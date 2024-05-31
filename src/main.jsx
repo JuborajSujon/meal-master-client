@@ -4,14 +4,13 @@ import "./index.css";
 import { HelmetProvider } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./Routes/Routes";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HelmetProvider>
-      <h1 className="text-3xl font-poppins font-bold underline">
-        Hello world!
-      </h1>
-
+      <RouterProvider router={router} />
       <ToastContainer />
     </HelmetProvider>
   </React.StrictMode>
