@@ -5,7 +5,7 @@ import Subscribe from "../../../components/Subscribe/Subscribe";
 export default function Footer() {
   return (
     <div>
-      <footer className="p-6 dark:bg-gray-100 dark:text-gray-800 text-base">
+      <footer className="p-6 dark:bg-slate-800 dark:text-slate-300 text-base">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
           <div className="lg:col-span-3">
             <FooterLink />
@@ -17,7 +17,7 @@ export default function Footer() {
 
         <hr className="border-gray-200 sm:mx-auto dark:border-gray-700 my-6" />
         <div className="flex items-center justify-center px-6">
-          <span className="dark:text-gray-600">
+          <span className="dark:text-slate-300">
             {new Date().getFullYear()}@ Meal Master. Design with
             <i className="mdi mdi-heart text-red-600"></i> by{" "}
             <Link
