@@ -89,7 +89,7 @@ export default function Navbar() {
   return (
     <div
       onMouseLeave={handleMouseLeave}
-      className="navbar max-w-[1540px] fixed z-10 bg-white/50 dark:bg-slate-800/50 dark:text-slate-300 px-4">
+      className="navbar max-w-[1540px] fixed z-20 bg-white/50 dark:bg-slate-800/50 dark:text-slate-300 px-4">
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -118,7 +118,7 @@ export default function Navbar() {
         </div>
         <Link
           to={"/"}
-          className="btn btn-ghost hover:bg-stone-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl italic font-bold  min-h-10 h-12 -ml-2 ">
+          className="btn btn-ghost hover:bg-slate-800 bg-stone-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl italic font-bold  min-h-10 h-12 -ml-2 ">
           <img className="w-28" src={Logo} alt="logo" />
         </Link>
       </div>

@@ -5,12 +5,13 @@ import ThemeController from "../components/ThemeController/ThemeController";
 
 export default function Main() {
   return (
-    <div>
+    <div className="font-poppins">
       <Navbar />
       <div className="dark:bg-slate-800 min-h-[calc(100vh-110px)] overflow-x-hidden">
         <Outlet />
+        <ThemeController />
       </div>
-      <ThemeController />
+
       <Footer />
     </div>
   );
