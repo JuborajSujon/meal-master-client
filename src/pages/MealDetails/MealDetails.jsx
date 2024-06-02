@@ -6,6 +6,7 @@ import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
 import MealCardSlider from "../../components/MealCardSlider/MealCardSlider";
+import StudentRatings from "../../components/StudentRatings/StudentRatings";
 
 export default function MealDetails() {
   const [rating, setRating] = useState(3);
@@ -162,6 +163,12 @@ export default function MealDetails() {
       </div>
 
       {/* Student Ratings */}
+      <div className="mt-10">
+        <StudentRatings />
+      </div>
+
+      {/* Student Review*/}
+      <div className="mt-10"></div>
     </div>
   );
 }
