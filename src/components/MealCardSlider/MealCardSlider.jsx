@@ -9,8 +9,8 @@ const MealCardSlider = () => {
   return (
     <div>
       <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
+        slidesPerView={1}
+        spaceBetween={10}
         freeMode={true}
         pagination={{
           clickable: true,
@@ -20,6 +20,20 @@ const MealCardSlider = () => {
           disableOnInteraction: false,
         }}
         modules={[FreeMode, Pagination, Autoplay]}
+        breakpoints={{
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 50,
+          },
+        }}
         className="mySwiper">
         <SwiperSlide>
           <MealCard />
