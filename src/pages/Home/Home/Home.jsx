@@ -4,6 +4,7 @@ import Membership from "../Membership/Membership";
 import MealsCategory from "../MealsCategory/MealsCategory";
 import { useEffect } from "react";
 import HomeAboutUs from "../HomeAboutUs/HomeAboutUs";
+import GiftCard from "../GiftCard/GiftCard";
 
 export default function Home() {
   //  ensure that the new page starts at the top when navigating
@@ -19,6 +20,7 @@ export default function Home() {
       <MealsCategory />
       <Membership />
       <HomeAboutUs />
+      <GiftCard />
     </div>
   );
 }
