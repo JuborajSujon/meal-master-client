@@ -24,6 +24,9 @@ export default function Membership() {
       <section className=" bg-gray-100 dark:bg-slate-800 rounded text-gray-800">
         <div className="container p-4 mx-auto sm:p-10">
           <div className="mb-12 space-y-4 text-center">
+            <h1 className="text-2xl dark:text-slate-300 font-bold">
+              Choose Your Plan
+            </h1>
             <div>
               <button
                 onClick={() => setSelectedPlan("monthly")}
@@ -42,9 +45,9 @@ export default function Membership() {
               return (
                 <div
                   key={plan.service_name}
-                  className="flex flex-col overflow-hidden border-2 rounded-md border-gray-300 hover:border-amber-600">
+                  className="flex flex-col overflow-hidden border-2 rounded-md border-gray-300 hover:border-amber-600 bg-slate-50">
                   <div
-                    className={`flex flex-col items-center justify-center px-2 py-8 space-y-4 ${plan?.bg_color} dark:${plan?.bg_color}`}>
+                    className={`flex flex-col items-center justify-center px-2 py-8 space-y-4 ${plan?.bg_color} `}>
                     <p className="text-2xl  font-medium">
                       {plan.service_name} Plan
                     </p>

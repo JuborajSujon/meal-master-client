@@ -105,7 +105,7 @@ export default function MealDetails() {
           </div>
 
           <div className="text-center flex justify-start mt-10 gap-6">
-            <Link to="/meal-details/subscription">
+            <Link to="/subscription">
               <button className="btn bg-yellow-400   hover:text-slate-900 dark:text-slate-900 hover:bg-yellow-500 text-base">
                 Meal Request
               </button>
