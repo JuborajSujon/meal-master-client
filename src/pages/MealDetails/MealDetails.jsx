@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaHome, FaShareAlt } from "react-icons/fa";
-import { FaEye, FaHeart } from "react-icons/fa6";
+import { FaArrowRight, FaEye, FaHeart } from "react-icons/fa6";
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
@@ -62,17 +62,17 @@ export default function MealDetails() {
         {/* right side */}
         <div className="lg:pr-16">
           <div className="flex justify-between items-start">
-            <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-300">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-300">
               Product Name
             </h2>
-            <h3 className="text-3xl font-bold text-slate-900 dark:text-slate-300 mr-3">
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-300 mr-3">
               $10
               <del className="text-base font-normal text-slate-400 ml-3">
                 12
               </del>
             </h3>
           </div>
-          <p className="text-lg font-bold text-slate-900 dark:text-slate-300">
+          <p className="text-base font-medium text-slate-900 dark:text-slate-300">
             <span className="text-slate-400 text-base mr-2">by</span>
             Healthy Feast Corner
           </p>
@@ -88,7 +88,7 @@ export default function MealDetails() {
             <span> | </span>
 
             {/* review - read only */}
-            <span className="text-slate-800 text-base leading-10">
+            <span className="text-slate-800 dark:text-slate-300 text-base leading-10">
               3 reviews
             </span>
           </div>
@@ -100,9 +100,19 @@ export default function MealDetails() {
               amet! Orci.
             </p>
             <ul className="*:mb-1">
-              <h4>Food Ingredients</h4>
-              <li>Potato</li>
-              <li>Onion</li>
+              <h4 className="text-lg font-medium underline decoration-orange-300">
+                Food Ingredients
+              </h4>
+              <li className="flex items-center gap-2">
+                {" "}
+                <FaArrowRight className="text-orange-600" size={18} />
+                Potato
+              </li>
+              <li className="flex items-center gap-2">
+                {" "}
+                <FaArrowRight className="text-orange-600" size={18} />
+                Carrot
+              </li>
             </ul>
           </div>
 
@@ -112,8 +122,8 @@ export default function MealDetails() {
             </button>
             <ul className="flex flex-wrap justify-start items-center gap-4">
               <li className="flex items-center gap-2">
+                <span>10</span>
                 <BiSolidLike className="text-orange-600" />
-                <span>Save</span>
               </li>
               <li className="flex items-center gap-2">
                 <FaHeart className="text-red-600" />

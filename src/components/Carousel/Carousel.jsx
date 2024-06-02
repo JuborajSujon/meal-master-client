@@ -7,7 +7,7 @@ import { BiSearch } from "react-icons/bi";
 export default function Carousel() {
   return (
     <div className="relative">
-      <div className="h-[70vh] bg-slate-800/70 absolute inset-0 z-10">
+      <div className="h-[80vh] bg-slate-800/70 absolute inset-0 z-10">
         <div className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-4xl mt-16">
           <h1 className="text-4xl font-bold leading-none sm:text-5xl text-white">
             Streamline Your
@@ -36,7 +36,7 @@ export default function Carousel() {
           </div>
         </div>
       </div>
-      <div className="h-[70vh] bg-red-600">
+      <div className="h-[80vh] bg-red-600">
         <Swiper
           centeredSlides={true}
           autoplay={{
@@ -51,19 +51,19 @@ export default function Carousel() {
           className="mySwiper">
           <SwiperSlide>
             <div
-              className={`relative h-[70vh] w-full bg-[url(https://i.ibb.co/pLdCJjD/vegetable-curry-recipe.jpg)] bg-no-repeat bg-cover flex items-center bg-center`}></div>
+              className={`relative h-[80vh] w-full bg-[url(https://i.ibb.co/pLdCJjD/vegetable-curry-recipe.jpg)] bg-no-repeat bg-cover flex items-center bg-center`}></div>
           </SwiperSlide>
           <SwiperSlide>
             <div
-              className={`relative h-[70vh] w-full bg-[url(https://i.ibb.co/g7xCbVR/Pasta-Primavera.jpg)] bg-no-repeat bg-cover flex items-center bg-center`}></div>
+              className={`relative h-[80vh] w-full bg-[url(https://i.ibb.co/g7xCbVR/Pasta-Primavera.jpg)] bg-no-repeat bg-cover flex items-center bg-center`}></div>
           </SwiperSlide>
           <SwiperSlide>
             <div
-              className={`relative h-[70vh] w-full bg-[url(https://i.ibb.co/4fJwdfp/chicken-stir-fry.jpg)] bg-no-repeat bg-cover flex items-center bg-center`}></div>
+              className={`relative h-[80vh] w-full bg-[url(https://i.ibb.co/4fJwdfp/chicken-stir-fry.jpg)] bg-no-repeat bg-cover flex items-center bg-center`}></div>
           </SwiperSlide>
           <SwiperSlide>
             <div
-              className={`relative h-[70vh] w-full bg-[url(https://i.ibb.co/4fJwdfp/chicken-stir-fry.jpg)] bg-no-repeat bg-cover flex items-center bg-center`}></div>
+              className={`relative h-[80vh] w-full bg-[url(https://i.ibb.co/4fJwdfp/chicken-stir-fry.jpg)] bg-no-repeat bg-cover flex items-center bg-center`}></div>
           </SwiperSlide>
         </Swiper>
       </div>

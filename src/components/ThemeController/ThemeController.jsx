@@ -18,7 +18,7 @@ const ThemeController = () => {
 
   return (
     <div className="">
-      <div className="fixed top-1/4 translate-x-1/2 z-50">
+      <div className="fixed top-1/4 translate-x-1/2 ml-6 z-50">
         <label className="swap swap-rotate">
           {/* this hidden checkbox controls the state */}
           <input

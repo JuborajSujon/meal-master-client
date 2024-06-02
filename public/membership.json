@@ -1,0 +1,91 @@
+{
+  "monthly": [
+    {
+      "service_name": "Silver",
+      "total_price": 100,
+      "duration": "monthly",
+      "benefits": [
+        "Access to breakfast only",
+        "10 meal coupons for lunch or dinner",
+        "Access to free beverages (tea, coffee)",
+        "Special discounts on weekends"
+      ],
+      "additional_info": "Best for students who prefer light meals",
+      "bg_color": "bg-amber-100"
+    },
+    {
+      "service_name": "Gold",
+      "total_price": 150,
+      "duration": "monthly",
+      "benefits": [
+        "Access to breakfast, lunch, and dinner",
+        "20 meal coupons for extra snacks",
+        "Access to free beverages (tea, coffee, juice)",
+        "Monthly special meal event",
+        "Priority seating during peak hours"
+      ],
+      "additional_info": "Ideal for regular eaters who enjoy variety",
+      "bg_color": "bg-green-400"
+    },
+    {
+      "service_name": "Platinum",
+      "total_price": 200,
+      "duration": "monthly",
+      "benefits": [
+        "Access to all meals",
+        "Unlimited meal coupons",
+        "Access to free all beverages",
+        "Weekly special meal event",
+        "Personalized meal options",
+        "Reserved seating area"
+      ],
+      "additional_info": "Perfect for food enthusiasts who want the best",
+      "bg_color": "bg-teal-400"
+    }
+  ],
+
+  "yearly": [
+    {
+      "service_name": "Silver",
+      "total_price": 1200,
+      "duration": "yearly",
+      "benefits": [
+        "Access to breakfast only",
+        "10 meal coupons for lunch or dinner",
+        "Access to free beverages (tea, coffee)",
+        "Special discounts on weekends"
+      ],
+      "additional_info": "Best for students who prefer light meals",
+      "bg_color": "bg-amber-100"
+    },
+    {
+      "service_name": "Gold",
+      "total_price": 1800,
+      "duration": "yearly",
+      "benefits": [
+        "Access to breakfast, lunch, and dinner",
+        "20 meal coupons for extra snacks",
+        "Access to free beverages (tea, coffee, juice)",
+        "Monthly special meal event",
+        "Priority seating during peak hours"
+      ],
+      "additional_info": "Ideal for regular eaters who enjoy variety",
+      "bg_color": "bg-yellow-400"
+    },
+    {
+      "service_name": "Platinum",
+      "total_price": 2400,
+      "duration": "yearly",
+      "benefits": [
+        "Access to all meals (breakfast, lunch, dinner, and snacks)",
+        "Unlimited meal coupons",
+        "Access to free beverages (tea, coffee, juice, soft drinks)",
+        "Weekly special meal event",
+        "Personalized meal options",
+        "Reserved seating area"
+      ],
+      "additional_info": "Perfect for food enthusiasts who want the best",
+      "bg_color": "bg-blue-400"
+    }
+  ]
+}
