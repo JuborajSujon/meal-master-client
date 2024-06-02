@@ -11,6 +11,7 @@ import StudentReview from "../../components/StudentReview/StudentReview";
 import { BiSolidLike } from "react-icons/bi";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { Link } from "react-router-dom";
+import { MdRateReview } from "react-icons/md";
 
 export default function MealDetails() {
   const [rating, setRating] = useState(3);
@@ -111,11 +112,15 @@ export default function MealDetails() {
             </Link>
             <ul className="flex flex-wrap justify-start items-center gap-4">
               <li className="flex items-center gap-2">
+                <BiSolidLike size={24} className="text-orange-600" />
                 <span>10</span>
-                <BiSolidLike className="text-orange-600" />
               </li>
               <li className="flex items-center gap-2">
-                <FaHeart className="text-red-600" />
+                <MdRateReview size={24} className="text-orange-600" />
+                <span>Review</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <FaHeart size={24} className="text-orange-600" />
                 <span>Save</span>
               </li>
 
@@ -144,21 +149,21 @@ export default function MealDetails() {
                 </div>
                 <div className="text-center">
                   <h4 className="text-xl font-medium text-slate-900 dark:text-slate-300">
-                    564
+                    306gm
                   </h4>
-                  <p className="text-slate-900 dark:text-slate-300">Calories</p>
+                  <p className="text-slate-900 dark:text-slate-300">Fat</p>
                 </div>
                 <div className="text-center">
                   <h4 className="text-xl font-medium text-slate-900 dark:text-slate-300">
-                    564
+                    2gm
                   </h4>
-                  <p className="text-slate-900 dark:text-slate-300">Calories</p>
+                  <p className="text-slate-900 dark:text-slate-300">Carbs</p>
                 </div>
                 <div className="text-center">
                   <h4 className="text-xl font-medium text-slate-900 dark:text-slate-300">
-                    564
+                    6.5gm
                   </h4>
-                  <p className="text-slate-900 dark:text-slate-300">Calories</p>
+                  <p className="text-slate-900 dark:text-slate-300">Protein</p>
                 </div>
               </div>
             </div>
