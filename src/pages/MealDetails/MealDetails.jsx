@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { FaHome, FaShareAlt } from "react-icons/fa";
+import { FaShareAlt } from "react-icons/fa";
 import { FaArrowRight, FaEye, FaHeart } from "react-icons/fa6";
 import { Rating } from "@smastrom/react-rating";
 
@@ -9,6 +9,8 @@ import MealCardSlider from "../../components/MealCardSlider/MealCardSlider";
 import StudentRatings from "../../components/StudentRatings/StudentRatings";
 import StudentReview from "../../components/StudentReview/StudentReview";
 import { BiSolidLike } from "react-icons/bi";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import { Link } from "react-router-dom";
 
 export default function MealDetails() {
   const [rating, setRating] = useState(3);
@@ -18,22 +20,7 @@ export default function MealDetails() {
         <title>Meal Details</title>
       </Helmet>
       {/* breadcrumbs */}
-      <div>
-        <div className="text-lg breadcrumbs dark:text-slate-800 bg-slate-300 px-2 rounded  mb-5">
-          <ul>
-            <li>
-              <a className="flex items-center gap-2">
-                <FaHome size={18} />
-                Home
-              </a>
-            </li>
-            <li>
-              <a>Documents</a>
-            </li>
-            <li>Add Document</li>
-          </ul>
-        </div>
-      </div>
+      <Breadcrumbs />
 
       {/* main content */}
       <div className="flex flex-col md:flex-row justify-between gap-6">
@@ -117,9 +104,11 @@ export default function MealDetails() {
           </div>
 
           <div className="text-center flex justify-start mt-10 gap-6">
-            <button className="btn bg-yellow-400   hover:text-slate-900 dark:text-slate-900 hover:bg-yellow-500 text-base">
-              Meal Request
-            </button>
+            <Link to="/meal-details/subscription">
+              <button className="btn bg-yellow-400   hover:text-slate-900 dark:text-slate-900 hover:bg-yellow-500 text-base">
+                Meal Request
+              </button>
+            </Link>
             <ul className="flex flex-wrap justify-start items-center gap-4">
               <li className="flex items-center gap-2">
                 <span>10</span>

@@ -2,11 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../pages/Home/Home/Home";
 import MealDetails from "../pages/MealDetails/MealDetails";
+import ErrorPage from "./../pages/ErrorPage/ErrorPage";
+import Subscription from "../pages/Subscription/Subscription";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -23,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "/meal-details",
         element: <MealDetails />,
+      },
+      {
+        path: "/meal-details/subscription",
+        element: <Subscription />,
       },
     ],
   },

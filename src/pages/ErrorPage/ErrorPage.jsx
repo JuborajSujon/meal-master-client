@@ -6,6 +6,7 @@ import errorAnimation2 from "./errorLottie.json";
 import Lottie from "lottie-react";
 import { IoIosHeart } from "react-icons/io";
 import { useRouteError } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -25,7 +26,7 @@ const ErrorPage = () => {
   return (
     <>
       <Helmet>
-        <title>FixNexus | Page Not Found</title>
+        <title>Page Not Found</title>
       </Helmet>
       <section className="relative bg-yellow-400/5">
         <div className="">
@@ -33,18 +34,14 @@ const ErrorPage = () => {
             <div className="flex flex-col min-h-screen justify-center md:px-10 py-10 px-4">
               <div className="text-center">
                 <Link to={"/"}>
-                  <img
-                    src="https://i.ibb.co/j5Sqs26/logo.png"
-                    className="mx-auto w-64"
-                    alt=""
-                  />
+                  <img src={logo} className="mx-auto w-64" alt="" />
                 </Link>
               </div>
               <div className=" text-center my-auto ">
                 <div className="mx-auto ">
                   {error.status === 404 ? (
                     <Lottie
-                      animationData={errorAnimation}
+                      animationData={errorAnimation2}
                       style={style}
                       lottieRef={erAnimation}
                       onLoopComplete={() => {
@@ -53,7 +50,7 @@ const ErrorPage = () => {
                     />
                   ) : (
                     <Lottie
-                      animationData={errorAnimation2}
+                      animationData={errorAnimation}
                       style={style}
                       lottieRef={erAnimation}
                       onLoopComplete={() => {
@@ -100,7 +97,7 @@ const ErrorPage = () => {
               </div>
               <div className="text-center">
                 <p className="mb-0 text-slate-400">
-                  {new Date().getFullYear()}@ FixNexus. Design with{" "}
+                  {new Date().getFullYear()}@ Meal Master. Design with{" "}
                   <IoIosHeart className="inline-block text-red-500" size={20} />{" "}
                   by{" "}
                   <Link
