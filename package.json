@@ -12,6 +12,7 @@
   "dependencies": {
     "@smastrom/react-rating": "^1.5.0",
     "localforage": "^1.10.0",
+    "lottie-react": "^2.4.0",
     "match-sorter": "^6.3.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
