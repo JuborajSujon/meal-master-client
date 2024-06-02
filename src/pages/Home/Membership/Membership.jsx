@@ -44,13 +44,13 @@ export default function Membership() {
                   key={plan.service_name}
                   className="flex flex-col overflow-hidden border-2 rounded-md border-gray-300 hover:border-amber-600">
                   <div
-                    className={`flex flex-col items-center justify-center px-2 py-8 space-y-4 ${plan.bg_color}`}>
-                    <p className="text-2xl font-medium">
+                    className={`flex flex-col items-center justify-center px-2 py-8 space-y-4 ${plan?.bg_color} dark:${plan?.bg_color}`}>
+                    <p className="text-2xl  font-medium">
                       {plan.service_name} Plan
                     </p>
                     <p className="text-5xl font-bold">
                       {plan.total_price}$
-                      <span className="text-xl text-gray-600">
+                      <span className="text-xl text-gray-600 ">
                         /
                         {plan.duration.toLowerCase() === "monthly"
                           ? "mo"
