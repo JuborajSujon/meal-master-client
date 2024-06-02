@@ -24,7 +24,7 @@ export default function MealDetails() {
       <Breadcrumbs />
 
       {/* main content */}
-      <div className="flex flex-col md:flex-row justify-between gap-6">
+      <div className="flex flex-col md:flex-row justify-between gap-6 mt-4">
         {/* left side */}
         <div>
           {/* Meal Image */}

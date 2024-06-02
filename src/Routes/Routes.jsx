@@ -5,6 +5,7 @@ import MealDetails from "../pages/MealDetails/MealDetails";
 import ErrorPage from "./../pages/ErrorPage/ErrorPage";
 import Subscription from "../pages/Subscription/Subscription";
 import Meals from "../pages/Meals/Meals";
+import UpComingMeals from "../pages/UpComingMeals/UpComingMeals";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/upcoming-meals",
-        element: <div>upcoming-meals</div>,
+        element: <UpComingMeals />,
       },
       {
         path: "/meal-details",
