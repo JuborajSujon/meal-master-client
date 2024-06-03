@@ -7,6 +7,7 @@ import Subscription from "../pages/Subscription/Subscription";
 import Meals from "../pages/Meals/Meals";
 import UpComingMeals from "../pages/UpComingMeals/UpComingMeals";
 import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
   },
