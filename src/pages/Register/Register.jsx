@@ -16,7 +16,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state || "/";
+  const from = location.state?.from.pathname || "/";
 
   const { googleLogin, githubLogin, createUser, updateUserProfile, setUser } =
     useAuth();
