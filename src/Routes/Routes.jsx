@@ -6,6 +6,7 @@ import ErrorPage from "./../pages/ErrorPage/ErrorPage";
 import Subscription from "../pages/Subscription/Subscription";
 import Meals from "../pages/Meals/Meals";
 import UpComingMeals from "../pages/UpComingMeals/UpComingMeals";
+import Login from "../pages/Login/Login";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/subscription",
         element: <Subscription />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },
