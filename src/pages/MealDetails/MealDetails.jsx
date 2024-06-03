@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaShareAlt } from "react-icons/fa";
 import { FaArrowRight, FaEye, FaHeart } from "react-icons/fa6";
@@ -15,6 +15,11 @@ import { MdRateReview } from "react-icons/md";
 
 export default function MealDetails() {
   const [rating, setRating] = useState(3);
+
+  //  ensure that the new page starts at the top when navigating
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="px-4 py-20">
       <Helmet>

@@ -2,8 +2,13 @@ import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import UpComingMealCard from "../../components/UpComingMealCard/UpComingMealCard";
+import { useEffect } from "react";
 
 export default function UpComingMeals() {
+  //  ensure that the new page starts at the top when navigating
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="py-20 px-4">
       <Helmet>

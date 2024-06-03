@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import SectionTitle from "./../../components/SectionTitle/SectionTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MealCard from "../../components/MealCard/MealCard";
 
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -28,6 +28,11 @@ export default function Meals() {
     const value = event.target.value;
     setPriceRange([0, parseInt(value)]);
   };
+
+  //  ensure that the new page starts at the top when navigating
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="px-4 py-20">
       <Helmet>
