@@ -8,6 +8,7 @@ import Meals from "../pages/Meals/Meals";
 import UpComingMeals from "../pages/UpComingMeals/UpComingMeals";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "secret",
+        element: (
+          <PrivateRoute>
+            <div>secret</div>
+          </PrivateRoute>
+        ),
       },
     ],
   },
