@@ -7,8 +7,12 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "./../../hooks/useAuth";
 import { imageUpload } from "./../../api/index";
 import useSocialLogin from "../../hooks/useSocialLogin";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function Register() {
+  // page starts at the top
+  useScrollToTop();
+
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,11 +33,6 @@ export default function Register() {
     reset,
     formState: { errors },
   } = useForm();
-
-  //  ensure that the new page starts at the top when navigating
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   // Register Handler for create user , update user profile
   const onSubmit = async (data) => {

@@ -8,6 +8,7 @@ import {
   signOut,
   updateProfile,
   updateEmail,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
@@ -64,6 +65,12 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, githubProvider);
   };
 
+  // send password reset email
+  const resetPassword = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email);
+  };
+
   // sign out
   const userSignOut = () => {
     setLoading(true);
@@ -90,6 +97,7 @@ const AuthProvider = ({ children }) => {
     userSignOut,
     updateUserProfile,
     updateUserEmail,
+    resetPassword,
     user,
     setUser,
     loading,
