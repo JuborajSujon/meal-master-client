@@ -1,13 +1,27 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import useAuth from "./../../hooks/useAuth";
+import { imageUpload } from "./../../api/index";
+import useSocialLogin from "../../hooks/useSocialLogin";
 
 export default function Register() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state || "/";
+
+  const {
+    googleLogin,
+    githubLogin,
+    createUser,
+    updateUserProfile,
+    setUser,
+    setLoading,
+  } = useAuth();
 
   const {
     register,
@@ -22,8 +36,8 @@ export default function Register() {
   }, []);
 
   // Register Handler for create user , update user profile
-  const onSubmit = (data) => {
-    const { email, password, fullName, photoURL } = data;
+  const onSubmit = async (data) => {
+    const { email, password, name, photo } = data;
 
     if (password.length < 6) {
       toast.error("Password must be at least 6 characters", {
@@ -45,11 +59,57 @@ export default function Register() {
       });
       return;
     }
+
+    try {
+      setLoading(true);
+      // upload image and get url
+      const image = photo[0];
+      const image_data = await imageUpload(image);
+
+      if (image_data.success) {
+        data.photo = image_data.data.display_url;
+      } else {
+        data.photo = "https://i.ibb.co/H4fnK5n/avater2.jpg";
+        toast.error("Image upload failed, default image will be used", {
+          autoClose: 2000,
+        });
+      }
+
+      // user registration
+      const result = await createUser(email, password);
+
+      // save username and photo
+      await updateUserProfile(name, data.photo);
+
+      //  Optimistic UI - update state
+      setUser({ ...result?.user, displayName: name, photoURL: data.photo });
+
+      // navigate to home page or other page after registration
+      navigate(from, { replace: true });
+
+      toast.success("User created successfully", {
+        autoClose: 1500,
+      });
+      setLoading(false);
+      reset();
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message, {
+        autoClose: 1500,
+      });
+    }
   };
+
+  //  google login
+  const handleGoogleLogin = useSocialLogin(googleLogin);
+
+  //  github login
+  const handleGithubLogin = useSocialLogin(githubLogin);
+
   return (
     <>
       <Helmet>
-        <title>Textile Art | Register</title>
+        <title>Register</title>
       </Helmet>
       <section className="relative w-full min-h-screen dark:bg-slate-900 h-full py-40  bg-orange-50">
         <div className="container mx-auto px-4 h-full">
@@ -65,7 +125,7 @@ export default function Register() {
 
                   <div className="btn-wrapper text-center">
                     <button
-                      onClick={() => {}}
+                      onClick={handleGithubLogin}
                       className="bg-white active:bg-slate-50 text-slate-700 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow border-2 border-transparent hover:border-2 hover:border-yellow-400 hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                       type="button">
                       <img
@@ -76,7 +136,7 @@ export default function Register() {
                       Github
                     </button>
                     <button
-                      onClick={() => {}}
+                      onClick={handleGoogleLogin}
                       className="bg-white active:bg-slate-50 text-slate-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow border-2 border-transparent hover:shadow-md hover:border-2 hover:border-yellow-400 inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                       type="button">
                       <img
@@ -99,12 +159,12 @@ export default function Register() {
                         Name
                       </label>
                       <input
-                        {...register("fullName", { required: true })}
+                        {...register("name", { required: true })}
                         type="text"
                         className="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Name"
                       />
-                      {errors.fullName && (
+                      {errors.name && (
                         <span className="text-red-500">
                           Please enter a valid name
                         </span>
@@ -132,15 +192,14 @@ export default function Register() {
                       <label
                         className="block uppercase text-slate-600 text-xs font-bold mb-2"
                         htmlFor="grid-password">
-                        Photo URL
+                        Photo
                       </label>
                       <input
-                        {...register("photoURL")}
-                        type="text"
+                        {...register("photo")}
+                        type="file"
                         className="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Photo URL"
                       />
-                      {errors.photoURL && (
+                      {errors.photo && (
                         <span className="text-red-500">
                           Please enter a valid photo URL
                         </span>
