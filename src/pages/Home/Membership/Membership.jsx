@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { LuBadgeCheck } from "react-icons/lu";
+import useMemberShip from "../../../hooks/useMemberShip";
 
 export default function Membership() {
   const [selectedPlan, setSelectedPlan] = useState("monthly");
-  const [membership, setMembership] = useState({});
+  const [membership, loading] = useMemberShip();
 
-  // Data fetching from api
-  useEffect(() => {
-    fetch("membership.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setMembership(data);
-      });
-  }, []);
+  if (loading)
+    return (
+      <div className=" text-center my-10">
+        <span className="loading loading-bars w-16"></span>
+      </div>
+    );
 
   return (
     <div className="py-10">
@@ -47,8 +46,8 @@ export default function Membership() {
                   key={plan.service_name}
                   className="flex flex-col overflow-hidden border-2 rounded-md border-gray-300 hover:border-amber-600 bg-slate-50">
                   <div
-                    className={`flex flex-col items-center justify-center px-2 py-8 space-y-4 ${plan?.bg_color} `}>
-                    <p className="text-2xl  font-medium">
+                    className={`${plan.bg_color} flex flex-col items-center justify-center px-2 py-8 space-y-4`}>
+                    <p className="text-2xl font-medium">
                       {plan.service_name} Plan
                     </p>
                     <p className="text-5xl font-bold">
