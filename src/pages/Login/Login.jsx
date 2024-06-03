@@ -17,15 +17,7 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
-  const {
-    signInUser,
-    googleLogin,
-    githubLogin,
-    loading,
-    setLoading,
-    user,
-    resetPassword,
-  } = useAuth();
+  const { signInUser, googleLogin, githubLogin, resetPassword } = useAuth();
 
   const {
     register,
@@ -37,15 +29,12 @@ export default function Login() {
   const onSubmit = async (data) => {
     const { email, password } = data;
     try {
-      setLoading(true);
       await signInUser(email, password);
-      setLoading(false);
       navigate(from, { replace: true });
       reset();
     } catch (err) {
       console.log(err);
       toast.error(err.message, { autoClose: 1500 });
-      setLoading(false);
     }
   };
 

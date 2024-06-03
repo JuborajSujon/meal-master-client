@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -18,14 +18,8 @@ export default function Register() {
   const location = useLocation();
   const from = location.state || "/";
 
-  const {
-    googleLogin,
-    githubLogin,
-    createUser,
-    updateUserProfile,
-    setUser,
-    setLoading,
-  } = useAuth();
+  const { googleLogin, githubLogin, createUser, updateUserProfile, setUser } =
+    useAuth();
 
   const {
     register,
@@ -60,7 +54,6 @@ export default function Register() {
     }
 
     try {
-      setLoading(true);
       // upload image and get url
       const image = photo[0];
       const image_data = await imageUpload(image);
@@ -89,7 +82,6 @@ export default function Register() {
       toast.success("User created successfully", {
         autoClose: 1500,
       });
-      setLoading(false);
       reset();
     } catch (error) {
       console.log(error);
