@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { IoIosNotifications } from "react-icons/io";
 import Logo from "../../../assets/logo.png";
+import useAuth from "./../../../hooks/useAuth";
+import useScrollPosition from "./../../../hooks/useScrollPosition";
 
 export default function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
-  const [user, setUser] = useState(true);
+  const { user, userSignOut, setUser, reload } = useAuth();
+  const scrollPosition = useScrollPosition();
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -15,16 +19,16 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    // userSignOut()
-    //   .then(() => {
-    //     setUser(null);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   });
+    userSignOut()
+      .then(() => {
+        setUser(null);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
-  // useEffect(() => {}, [user, reload]);
+  useEffect(() => {}, [user, reload]);
 
   const navList = (
     <>
@@ -89,7 +93,11 @@ export default function Navbar() {
   return (
     <div
       onMouseLeave={handleMouseLeave}
-      className="navbar max-w-[1540px] fixed z-20 bg-white/50 dark:bg-slate-800/50 dark:text-slate-300 px-4">
+      className={`navbar max-w-[1540px] fixed z-20 ${
+        scrollPosition > 300
+          ? "bg-white dark:bg-slate-800"
+          : "bg-white/50 dark:bg-slate-800/50"
+      } dark:text-slate-300 px-4`}>
       <div className="navbar-start">
         <div className="dropdown">
           <div
