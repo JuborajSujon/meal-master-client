@@ -22,7 +22,30 @@ export default function Register() {
   }, []);
 
   // Register Handler for create user , update user profile
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const { email, password, fullName, photoURL } = data;
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters", {
+        autoClose: 1500,
+      });
+      return;
+    }
+
+    if (!/(?=.*[A-Z])/.test(password)) {
+      toast.error("Password must contain at least one uppercase letter", {
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (!/(?=.*[a-z])/.test(password)) {
+      toast.error("Password must contain at least one lowercase letter", {
+        autoClose: 2000,
+      });
+      return;
+    }
+  };
   return (
     <>
       <Helmet>
@@ -38,6 +61,31 @@ export default function Register() {
                     <h6 className="text-slate-500 text-sm font-bold">
                       Sign Up
                     </h6>
+                  </div>
+
+                  <div className="btn-wrapper text-center">
+                    <button
+                      onClick={() => {}}
+                      className="bg-white active:bg-slate-50 text-slate-700 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow border-2 border-transparent hover:border-2 hover:border-yellow-400 hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                      type="button">
+                      <img
+                        alt="..."
+                        className="w-5 mr-1"
+                        src="https://demos.creative-tim.com/notus-nextjs/img/github.svg"
+                      />
+                      Github
+                    </button>
+                    <button
+                      onClick={() => {}}
+                      className="bg-white active:bg-slate-50 text-slate-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow border-2 border-transparent hover:shadow-md hover:border-2 hover:border-yellow-400 inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                      type="button">
+                      <img
+                        alt="..."
+                        className="w-5 mr-1"
+                        src="https://demos.creative-tim.com/notus-nextjs/img/google.svg"
+                      />
+                      Google
+                    </button>
                   </div>
 
                   <hr className="mt-6 border-b-1 border-slate-300" />

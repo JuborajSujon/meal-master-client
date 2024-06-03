@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [reload, setReload] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
   // create user
   const createUser = (email, password) => {
     setLoading(true);
@@ -65,6 +66,7 @@ const AuthProvider = ({ children }) => {
 
   // sign out
   const userSignOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -77,7 +79,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, [reload]);
+  }, []);
   // console.log(user);
 
   const authInfo = {
@@ -92,11 +94,12 @@ const AuthProvider = ({ children }) => {
     setUser,
     loading,
     setLoading,
-    setReload,
     reload,
+    setReload,
     isHovered,
     setIsHovered,
   };
+
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
