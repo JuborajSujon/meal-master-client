@@ -170,6 +170,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     to="/dashboard"
+                    end
                     className="btn btn-ghost border border-orange-400 hover:bg-orange-500 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
                     Dashboard
                   </Link>

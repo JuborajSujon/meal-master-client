@@ -59,6 +59,35 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
     errorElement: <ErrorPage />,
-    children: [],
+    children: [
+      {
+        path: "/dashboard",
+        element: <div>Dashboard</div>,
+      },
+      {
+        path: "/dashboard/admin-profile",
+        element: <div>Admin Profile</div>,
+      },
+      {
+        path: "/dashboard/manage-users",
+        element: <div>Manage Users</div>,
+      },
+      {
+        path: "/dashboard/add-meal",
+        element: <div>Add Meal</div>,
+      },
+      {
+        path: "/dashboard/all-reviews",
+        element: <div>All Reviews</div>,
+      },
+      {
+        path: "/dashboard/serve-meals",
+        element: <div>Serve Meals</div>,
+      },
+      {
+        path: "/dashboard/upcoming-meals",
+        element: <div>Upcoming Meals</div>,
+      },
+    ],
   },
 ]);
