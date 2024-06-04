@@ -1,9 +1,23 @@
 import { AiOutlineBars } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import logo from "../../../../assets/logo.png";
+import useAuth from "../../../../hooks/useAuth";
 
 const DashboardNav = ({ handleToggle }) => {
+  const { userSignOut, setUser } = useAuth();
+  const navigate = useNavigate();
+
+  // Logout Handler
+  const handleLogout = async () => {
+    try {
+      await userSignOut();
+      setUser(null);
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <div className="sticky top-0 z-10 dark:bg-slate-700 border-b border-gray-200">
       {/* Small Screen Navbar */}
@@ -142,13 +156,30 @@ const DashboardNav = ({ handleToggle }) => {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-md dark:bg-slate-700 dark:text-slate-300 w-64">
                   <li>
-                    <a>Profile</a>
+                    <Link to="/" className="hover:bg-orange-100 rounded-md">
+                      Home
+                    </Link>
                   </li>
                   <li>
-                    <a>Settings</a>
+                    <Link
+                      to="/user-profile"
+                      className="hover:bg-orange-100 rounded-md">
+                      Profile
+                    </Link>
                   </li>
                   <li>
-                    <a>Logout</a>
+                    <Link
+                      to="/setting"
+                      className="hover:bg-orange-100 rounded-md">
+                      Settings
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="hover:bg-orange-100 rounded-md">
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </div>

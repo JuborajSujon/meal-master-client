@@ -73,7 +73,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                   to="/dashboard"
                   end
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform hover:bg-gray-300 hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
                       isActive
                         ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
                         : "text-gray-700"
@@ -86,7 +86,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="admin-profile"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform hover:bg-gray-300 hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
                       isActive
                         ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
                         : "text-gray-700"
@@ -100,7 +100,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="manage-users"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform hover:bg-gray-300 hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
                       isActive
                         ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
                         : "text-gray-700"
@@ -114,7 +114,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="add-meal"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform hover:bg-gray-300 hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
                       isActive
                         ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
                         : "text-gray-700"
@@ -128,7 +128,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="all-reviews"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform hover:bg-gray-300 hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
                       isActive
                         ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
                         : "text-gray-700"
@@ -142,7 +142,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="serve-meals"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform hover:bg-gray-300 hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
                       isActive
                         ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
                         : "text-gray-700"
@@ -156,7 +156,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="upcoming-meals"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform hover:bg-gray-300 hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
                       isActive
                         ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
                         : "text-gray-700"
@@ -178,7 +178,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
           <NavLink
             to="/dashboard/profile"
             className={({ isActive }) =>
-              `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+              `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-orange-100 rounded-md hover:text-gray-700 ${
                 isActive ? "bg-gray-300  text-gray-700" : "text-gray-600"
               }`
             }>
@@ -188,7 +188,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
           </NavLink>
           <button
             onClick={handleLogout}
-            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform">
+            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-orange-100 rounded-md hover:text-gray-700 transition-colors duration-300 transform">
             <GrLogout className="w-5 h-5" />
 
             <span className="mx-4 font-medium">Logout</span>

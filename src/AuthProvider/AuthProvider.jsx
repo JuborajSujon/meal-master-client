@@ -13,6 +13,7 @@ import {
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.confi";
+import axios from "axios";
 
 // Social Auth Provider
 const googleProvider = new GoogleAuthProvider();
@@ -77,10 +78,31 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // save user data in db
+  const saveUser = async (user) => {
+    const currentUser = {
+      email: user?.email,
+      name: user?.displayName,
+      photo: user?.photoURL || "https://i.ibb.co/Jn1jJHN/avater.png",
+      role: "bronze",
+      status: "verified",
+      createdAt: user?.metadata.createdAt,
+      lastLogin: user?.metadata.lastLoginAt,
+    };
+    const { data } = await axios.put(
+      `${import.meta.env.VITE_API_URL}/user`,
+      currentUser
+    );
+    return data;
+  };
+
   // observer user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        saveUser(currentUser);
+      }
       setLoading(false);
     });
     return () => {
@@ -98,6 +120,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     updateUserEmail,
     resetPassword,
+    saveUser,
     user,
     setUser,
     loading,

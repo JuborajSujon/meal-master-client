@@ -18,8 +18,14 @@ export default function Register() {
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
 
-  const { googleLogin, githubLogin, createUser, updateUserProfile, setUser } =
-    useAuth();
+  const {
+    googleLogin,
+    githubLogin,
+    createUser,
+    updateUserProfile,
+    setUser,
+    saveUser,
+  } = useAuth();
 
   const {
     register,
@@ -78,7 +84,7 @@ export default function Register() {
 
       // navigate to home page or other page after registration
       navigate(from, { replace: true });
-
+      saveUser(result?.user);
       toast.success("User created successfully", {
         autoClose: 1500,
       });

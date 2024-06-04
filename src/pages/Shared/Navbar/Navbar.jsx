@@ -35,6 +35,7 @@ export default function Navbar() {
       <li className="">
         <NavLink
           to="/"
+          end
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
@@ -71,23 +72,6 @@ export default function Navbar() {
           Upcoming Meals
         </NavLink>
       </li>
-      {user && (
-        <>
-          <li>
-            <NavLink
-              to="/upcoming-meals"
-              className={({ isActive, isPending }) =>
-                isPending
-                  ? "pending"
-                  : isActive
-                  ? "text-orange-600 px-2 py-1.5 dark:text-white"
-                  : "hover:text-slate-900 px-2 py-1.5 hover:bg-orange-400 rounded-md dark:text-orange-500 dark:hover:text-slate-900"
-              }>
-              Upcoming Meals
-            </NavLink>
-          </li>
-        </>
-      )}
     </>
   );
   return (
@@ -170,7 +154,6 @@ export default function Navbar() {
                 <li>
                   <Link
                     to="/dashboard"
-                    end
                     className="btn btn-ghost border border-orange-400 hover:bg-orange-500 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
                     Dashboard
                   </Link>
@@ -189,8 +172,8 @@ export default function Navbar() {
           <div className="flex">
             <Link
               to="/login"
-              className="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-transparent text-indigo-600 dark:border-white dark:text-white">
-              <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-indigo-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+              className="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-transparent text-slate-800 dark:border-white dark:text-white">
+              <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-orange-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
               <span className="relative text-indigo-600 dark:text-orange-500  transition duration-300 group-hover:text-white ease">
                 Join Us
               </span>
