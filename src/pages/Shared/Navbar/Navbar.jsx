@@ -148,9 +148,12 @@ export default function Navbar() {
                 tabIndex={0}
                 onMouseLeave={handleMouseLeave}
                 className="menu menu-sm dropdown-content mt-0 -ml-48 z-[1] py-3 px-4 shadow bg-base-100 rounded-md w-64 absolute space-y-2">
-                <li className="text-base font-medium">
+                <p className="text-base flex justify-between items-center">
                   Name : {user?.displayName || "user name not found"}
-                </li>
+                  <span className="text-sm py-1 px-2 rounded-full bg-orange-400">
+                    Bronze
+                  </span>
+                </p>
                 <li>
                   <Link
                     to="/dashboard"
