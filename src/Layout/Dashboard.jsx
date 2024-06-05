@@ -18,7 +18,7 @@ const Dashboard = () => {
       </div>
 
       {/* dashboard dynamic content */}
-      <div className="flex-1 ">
+      <div className="flex-1 mt-16 md:ml-64">
         {/* navbar */}
         <DashboardNav handleToggle={handleToggle} isActive={isActive} />
         <div className="px-5">

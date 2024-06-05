@@ -10,6 +10,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
+import AddMeal from "../pages/Dashboard/AddMeal/AddMeal";
 
 export const router = createBrowserRouter([
   {
@@ -74,7 +75,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/add-meal",
-        element: <div>Add Meal</div>,
+        element: <AddMeal />,
       },
       {
         path: "/dashboard/all-reviews",

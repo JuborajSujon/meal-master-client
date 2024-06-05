@@ -29,7 +29,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
     <>
       {/* Sidebar */}
       <div
-        className={`z-10 min-h-screen flex flex-col justify-between overflow-x-hidden border-r border-gray-200  dark:bg-slate-800 w-64 space-y-6 px-2 py-3 absolute md:static inset-y-0 left-0 transform ${
+        className={`z-20 min-h-screen flex flex-col justify-between overflow-x-hidden border-r border-gray-200 bg-slate-200 dark:bg-slate-800 w-64 space-y-6 px-2 py-3 absolute md:fixed md:top-0 md:left-0 inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0 transition duration-200 ease-in-out`}>
         <div>
@@ -73,9 +73,9 @@ const Sidebar = ({ handleToggle, isActive }) => {
                   to="/dashboard"
                   end
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
                       isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
+                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                         : "text-gray-700"
                     }`
                   }>
@@ -86,9 +86,9 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="admin-profile"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
                       isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
+                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                         : "text-gray-700"
                     }`
                   }>
@@ -100,9 +100,9 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="manage-users"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
                       isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
+                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                         : "text-gray-700"
                     }`
                   }>
@@ -114,9 +114,9 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="add-meal"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
                       isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
+                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                         : "text-gray-700"
                     }`
                   }>
@@ -128,9 +128,9 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="all-reviews"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
                       isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
+                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                         : "text-gray-700"
                     }`
                   }>
@@ -142,9 +142,9 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="serve-meals"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
                       isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
+                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                         : "text-gray-700"
                     }`
                   }>
@@ -156,9 +156,9 @@ const Sidebar = ({ handleToggle, isActive }) => {
                 <NavLink
                   to="upcoming-meals"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-700 ${
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
                       isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 rounded-md"
+                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                         : "text-gray-700"
                     }`
                   }>
@@ -179,19 +179,23 @@ const Sidebar = ({ handleToggle, isActive }) => {
             to="/dashboard/profile"
             className={({ isActive }) =>
               `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-orange-100 rounded-md hover:text-gray-700 ${
-                isActive ? "bg-gray-300  text-gray-700" : "text-gray-600"
+                isActive
+                  ? "bg-gray-300 dark:text-slate-300 text-gray-700"
+                  : "text-gray-600"
               }`
             }>
-            <FcSettings className="w-5 h-5" />
+            <FcSettings className="w-5 h-5 " />
 
-            <span className="mx-4 font-medium">Profile</span>
+            <span className="mx-4 dark:text-slate-300 font-medium">
+              Profile
+            </span>
           </NavLink>
           <button
             onClick={handleLogout}
             className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-orange-100 rounded-md hover:text-gray-700 transition-colors duration-300 transform">
-            <GrLogout className="w-5 h-5" />
+            <GrLogout className="w-5 h-5 dark:text-slate-300" />
 
-            <span className="mx-4 font-medium">Logout</span>
+            <span className="mx-4 dark:text-slate-300 font-medium">Logout</span>
           </button>
         </div>
       </div>

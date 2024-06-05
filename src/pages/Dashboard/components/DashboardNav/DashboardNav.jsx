@@ -19,7 +19,7 @@ const DashboardNav = ({ handleToggle }) => {
     }
   };
   return (
-    <div className="sticky top-0 z-10 dark:bg-slate-700 border-b border-gray-200">
+    <div className="fixed left-0 right-0 top-0 z-10 bg-slate-50 dark:bg-slate-700 border-b border-gray-200 md:ml-64">
       {/* Small Screen Navbar */}
       <div className=" dark:bg-slate-700 text-gray-800 flex justify-between">
         <div className="flex items-center md:hidden">

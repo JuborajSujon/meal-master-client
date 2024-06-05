@@ -6,7 +6,8 @@
       "duration": "monthly",
       "benefits": [
         "Access to breakfast only",
-        "10 meal coupons for lunch or dinner",
+        "40 meal coupons for lunch or dinner",
+        "30 meal coupons for extra snacks",
         "Access to free beverages (tea, coffee)",
         "Special discounts on weekends"
       ],
@@ -19,10 +20,11 @@
       "duration": "monthly",
       "benefits": [
         "Access to breakfast, lunch, and dinner",
-        "20 meal coupons for extra snacks",
+        "40 meal coupons for extra snacks",
         "Access to free beverages (tea, coffee, juice)",
         "Monthly special meal event",
-        "Priority seating during peak hours"
+        "Personalized meal options",
+        "Themed Nights meal events"
       ],
       "additional_info": "Ideal for regular eaters who enjoy variety",
       "bg_color": "bg-green-400"
@@ -37,6 +39,8 @@
         "Access to free all beverages",
         "Weekly special meal event",
         "Personalized meal options",
+        "Themed Nights meal events",
+        "Special Occasions meal events",
         "Reserved seating area"
       ],
       "additional_info": "Perfect for food enthusiasts who want the best",
@@ -51,7 +55,8 @@
       "duration": "yearly",
       "benefits": [
         "Access to breakfast only",
-        "10 meal coupons for lunch or dinner",
+        "40 meal coupons for lunch or dinner",
+        "30 meal coupons for extra snacks",
         "Access to free beverages (tea, coffee)",
         "Special discounts on weekends"
       ],
@@ -64,10 +69,11 @@
       "duration": "yearly",
       "benefits": [
         "Access to breakfast, lunch, and dinner",
-        "20 meal coupons for extra snacks",
+        "40 meal coupons for extra snacks",
         "Access to free beverages (tea, coffee, juice)",
         "Monthly special meal event",
-        "Priority seating during peak hours"
+        "Personalized meal options",
+        "Themed Nights meal events"
       ],
       "additional_info": "Ideal for regular eaters who enjoy variety",
       "bg_color": "bg-yellow-400"
@@ -82,6 +88,8 @@
         "Access to free all beverages",
         "Weekly special meal event",
         "Personalized meal options",
+        "Themed Nights meal events",
+        "Special Occasions meal events",
         "Reserved seating area"
       ],
       "additional_info": "Perfect for food enthusiasts who want the best",
