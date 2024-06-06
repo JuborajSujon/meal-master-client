@@ -4,7 +4,7 @@ export default function SectionTitle({ title, subTitle }) {
   return (
     <div className="px-4 space-y-3">
       <div className="flex">
-        <h3 className="text-lg font-medium text-orange-600 bg-orange-200 px-6 py-1.5 rounded-full">
+        <h3 className="sm:text-lg text-sm font-medium text-orange-600 bg-orange-200 px-3 sm:px-6 py-1.5 rounded-full">
           {title}
         </h3>
       </div>

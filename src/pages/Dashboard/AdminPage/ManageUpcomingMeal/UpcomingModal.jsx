@@ -1,12 +1,10 @@
-import { Helmet } from "react-helmet-async";
-import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
-import Breadcrumbs from "../../../../components/Breadcrumbs/Breadcrumbs";
 import { useForm } from "react-hook-form";
-import useAuth from "../../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { imageUpload } from "../../../../api";
+import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-const AddMeal = () => {
+
+function UpcomingModal() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const {
@@ -96,14 +94,15 @@ const AddMeal = () => {
           reviews: [],
         };
 
-        const menuRes = await axiosSecure.post("/menu", menuItem);
+        // const menuRes = await axiosSecure.post("/upcoming-meal", menuItem);
 
-        if (menuRes.data.insertedId) {
-          toast.success("Meal added successfully");
-          reset();
-        } else {
-          toast.error("Failed to add meal");
-        }
+        // if (menuRes.data.insertedId) {
+        //   toast.success("Meal added successfully");
+        //   reset();
+        // } else {
+        //   toast.error("Failed to add meal");
+        // }
+        console.log(menuItem);
       } else {
         toast.error("Image upload failed, default image will be used", {
           autoClose: 2000,
@@ -114,18 +113,11 @@ const AddMeal = () => {
       toast.error(err.message);
     }
   };
-
   return (
     <div>
-      <Helmet>
-        <title>Add Meal | Dashboard</title>
-      </Helmet>
-      <div className="py-2">
-        <Breadcrumbs />
-      </div>
-      <div>
-        <SectionTitle title="Add New Meal" />
-      </div>
+      <h1 className="text-base dark:text-slate-300 md:text-2xl text-center font-bold mb-4">
+        Add New Upcoming Meal
+      </h1>
       <section className="p-6 bg-slate-200 dark:bg-slate-800">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 grid-y-3">
@@ -302,9 +294,9 @@ const AddMeal = () => {
 
               <select
                 {...register("post_status", { required: true })}
-                defaultValue="Published"
+                defaultValue="Upcoming"
                 className="select h-9 min-h-2 select-bordered border-0 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                <option value="Published">Published</option>
+                <option value="Upcoming">Upcoming</option>
               </select>
             </div>
           </div>
@@ -461,6 +453,6 @@ const AddMeal = () => {
       </section>
     </div>
   );
-};
+}
 
-export default AddMeal;
+export default UpcomingModal;

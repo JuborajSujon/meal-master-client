@@ -13,7 +13,7 @@ export default function Breadcrumbs() {
     .map((crumb, index) => {
       currentLink += `/${crumb}`;
       return (
-        <ul key={index} className="crumb">
+        <ul key={index} className="crumb *:text-sm">
           <li>
             <Link to={currentLink}>{crumb}</Link>
           </li>
@@ -25,7 +25,9 @@ export default function Breadcrumbs() {
     <div>
       <div className="flex items-center breadcrumbs bg-slate-300 dark:bg-slate-600 pl-5 rounded text-lg font-medium ">
         <li>
-          <Link to="/" className="flex items-center gap-2 hover:underline">
+          <Link
+            to="/"
+            className="flex items-center gap-2 hover:underline text-sm">
             <FaHome className="text-slate-600 dark:text-slate-300" />
             Home
             <IoIosArrowForward
