@@ -73,8 +73,11 @@ const AuthProvider = ({ children }) => {
   };
 
   // sign out
-  const userSignOut = () => {
+  const userSignOut = async () => {
     setLoading(true);
+    await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+      withCredentials: true,
+    });
     return signOut(auth);
   };
 
@@ -85,8 +88,6 @@ const AuthProvider = ({ children }) => {
       { email },
       { withCredentials: true }
     );
-
-    console.log(data);
     return data;
   };
 
@@ -111,12 +112,13 @@ const AuthProvider = ({ children }) => {
   // observer user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const email = currentUser?.email || user?.email;
       setUser(currentUser);
+      setLoading(false);
       if (currentUser) {
-        getToken(currentUser.email);
+        getToken(email);
         saveUser(currentUser);
       }
-      setLoading(false);
     });
     return () => {
       unsubscribe();
