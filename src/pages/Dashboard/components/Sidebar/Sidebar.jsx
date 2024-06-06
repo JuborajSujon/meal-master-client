@@ -29,10 +29,15 @@ const Sidebar = ({ handleToggle, isActive }) => {
   return (
     <>
       {/* Sidebar */}
-      <div
+      {/* <div
         className={`z-20 min-h-screen flex flex-col justify-between overflow-x-hidden border-r border-gray-200 bg-slate-200 dark:bg-slate-800 w-64 space-y-6 px-2 py-3 absolute md:fixed md:top-0 md:left-0 inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
-        }  md:translate-x-0 transition duration-200 ease-in-out`}>
+        }  md:translate-x-0 transition duration-200 ease-in-out`}> */}
+
+      <div
+        className={`md:flex flex-col justify-between overflow-x-hidden border-r border-gray-200 bg-slate-200 dark:bg-slate-800  space-y-6 px-2 py-3 z-20 min-h-screen w-64 ${
+          isActive ? "translate-x-0" : "-translate-x-full"
+        } transform md:translate-x-0 md:static fixed top-0 left-0 h-full transition-transform duration-200 ease-in-out`}>
         <div>
           <div className="flex justify-between border-b border-gray-200  pb-4">
             <div className="md:flex md:w-full px-4 py-2 shadow-lg rounded-lg justify-start items-center bg-slate-800">
@@ -199,7 +204,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                   : "text-gray-600"
               }`
             }>
-            <FcSettings className="w-5 h-5 " />
+            <FcSettings className="w-5 h-5 dark:text-slate-300" />
 
             <span className="mx-4 dark:text-slate-300 font-medium">
               Profile

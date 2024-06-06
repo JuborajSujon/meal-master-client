@@ -5,23 +5,23 @@ import { useState } from "react";
 import DashboardNav from "../pages/Dashboard/components/DashboardNav/DashboardNav";
 
 const Dashboard = () => {
-  const [isActive, setActive] = useState(true);
+  const [isActive, setActive] = useState(false);
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
   };
   return (
-    <div className="min-h-screen md:flex justify-start font-poppins">
+    <div className="h-screen flex max-w-[1540px] mx-auto font-poppins">
       {/* sider bar */}
-      <div>
+      <div className="relative">
         <Sidebar handleToggle={handleToggle} isActive={isActive} />
       </div>
 
       {/* dashboard dynamic content */}
-      <div className="flex-1 mt-16 md:ml-64">
+      <div className="flex flex-col flex-grow overflow-hidden ">
         {/* navbar */}
         <DashboardNav handleToggle={handleToggle} isActive={isActive} />
-        <div className="px-5">
+        <div className="flex-grow p-4 overflow-auto">
           <Outlet />
         </div>
       </div>

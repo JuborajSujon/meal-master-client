@@ -17,80 +17,57 @@ function AllReviews() {
         <SectionTitle title="Manage All Reviews" />
       </div>
       <div className="bg-orange-50 dark:text-slate-800 dark:bg-slate-800 p-4 rounded-md">
-        <div>
-          <div className="rounded-md">
-            <table className="min-w-full rounded-md overflow-x-auto text-xs">
+        {/* table */}
+        <div className="container p-2 mx-auto sm:p-4 text-gray-800">
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-xs">
+              <colgroup>
+                <col className="min-w-96" />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col />
+              </colgroup>
               <thead className="bg-gray-300">
                 <tr className="text-left">
                   <th className="p-3">Review</th>
-                  <th className="p-3">Meal Title</th>
-                  <th className="p-3">Likes</th>
-                  <th className="p-3">Reviews Count</th>
-                  <th className="p-3">Action</th>
+                  <th className="p-3">Meal Name</th>
+                  <th className="p-3">Like</th>
+                  <th className="p-3">Review count</th>
+                  <th className="p-3 ">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                  <td className="p-3 ">
+                  <td className="p-3">
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Exercitationem consequuntur nemo deserunt numquam ad
-                      veniam qui illo laudantium provident autem.
+                      Impedit maiores soluta error et aliquid dolor obcaecati
+                      debitis placeat, deserunt ducimus.
                     </p>
                   </td>
                   <td className="p-3">
-                    <p>Microsoft Corporation Corporation</p>
+                    <p>Meal Name</p>
                   </td>
                   <td className="p-3">
-                    <p className="text-gray-600">300</p>
+                    <p>200</p>
                   </td>
                   <td className="p-3">
-                    <p className="text-gray-600">300</p>
+                    <p>200</p>
                   </td>
 
                   <td className="p-3 flex items-center gap-2">
                     <button
-                      data-tip="View Meal"
-                      className="px-3 py-2  rounded-md bg-green-600 text-gray-50  tooltip ">
-                      <BiSolidDetail size={20} />
+                      data-tip="Meal View"
+                      className="px-3 py-1 tooltip rounded-md bg-amber-600 text-gray-50">
+                      <BiSolidDetail size={16} />
                     </button>
 
                     <button
-                      data-tip="View Meal"
-                      className="px-3 py-2  rounded-md bg-red-600 text-white  tooltip ">
-                      <MdDeleteForever size={20} />
-                    </button>
-                  </td>
-                </tr>
-                <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                  <td className="p-3 ">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Exercitationem consequuntur nemo deserunt numquam ad
-                      veniam qui illo laudantium provident autem.
-                    </p>
-                  </td>
-                  <td className="p-3">
-                    <p>Microsoft Corporation Corporation</p>
-                  </td>
-                  <td className="p-3">
-                    <p className="text-gray-600">300</p>
-                  </td>
-                  <td className="p-3">
-                    <p className="text-gray-600">300</p>
-                  </td>
-
-                  <td className="p-3 flex items-center gap-2">
-                    <button
-                      data-tip="View Meal"
-                      className="px-3 py-2  rounded-md bg-green-600 text-gray-50  tooltip ">
-                      <BiSolidDetail size={20} />
-                    </button>
-
-                    <button
-                      data-tip="View Meal"
-                      className="px-3 py-2  rounded-md bg-red-600 text-white  tooltip ">
-                      <MdDeleteForever size={20} />
+                      data-tip="Delete"
+                      className="px-3 py-1 tooltip rounded-md bg-red-600 text-gray-50">
+                      <MdDeleteForever size={16} />
                     </button>
                   </td>
                 </tr>

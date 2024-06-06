@@ -31,44 +31,49 @@ export default function ManageUsers() {
           </div>
 
           {/* table */}
-          <div>
-            <div className=" p-2 sm:p-4 text-gray-800">
-              <div className="overflow-x-auto">
-                <table className="min-w-full text-base">
-                  <thead className="bg-gray-300">
-                    <tr className="text-left">
-                      <th className="p-3">User Name</th>
-                      <th className="p-3">Email</th>
-                      <th className="p-3">User Type</th>
-                      <th className="p-3">Subcription</th>
-                      <th className="p-3">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                      <td className="p-3">
-                        <p>John Doe</p>
-                      </td>
-                      <td className="p-3">
-                        <p>3GKpS@example.com</p>
-                      </td>
-                      <td className="p-3">
-                        <span className="px-3 py-1 font-semibold rounded-md bg-green-600/50 ">
-                          verified
-                        </span>
-                      </td>
-                      <td className="p-3">
-                        <p className="text-gray-600">Bronze</p>
-                      </td>
-                      <td className="p-3">
-                        <button className="px-3 py-1 font-semibold rounded-md bg-amber-600 text-gray-50">
-                          Make An Admin
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          <div className="container p-2 mx-auto sm:p-4 text-gray-800">
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-xs">
+                <colgroup>
+                  <col />
+                  <col />
+                  <col />
+                  <col />
+                  <col />
+                  <col />
+                </colgroup>
+                <thead className="bg-gray-300">
+                  <tr className="text-left">
+                    <th className="p-3">User Name</th>
+                    <th className="p-3">Email</th>
+                    <th className="p-3">Role</th>
+                    <th className="p-3">Subscription</th>
+                    <th className="p-3 ">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
+                    <td className="p-3">
+                      <p>User Name</p>
+                    </td>
+                    <td className="p-3">
+                      <p>Email@email.com</p>
+                    </td>
+                    <td className="p-3">
+                      <p>Admin</p>
+                    </td>
+                    <td className="p-3">
+                      <p>Bronze</p>
+                    </td>
+
+                    <td className="p-3">
+                      <button className="px-3 py-1 font-semibold rounded-md bg-amber-600 text-gray-50">
+                        Make Admin
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
