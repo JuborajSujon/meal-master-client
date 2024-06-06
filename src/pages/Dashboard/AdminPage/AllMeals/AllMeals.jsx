@@ -82,12 +82,12 @@ const AllMeals = () => {
                           <BiSolidDetail size={24} />
                         </button>
                         <button
-                          data-tip="View Meal"
+                          data-tip="Update Meal"
                           className="px-3 py-2  rounded-md bg-amber-600 text-blue-500  tooltip ">
                           <FaEdit size={24} />
                         </button>
                         <button
-                          data-tip="View Meal"
+                          data-tip="Delete Meal"
                           className="px-3 py-2  rounded-md bg-red-600 text-white  tooltip ">
                           <MdDeleteForever size={24} />
                         </button>
