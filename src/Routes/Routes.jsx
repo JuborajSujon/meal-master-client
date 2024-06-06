@@ -10,8 +10,9 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
-import AddMeal from "../pages/Dashboard/AddMeal/AddMeal";
+import AddMeal from "../pages/Dashboard/AdminPage/AddMeal/AddMeal";
 import UserProfile from "../pages/Dashboard/UserProfile/UserProfile";
+import ManageUsers from "../pages/Dashboard/AdminPage/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -72,7 +73,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/manage-users",
-        element: <div>Manage Users</div>,
+        element: <ManageUsers />,
       },
       {
         path: "/dashboard/add-meal",

@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
+import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
+import Breadcrumbs from "../../../../components/Breadcrumbs/Breadcrumbs";
 import { useForm } from "react-hook-form";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../../hooks/useAuth";
 import { toast } from "react-toastify";
-import { imageUpload } from "../../../api";
-import useAxiosSecure from "./../../../hooks/useAxiosSecure";
+import { imageUpload } from "../../../../api";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 const AddMeal = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
