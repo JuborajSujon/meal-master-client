@@ -3,17 +3,17 @@ import Breadcrumbs from "../../../../components/Breadcrumbs/Breadcrumbs";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { FaSearch } from "react-icons/fa";
 
-export default function ManageUsers() {
+const ServeMeals = () => {
   return (
     <div>
       <Helmet>
-        <title>Manage Users | Dashboard</title>
+        <title>Serve Meals | Dashboard</title>
       </Helmet>
       <div className="py-2">
         <Breadcrumbs />
       </div>
       <div>
-        <SectionTitle title="Manage All Users" />
+        <SectionTitle title="Serve All Meals" />
       </div>
       <div className="bg-orange-50 dark:bg-slate-800 p-4 rounded">
         <div>
@@ -44,31 +44,33 @@ export default function ManageUsers() {
                 </colgroup>
                 <thead className="bg-gray-300">
                   <tr className="text-left">
+                    <th className="p-3">Meal Name</th>
+                    <th className="p-3">User Email</th>
                     <th className="p-3">User Name</th>
-                    <th className="p-3">Email</th>
-                    <th className="p-3">Role</th>
-                    <th className="p-3">Subscription</th>
+                    <th className="p-3">Meal Request</th>
                     <th className="p-3 ">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
                     <td className="p-3">
-                      <p>User Name</p>
+                      <p>Meal Name</p>
                     </td>
                     <td className="p-3">
                       <p>Email@email.com</p>
                     </td>
                     <td className="p-3">
-                      <p>Admin</p>
+                      <p>User Name</p>
                     </td>
                     <td className="p-3">
-                      <p>Bronze</p>
+                      <p className="px-3 py-1 font-semibold rounded-md bg-blue-200 inline-block ">
+                        Pending
+                      </p>
                     </td>
 
                     <td className="p-3">
                       <button className="px-3 py-1 font-semibold rounded-md bg-amber-600 text-gray-50">
-                        Make Admin
+                        Serve
                       </button>
                     </td>
                   </tr>
@@ -80,4 +82,6 @@ export default function ManageUsers() {
       </div>
     </div>
   );
-}
+};
+
+export default ServeMeals;
