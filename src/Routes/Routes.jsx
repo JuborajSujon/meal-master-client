@@ -11,6 +11,7 @@ import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import AddMeal from "../pages/Dashboard/AddMeal/AddMeal";
+import UserProfile from "../pages/Dashboard/UserProfile/UserProfile";
 
 export const router = createBrowserRouter([
   {
@@ -67,7 +68,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin-profile",
-        element: <div>Admin Profile</div>,
+        element: <UserProfile />,
       },
       {
         path: "/dashboard/manage-users",

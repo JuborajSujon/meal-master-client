@@ -135,11 +135,11 @@ const DashboardNav = ({ handleToggle }) => {
                 </div>
               </div>
               <div className="dropdown dropdown-end">
-                <div className="flex items-center justify-start">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="btn btn-ghost btn-circle avatar">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="flex items-center justify-start ">
+                  <div className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
                       <img
                         alt="Tailwind CSS Navbar component"
