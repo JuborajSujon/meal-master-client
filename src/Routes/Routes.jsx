@@ -99,6 +99,22 @@ export const router = createBrowserRouter([
         path: "/dashboard/upcoming-meals",
         element: <ManageUpcomingMeal />,
       },
+      {
+        path: "/dashboard/user-profile",
+        element: <div>User Profile</div>,
+      },
+      {
+        path: "/dashboard/requested-meals",
+        element: <div>Requested Meals</div>,
+      },
+      {
+        path: "/dashboard/user-reviews",
+        element: <div>User Reviews</div>,
+      },
+      {
+        path: "/dashboard/payment-history",
+        element: <div>Payment History</div>,
+      },
     ],
   },
 ]);
