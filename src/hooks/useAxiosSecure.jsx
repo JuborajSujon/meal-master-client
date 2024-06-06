@@ -8,7 +8,7 @@ export const axiosSecure = axios.create({
 });
 
 const useAxiosSecure = () => {
-  const { logOut } = useAuth();
+  const { userSignOut } = useAuth();
   const navigate = useNavigate();
 
   // interceptors - response to remove authorization for every secure call to the server
@@ -20,7 +20,7 @@ const useAxiosSecure = () => {
     async (error) => {
       const status = error.response?.status;
       if (status === 401 || status === 403) {
-        await logOut();
+        await userSignOut();
         navigate("/login");
       }
       return Promise.reject(error);
