@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { LuBadgeCheck } from "react-icons/lu";
 import useMemberShip from "../../../hooks/useMemberShip";
 
 export default function Membership() {
+  const [selectedPlan, setSelectedPlan] = useState([]);
   const [membership, loading] = useMemberShip();
-  const [selectedPlan, setSelectedPlan] = useState(membership.slice(0, 3));
+
+  useEffect(() => {
+    setSelectedPlan(membership.slice(0, 3));
+  }, [membership]);
 
   const handleFilter = (plan) => {
     const result = membership.filter((item) => item.duration === plan);

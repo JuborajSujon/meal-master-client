@@ -50,7 +50,7 @@ export default function Login() {
     if (!email) {
       toast.error("Please write your email first!", { autoClose: 1500 });
       return;
-    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       toast.error("Invalid Email!", { autoClose: 1500 });
       return;
     }
@@ -63,11 +63,9 @@ export default function Login() {
           autoClose: 1500,
         }
       );
-      setLoading(false);
     } catch (err) {
       console.log(err);
       toast.error(err.message, { autoClose: 1500 });
-      setLoading(false);
     }
   };
   return (
