@@ -11,8 +11,8 @@ const useMemberShip = () => {
   } = useQuery({
     queryKey: ["membership"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/membership");
-      return res.data[0];
+      const { data } = await axiosPublic.get("/membership");
+      return data;
     },
   });
 

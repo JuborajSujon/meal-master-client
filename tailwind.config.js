@@ -8,6 +8,7 @@ export default {
     "bg-teal-400",
     "bg-yellow-400",
     "bg-teal-500",
+    "bg-blue-400",
   ],
   theme: {
     extend: {

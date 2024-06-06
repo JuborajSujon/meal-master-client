@@ -4,8 +4,13 @@ import { LuBadgeCheck } from "react-icons/lu";
 import useMemberShip from "../../../hooks/useMemberShip";
 
 export default function Membership() {
-  const [selectedPlan, setSelectedPlan] = useState("monthly");
   const [membership, loading] = useMemberShip();
+  const [selectedPlan, setSelectedPlan] = useState(membership.slice(0, 3));
+
+  const handleFilter = (plan) => {
+    const result = membership.filter((item) => item.duration === plan);
+    setSelectedPlan(result);
+  };
 
   if (loading)
     return (
@@ -28,19 +33,19 @@ export default function Membership() {
             </h1>
             <div>
               <button
-                onClick={() => setSelectedPlan("monthly")}
+                onClick={() => handleFilter("monthly")}
                 className="px-4 py-1 font-semibold border rounded-l-lg bg-amber-600 border-amber-600 text-gray-50">
                 Monthly
               </button>
               <button
-                onClick={() => setSelectedPlan("yearly")}
+                onClick={() => handleFilter("yearly")}
                 className="px-4 py-1 border rounded-r-lg border-amber-600 dark:text-slate-300">
                 Annually
               </button>
             </div>
           </div>
           <div className="grid max-w-md grid-cols-1 gap-6 mx-auto auto-rows-fr lg:grid-cols-3 lg:max-w-full">
-            {membership[selectedPlan]?.map((plan) => {
+            {selectedPlan?.map((plan) => {
               return (
                 <div
                   key={plan.service_name}
