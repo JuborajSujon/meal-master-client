@@ -10,6 +10,7 @@ import { FaHome, FaUser } from "react-icons/fa";
 import useAuth from "../../../../hooks/useAuth";
 import logo from "../../../../assets/logo.png";
 import PropTypes from "prop-types";
+import { FaList } from "react-icons/fa6";
 
 const Sidebar = ({ handleToggle, isActive }) => {
   const { userSignOut, setUser, user } = useAuth();
@@ -123,6 +124,20 @@ const Sidebar = ({ handleToggle, isActive }) => {
                   <MdFormatListBulletedAdd className="w-5 h-5" />
 
                   <span className="mx-4 font-medium">Add Meal</span>
+                </NavLink>
+
+                <NavLink
+                  to="all-meals"
+                  className={({ isActive }) =>
+                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      isActive
+                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                        : "text-gray-700"
+                    }`
+                  }>
+                  <FaList className="w-5 h-5" />
+
+                  <span className="mx-4 font-medium">All Males</span>
                 </NavLink>
 
                 <NavLink

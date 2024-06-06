@@ -13,6 +13,7 @@ import Dashboard from "../Layout/Dashboard";
 import AddMeal from "../pages/Dashboard/AdminPage/AddMeal/AddMeal";
 import UserProfile from "../pages/Dashboard/UserProfile/UserProfile";
 import ManageUsers from "../pages/Dashboard/AdminPage/ManageUsers/ManageUsers";
+import AllMeals from "../pages/Dashboard/AdminPage/AllMeals/AllMeals";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/add-meal",
         element: <AddMeal />,
+      },
+      {
+        path: "/dashboard/all-meals",
+        element: <AllMeals />,
       },
       {
         path: "/dashboard/all-reviews",
