@@ -94,17 +94,16 @@ function UpcomingModal() {
           reviews: [],
         };
 
-        // const menuRes = await axiosSecure.post("/upcoming-meal", menuItem);
+        const menuRes = await axiosSecure.post("/upcoming-meal", menuItem);
 
-        // if (menuRes.data.insertedId) {
-        //   toast.success("Meal added successfully");
-        //   reset();
-        // } else {
-        //   toast.error("Failed to add meal");
-        // }
-        console.log(menuItem);
+        if (menuRes.data.insertedId) {
+          toast.success("Meal added successfully");
+          reset();
+        } else {
+          toast.error("Failed to add meal");
+        }
       } else {
-        toast.error("Image upload failed, default image will be used", {
+        toast.error("Image upload failed, please try again", {
           autoClose: 2000,
         });
       }

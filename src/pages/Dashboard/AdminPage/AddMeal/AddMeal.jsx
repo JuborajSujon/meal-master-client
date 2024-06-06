@@ -105,7 +105,7 @@ const AddMeal = () => {
           toast.error("Failed to add meal");
         }
       } else {
-        toast.error("Image upload failed, default image will be used", {
+        toast.error("Image upload failed, please try again", {
           autoClose: 2000,
         });
       }
