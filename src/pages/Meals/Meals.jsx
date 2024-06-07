@@ -18,11 +18,10 @@ export default function Meals() {
 
   // handle infinite scroll
   const fetchMoreData = () => {
-    if (items.length >= 500) {
+    if (items.length >= 60) {
       setHasMore(false);
       return;
     }
-    // a fake async API call which sends 20 more records in .5 secs
     setTimeout(() => {
       setItems((prevItems) => prevItems.concat(Array.from({ length: 6 })));
     }, 1000);
@@ -110,7 +109,13 @@ export default function Meals() {
           </div>
         }
         endMessage={
-          <p style={{ textAlign: "center" }}>
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: "40px",
+              color: "blue",
+              fontSize: "20px",
+            }}>
             <b>Yay! You have seen it all</b>
           </p>
         }>
