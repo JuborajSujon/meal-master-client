@@ -110,7 +110,7 @@ export default function Navbar() {
         </div>
         <Link
           to={"/"}
-          className="btn btn-ghost hover:bg-slate-800 bg-stone-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl italic font-bold  min-h-10 h-12 -ml-2 ">
+          className="btn btn-ghost hover:bg-slate-800 bg-stone-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl italic font-bold  min-h-10 h-12 -ml-2 md:ml-4">
           <img className="w-28" src={Logo} alt="logo" />
         </Link>
       </div>
@@ -119,7 +119,7 @@ export default function Navbar() {
           {navList}
         </ul>
       </div>
-      <div className="navbar-end  space-x-2">
+      <div className="navbar-end  space-x-2 mr-4">
         <div>
           <IoIosNotifications
             size={30}

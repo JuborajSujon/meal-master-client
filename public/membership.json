@@ -1,11 +1,11 @@
 [
   {
     "service_name": "Silver",
-    "total_price": 100,
+    "total_price": 150,
     "duration": "monthly",
     "benefits": [
       "Access to breakfast only",
-      "40 meal coupons for lunch or dinner",
+      "30 meal coupons for lunch or dinner",
       "30 meal coupons for extra snacks",
       "Access to free beverages (tea, coffee)",
       "Special discounts on weekends"
@@ -15,7 +15,7 @@
   },
   {
     "service_name": "Gold",
-    "total_price": 150,
+    "total_price": 200,
     "duration": "monthly",
     "benefits": [
       "Access to breakfast, lunch, and dinner",
@@ -30,7 +30,7 @@
   },
   {
     "service_name": "Platinum",
-    "total_price": 200,
+    "total_price": 300,
     "duration": "monthly",
     "benefits": [
       "Access to all meals",
@@ -48,11 +48,11 @@
 
   {
     "service_name": "Silver",
-    "total_price": 1200,
+    "total_price": 1800,
     "duration": "yearly",
     "benefits": [
       "Access to breakfast only",
-      "40 meal coupons for lunch or dinner",
+      "30 meal coupons for lunch or dinner",
       "30 meal coupons for extra snacks",
       "Access to free beverages (tea, coffee)",
       "Special discounts on weekends"
@@ -62,7 +62,7 @@
   },
   {
     "service_name": "Gold",
-    "total_price": 1800,
+    "total_price": 2400,
     "duration": "yearly",
     "benefits": [
       "Access to breakfast, lunch, and dinner",
@@ -77,7 +77,7 @@
   },
   {
     "service_name": "Platinum",
-    "total_price": 2400,
+    "total_price": 3600,
     "duration": "yearly",
     "benefits": [
       "Access to all meals",

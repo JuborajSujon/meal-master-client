@@ -6,7 +6,9 @@ import useAuth from "../../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { imageUpload } from "../../../../api";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { useState } from "react";
 const AddMeal = () => {
+  const [spinning, setSpinning] = useState(false);
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const {
@@ -45,6 +47,7 @@ const AddMeal = () => {
       short_description,
     } = data;
     try {
+      setSpinning(true);
       // upload image and get url
       let image;
       const imageData = photo[0];
@@ -99,8 +102,11 @@ const AddMeal = () => {
         const menuRes = await axiosSecure.post("/menu", menuItem);
 
         if (menuRes.data.insertedId) {
-          toast.success("Meal added successfully");
+          toast.success("Meal added successfully", {
+            autoClose: 1500,
+          });
           reset();
+          setSpinning(false);
         } else {
           toast.error("Failed to add meal");
         }
@@ -154,6 +160,7 @@ const AddMeal = () => {
               <input
                 {...register("price", { required: true })}
                 type="number"
+                step="any"
                 className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Price"
               />
@@ -471,11 +478,19 @@ const AddMeal = () => {
 
           {/* submit button */}
           <div className="text-center mt-6">
-            <input
-              value={"Add Meal"}
-              type="submit"
-              className="bg-slate-800 text-white  hover:bg-slate-700 text-sm font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none border-2 border-transparent dark:bg-slate-500 hover:border-2 hover:border-yellow-400 focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-            />
+            {spinning ? (
+              <button
+                disabled
+                className="bg-slate-800 text-white  hover:bg-slate-700 text-sm font-bold uppercase px-6 py-1 rounded shadow hover:shadow-lg outline-none border-2 border-transparent dark:bg-slate-500 hover:border-2 hover:border-yellow-400 focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
+                <span className="loading loading-dots loading-md"></span>
+              </button>
+            ) : (
+              <input
+                value={"Add Meal"}
+                type="submit"
+                className="bg-slate-800 text-white  hover:bg-slate-700 text-sm font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none border-2 border-transparent dark:bg-slate-500 hover:border-2 hover:border-yellow-400 focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+              />
+            )}
           </div>
         </form>
       </section>

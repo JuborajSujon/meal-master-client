@@ -5,6 +5,7 @@ import MealsCategory from "../MealsCategory/MealsCategory";
 import { useEffect } from "react";
 import HomeAboutUs from "../HomeAboutUs/HomeAboutUs";
 import GiftCard from "../GiftCard/GiftCard";
+import TabMealCategory from "../TabMealCategory/TabMealCategory";
 
 export default function Home() {
   //  ensure that the new page starts at the top when navigating
@@ -17,8 +18,9 @@ export default function Home() {
         <title>Home</title>
       </Helmet>
       <Carousel />
-      <MealsCategory />
+      <TabMealCategory />
       <Membership />
+      <MealsCategory />
       <HomeAboutUs />
       <GiftCard />
     </div>
