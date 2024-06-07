@@ -21,7 +21,7 @@ const ManageUpcomingMeal = () => {
         <Breadcrumbs />
       </div>
       <div className="flex items-center justify-between">
-        <SectionTitle title="Manage All Meals" />
+        <SectionTitle title="Upcoming Meals" />
         <div>
           <div>
             {/* The button to open modal */}

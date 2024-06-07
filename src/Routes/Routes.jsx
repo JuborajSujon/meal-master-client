@@ -18,6 +18,8 @@ import AllReviews from "../pages/Dashboard/AdminPage/AllReviews/AllReviews";
 import ServeMeals from "../pages/Dashboard/AdminPage/ServeMeals/ServeMeals";
 import ManageUpcomingMeal from "./../pages/Dashboard/AdminPage/ManageUpcomingMeal/ManageUpcomingMeal";
 import RequestedMeals from "../pages/Dashboard/UserPage/RequestedMeals/RequestedMeals";
+import UserReviews from "../pages/Dashboard/UserPage/UserReviews/UserReviews";
+import PaymentHistory from "../pages/Dashboard/UserPage/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -110,11 +112,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/user-reviews",
-        element: <div>User Reviews</div>,
+        element: <UserReviews />,
       },
       {
         path: "/dashboard/payment-history",
-        element: <div>Payment History</div>,
+        element: <PaymentHistory />,
       },
     ],
   },
