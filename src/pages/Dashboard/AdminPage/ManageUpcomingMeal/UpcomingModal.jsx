@@ -390,16 +390,26 @@ function UpcomingModal() {
               Nutrition Facts
             </label>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
-            <div className="relative w-full mb-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+            <div className="relative w-full mb-2">
+              <label
+                className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
+                htmlFor="grid-password">
+                Calories
+              </label>
               <input
                 {...register("nutrition_calories", { required: true })}
                 type="text"
                 className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                placeholder="10gm"
+                placeholder="100"
               />
             </div>
-            <div className="relative w-full mb-3">
+            <div className="relative w-full mb-2">
+              <label
+                className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
+                htmlFor="grid-password">
+                Fats
+              </label>
               <input
                 {...register("nutrition_fats", { required: true })}
                 type="text"
@@ -408,6 +418,11 @@ function UpcomingModal() {
               />
             </div>
             <div className="relative w-full mb-3">
+              <label
+                className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
+                htmlFor="grid-password">
+                Carbs
+              </label>
               <input
                 {...register("nutrition_carbs", { required: true })}
                 type="text"
@@ -416,6 +431,11 @@ function UpcomingModal() {
               />
             </div>
             <div className="relative w-full mb-3">
+              <label
+                className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
+                htmlFor="grid-password">
+                Proteins
+              </label>
               <input
                 {...register("nutrition_proteins", { required: true })}
                 type="text"

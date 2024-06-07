@@ -12,16 +12,7 @@ export default function MealsCategory() {
     <div className="py-16">
       <div className="flex justify-start items-end gap-6">
         <div>
-          <SectionTitle title="Menu" subTitle="Meals Category" />
-        </div>
-        <div>
-          <p className="mb-2">Select your category</p>
-          <select className="select font-bold text-lg select-warning w-full max-w-xs">
-            <option value="all">All Meals</option>
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-          </select>
+          <SectionTitle title="Gallery" subTitle="Fast & fresh to your door" />
         </div>
       </div>
       <div className="relative mt-10">
