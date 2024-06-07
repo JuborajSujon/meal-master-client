@@ -12,14 +12,13 @@ import { BiSolidLike } from "react-icons/bi";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { MdRateReview } from "react-icons/md";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 export default function MealDetails() {
   const [rating, setRating] = useState(3);
 
   //  ensure that the new page starts at the top when navigating
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useScrollToTop();
   return (
     <div className="px-4 py-20">
       <Helmet>

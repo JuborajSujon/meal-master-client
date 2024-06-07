@@ -1,16 +1,20 @@
 import { Helmet } from "react-helmet-async";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import SectionTitle from "./../../components/SectionTitle/SectionTitle";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MealCard from "../../components/MealCard/MealCard";
 
 import InfiniteScroll from "react-infinite-scroll-component";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 export default function Meals() {
   const [items, setItems] = useState(Array.from({ length: 6 }));
   const [hasMore, setHasMore] = useState(true);
   const [priceRange, setPriceRange] = useState([0, 100]);
   const [minPrice, maxPrice] = priceRange;
+
+  //  ensure that the new page starts at the top when navigating
+  useScrollToTop();
 
   // handle infinite scroll
   const fetchMoreData = () => {
@@ -29,10 +33,6 @@ export default function Meals() {
     setPriceRange([0, parseInt(value)]);
   };
 
-  //  ensure that the new page starts at the top when navigating
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
     <div className="px-4 py-20">
       <Helmet>
