@@ -3,24 +3,20 @@ import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
 export default function useUser() {
-  const axiosSecure = useAxiosSecure;
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  console.log(user?.email);
 
   const {
-    data: useData = {},
+    data: userData = {},
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["useData", user?.email],
+    queryKey: ["userData", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/user/${user?.email}`);
-      console.log(data);
       return data;
     },
   });
 
-  console.log(useData);
-
-  return [useData, isLoading, refetch];
+  return [userData, isLoading, refetch];
 }

@@ -7,7 +7,8 @@ import useUpcomingMeal from "../../hooks/useUpcomingMeal";
 import Loading from "../../components/Loading/Loading";
 
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import useUser from "../../hooks/useUser";
 
 export default function UpComingMeals() {
   //  ensure that the new page starts at the top when navigating
@@ -16,8 +17,23 @@ export default function UpComingMeals() {
   const [items, setItems] = useState(Array.from({ length: 6 }));
   const [hasMore, setHasMore] = useState(true);
 
+  // current user data get from db
+  const [userData] = useUser();
+
   // data fetching from db
   const [upcomingMeals, loading] = useUpcomingMeal();
+  const renderUpcomingMealCard = useCallback(
+    (upcomingMeals) => {
+      return (
+        <UpComingMealCard
+          key={upcomingMeals._id}
+          upcomingMeal={upcomingMeals}
+          currentUser={userData}
+        />
+      );
+    },
+    [userData]
+  );
 
   // handle infinite scroll
   const fetchMoreData = () => {
@@ -74,12 +90,7 @@ export default function UpComingMeals() {
           </p>
         }>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {upcomingMeals?.map((upcomingMeal) => (
-            <UpComingMealCard
-              key={upcomingMeal._id}
-              upcomingMeal={upcomingMeal}
-            />
-          ))}
+          {upcomingMeals?.map(renderUpcomingMealCard)}
         </div>
       </InfiniteScroll>
     </div>

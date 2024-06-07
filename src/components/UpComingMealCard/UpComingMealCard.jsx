@@ -1,8 +1,10 @@
-import { AiFillLike } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
-export default function UpComingMealCard({ upcomingMeal }) {
+export default function UpComingMealCard({ upcomingMeal, currentUser }) {
+  const [liked, setLiked] = useState(false);
+
   const {
     _id,
     meal_title,
@@ -11,7 +13,22 @@ export default function UpComingMealCard({ upcomingMeal }) {
     meal_category,
     meal_subcategory,
     short_description,
+    likes_count,
   } = upcomingMeal;
+  const [likeCount, setLikeCount] = useState(likes_count);
+  const { _id: userId, badge, email, name, photo } = currentUser;
+  console.log(upcomingMeal);
+
+  // handle like button
+  const handleLike = () => {
+    if (liked) {
+      setLikeCount(likeCount - 1);
+      setLiked(!liked);
+      return;
+    }
+    setLikeCount(likeCount + 1);
+    setLiked(!liked);
+  };
   return (
     <div className="group rounded-lg bg-white dark:bg-slate-900 shadow hover:shadow-md dark:hover:shadow-md dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden  m-3 flex flex-col max-w-sm">
       <div className="relative h-64">
@@ -57,9 +74,9 @@ export default function UpComingMealCard({ upcomingMeal }) {
           <li>
             <ul className="text-lg font-medium  list-none">
               <li className=" dark:text-slate-300 flex items-center">
-                <span className="text-blue-600 mt-1 text-xl mr-2">0</span>
-                <button>
-                  <AiFillLike className="inline" size={22} />
+                <span className="text-blue-600 text-xl mr-2">{likeCount}</span>
+                <button onClick={handleLike}>
+                  {liked ? "Unlike" : "Like"}
                 </button>
               </li>
             </ul>
