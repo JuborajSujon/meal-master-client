@@ -66,12 +66,12 @@ function UpcomingModal() {
           meal_ing_item9,
         ].filter(Boolean);
 
-        const nutrition_facts = [
-          { name: "calories", amount: nutrition_calories },
-          { name: "fats", amount: nutrition_fats },
-          { name: "carbs", amount: nutrition_carbs },
-          { name: "protein", amount: nutrition_proteins },
-        ];
+        const nutrition_facts = {
+          calories: nutrition_calories,
+          fats: nutrition_fats,
+          carbs: nutrition_carbs,
+          protein: nutrition_proteins,
+        };
         const menuItem = {
           meal_title,
           meal_category,
@@ -95,6 +95,11 @@ function UpcomingModal() {
           },
           likes: [],
           reviews: [],
+          likes_count: 0,
+          rating: {
+            average: 0,
+            count: 0,
+          },
         };
 
         const menuRes = await axiosSecure.post("/upcoming-meal", menuItem);

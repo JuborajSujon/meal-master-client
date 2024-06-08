@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaShareAlt } from "react-icons/fa";
 import { FaArrowRight, FaEye, FaHeart } from "react-icons/fa6";
@@ -10,13 +10,24 @@ import StudentRatings from "../../components/StudentRatings/StudentRatings";
 import StudentReview from "../../components/StudentReview/StudentReview";
 import { BiSolidLike } from "react-icons/bi";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { MdRateReview } from "react-icons/md";
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import moment from "moment";
+import useSingleMeal from "../../hooks/useSingleMeal";
+import Loading from "../../components/Loading/Loading";
+import useUser from "../../hooks/useUser";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 export default function MealDetails() {
-  const loadedData = useLoaderData();
+  useScrollToTop();
+  const { mealId } = useParams();
+  const [like, setLike] = useState(false);
+  const axiosSecure = useAxiosSecure();
+  const [singleMeal, isLoading, refetch] = useSingleMeal(mealId);
+  const [userData] = useUser();
+  const { _id: userId, name, email, photo } = userData;
 
   const {
     _id,
@@ -29,20 +40,49 @@ export default function MealDetails() {
     total_time,
     distributor_name,
     image,
-    likes_count,
     meal_category,
     meal_subcategory,
     meal_ingredients,
     nutrition_facts,
     post_createdAt,
     post_updatedAt,
-    rating: mealRating,
     short_description,
-  } = loadedData;
-  const [rating, setRating] = useState(mealRating.average || 0);
+    rating: mealRating,
+    likes_count,
+    reviews,
+  } = singleMeal;
 
-  //  ensure that the new page starts at the top when navigating
-  useScrollToTop();
+  // handle like
+  const handleLike = async () => {
+    setLike(!like);
+
+    try {
+      const likeObj = {
+        meal_id: _id,
+        user_id: userId,
+        name: name,
+        email: email,
+        photo: photo,
+        liked: like,
+        created_time: new Date().toISOString(),
+      };
+
+      const result = await axiosSecure.post(`/like`, likeObj);
+
+      if (result.status === 200) {
+        toast.success(result.data.message);
+        refetch();
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className="px-4 py-20">
       <Helmet>
@@ -103,7 +143,11 @@ export default function MealDetails() {
 
           <div className="flex items-center gap-2 ">
             {/* Rating - read only */}
-            <Rating style={{ maxWidth: 120 }} value={rating} readOnly />
+            <Rating
+              style={{ maxWidth: 120 }}
+              value={mealRating.average}
+              readOnly
+            />
 
             <span> | </span>
 
@@ -166,7 +210,9 @@ export default function MealDetails() {
               </button>
             </Link>
             <ul className="flex flex-wrap justify-start items-center gap-4">
-              <li className="flex cursor-pointer items-center gap-2">
+              <li
+                onClick={handleLike}
+                className="flex cursor-pointer items-center gap-2">
                 <BiSolidLike size={24} className="text-orange-600" />
                 <span>{likes_count}</span>
               </li>
@@ -260,7 +306,7 @@ export default function MealDetails() {
 
       {/* Student Review*/}
       <div id="reviews" className="mt-24">
-        <StudentReview />
+        <StudentReview reviews={reviews} refetch={refetch} id={_id} />
       </div>
     </div>
   );

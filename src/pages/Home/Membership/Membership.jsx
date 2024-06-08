@@ -2,27 +2,32 @@ import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { LuBadgeCheck } from "react-icons/lu";
 import useMemberShip from "../../../hooks/useMemberShip";
+import Loading from "../../../components/Loading/Loading";
+import { Link } from "react-router-dom";
 
 export default function Membership() {
   const [selectedPlan, setSelectedPlan] = useState([]);
   const [membership, loading] = useMemberShip();
 
   useEffect(() => {
-    setSelectedPlan(membership.slice(0, 3));
-  }, [membership]);
+    if (!loading) {
+      setSelectedPlan(
+        membership
+          .reverse()
+          .slice((0, 3))
+          .reverse()
+      );
+    }
+  }, [membership, loading]);
 
   const handleFilter = (plan) => {
     const result = membership.filter((item) => item.duration === plan);
-    setSelectedPlan(result);
+    setSelectedPlan(result.reverse());
   };
 
-  if (loading)
-    return (
-      <div className=" text-center my-10">
-        <span className="loading loading-bars w-16"></span>
-      </div>
-    );
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="py-10">
       <div className="flex justify-between items-center p-4">
@@ -80,9 +85,11 @@ export default function Membership() {
                         </li>
                       ))}
                     </ul>
-                    <button className="px-8 py-3 mt-6 text-lg font-semibold rounded sm:mt-12 bg-amber-600 hover:bg-orange-400 text-gray-50">
-                      Subscribe
-                    </button>
+                    <Link to={`/checkout/${plan._id}`}>
+                      <button className="px-8 py-3 mt-6 text-lg font-semibold rounded sm:mt-12 bg-amber-600 hover:bg-orange-400 text-gray-50">
+                        Subscribe
+                      </button>
+                    </Link>
                   </div>
                 </div>
               );

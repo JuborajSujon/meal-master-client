@@ -42,8 +42,6 @@ export const router = createBrowserRouter([
       {
         path: "/meal-details/:mealId",
         element: <MealDetails />,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/menu/${params.mealId}`),
       },
       {
         path: "/subscription",
