@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Loading from "../Loading/Loading";
 const MakeReview = ({ id, refetch }) => {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
   const [userData, isLoading] = useUser();
   const { _id, name, email, photo } = userData;
   const axiosPublic = useAxiosPublic();
@@ -113,6 +113,7 @@ const MakeReview = ({ id, refetch }) => {
 
 MakeReview.propTypes = {
   id: PropTypes.string,
+  refetch: PropTypes.func,
 };
 
 export default MakeReview;

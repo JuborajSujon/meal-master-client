@@ -50,6 +50,7 @@ export default function MealDetails() {
     rating: mealRating,
     likes_count,
     reviews,
+    ratingCount,
   } = singleMeal;
 
   // handle like
@@ -145,7 +146,7 @@ export default function MealDetails() {
             {/* Rating - read only */}
             <Rating
               style={{ maxWidth: 120 }}
-              value={mealRating.average}
+              value={mealRating.averageRating}
               readOnly
             />
 
@@ -153,7 +154,7 @@ export default function MealDetails() {
 
             {/* review - read only */}
             <span className="text-slate-800 dark:text-slate-300 text-base leading-10">
-              {mealRating.count} reviews
+              {mealRating.reviewCount} reviews
             </span>
           </div>
 
@@ -301,7 +302,7 @@ export default function MealDetails() {
 
       {/* Student Ratings */}
       <div className="mt-16">
-        <StudentRatings />
+        <StudentRatings mealRating={mealRating} ratingCount={ratingCount} />
       </div>
 
       {/* Student Review*/}
