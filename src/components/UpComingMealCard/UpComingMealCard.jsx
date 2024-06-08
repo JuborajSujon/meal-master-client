@@ -1,9 +1,13 @@
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
-export default function UpComingMealCard({ upcomingMeal, userData }) {
+export default function UpComingMealCard({ upcomingMeal, userData, refetch }) {
   const [liked, setLiked] = useState(false);
+  const [like, setLike] = useState(false);
+  const axiosSecure = useAxiosSecure();
+  const { _id: userId, name, email, photo } = userData;
 
   const {
     _id,
@@ -14,19 +18,44 @@ export default function UpComingMealCard({ upcomingMeal, userData }) {
     meal_subcategory,
     short_description,
     likes_count,
-  } = upcomingMeal;
-  const [likeCount, setLikeCount] = useState(likes_count);
+  } = upcomingMeal || {};
+
+  if (!userData?.badge === "bronze") {
+    setLiked(true);
+  }
+
+  // handle like
+  // const handleIsLike = async () => {
+  //   setLike(!like);
+  // }
 
   // handle like button
-  const handleLike = () => {
-    if (liked) {
-      setLikeCount(likeCount - 1);
-      setLiked(!liked);
-      return;
+  const handleLike = async () => {
+    setLike(!like);
+
+    try {
+      const likeObj = {
+        meal_id: _id,
+        user_id: userId,
+        name: name,
+        email: email,
+        photo: photo,
+        liked: like,
+        created_time: new Date().toISOString(),
+      };
+
+      const result = await axiosSecure.post(`/upcoming-like`, likeObj);
+
+      if (result.data.acknowledged) {
+        console.log(result.data.modifiedCount);
+        refetch();
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
     }
-    setLikeCount(likeCount + 1);
-    setLiked(!liked);
   };
+
   return (
     <div className="group rounded-lg bg-white dark:bg-slate-900 shadow hover:shadow-md dark:hover:shadow-md dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden  m-3 flex flex-col max-w-sm">
       <div className="relative h-64">
@@ -72,22 +101,16 @@ export default function UpComingMealCard({ upcomingMeal, userData }) {
           <li>
             <ul className="text-lg font-medium  list-none">
               <li className=" dark:text-slate-300 flex items-center">
-                <span className="text-blue-600 text-xl mr-2">{likeCount}</span>
-                <button onClick={handleLike}>
-                  {liked ? "Unlike" : "Like"}
+                <span className="text-blue-600 text-xl mr-2">
+                  {likes_count}
+                </span>
+                <button disabled={liked} onClick={handleLike}>
+                  {like ? "Unlike" : "Like"}
                 </button>
               </li>
             </ul>
           </li>
         </ul>
-
-        <div className=" mt-4">
-          <Link
-            to={`/upcoming-meal/${_id}`}
-            className="btn text-base bg-orange-400 hover:bg-orange-500 border-orange-400 hover:orange-yellow-500 text-slate-900 rounded-md ">
-            View Details
-          </Link>
-        </div>
       </div>
     </div>
   );
@@ -95,4 +118,5 @@ export default function UpComingMealCard({ upcomingMeal, userData }) {
 
 UpComingMealCard.propTypes = {
   upcomingMeal: PropTypes.object,
+  refetch: PropTypes.func,
 };

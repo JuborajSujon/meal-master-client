@@ -69,9 +69,7 @@ export default function MealDetails() {
       };
 
       const result = await axiosSecure.post(`/like`, likeObj);
-
       if (result.status === 200) {
-        toast.success(result.data.message);
         refetch();
       }
     } catch (error) {

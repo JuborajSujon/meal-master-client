@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import logo from "../../../../assets/logo.png";
 import useAuth from "../../../../hooks/useAuth";
+import useUser from "../../../../hooks/useUser";
 
 const DashboardNav = ({ handleToggle }) => {
   const { userSignOut, setUser } = useAuth();
   const navigate = useNavigate();
+  const [userData] = useUser();
 
   // Logout Handler
   const handleLogout = async () => {
@@ -143,13 +145,13 @@ const DashboardNav = ({ handleToggle }) => {
                     <div className="w-10 rounded-full">
                       <img
                         alt="Tailwind CSS Navbar component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                        src={userData?.photo}
                       />
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm font-semibold">Tailwind CSS</p>
-                    <small>Designer</small>
+                    <p className="text-sm font-semibold">{userData?.name}</p>
+                    <small>{userData?.badge}</small>
                   </div>
                 </div>
                 <ul
@@ -162,18 +164,12 @@ const DashboardNav = ({ handleToggle }) => {
                   </li>
                   <li>
                     <Link
-                      to="/user-profile"
+                      to="/dashboard/user-profile"
                       className="hover:bg-orange-100 rounded-md">
                       Profile
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      to="/setting"
-                      className="hover:bg-orange-100 rounded-md">
-                      Settings
-                    </Link>
-                  </li>
+
                   <li>
                     <button
                       onClick={handleLogout}

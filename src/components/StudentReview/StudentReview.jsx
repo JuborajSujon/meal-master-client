@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import MakeReview from "../MakeReview/MakeReview";
 import ReviewCard from "./ReviewCard";
 import PropTypes from "prop-types";
