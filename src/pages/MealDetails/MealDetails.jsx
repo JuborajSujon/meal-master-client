@@ -51,7 +51,7 @@ export default function MealDetails() {
     likes_count,
     reviews,
     ratingCount,
-  } = singleMeal;
+  } = singleMeal || {};
 
   // handle like
   const handleLike = async () => {
@@ -146,7 +146,7 @@ export default function MealDetails() {
             {/* Rating - read only */}
             <Rating
               style={{ maxWidth: 120 }}
-              value={mealRating.averageRating}
+              value={mealRating.averageRating || 0}
               readOnly
             />
 
@@ -154,7 +154,7 @@ export default function MealDetails() {
 
             {/* review - read only */}
             <span className="text-slate-800 dark:text-slate-300 text-base leading-10">
-              {mealRating.reviewCount} reviews
+              {mealRating.reviewCount || 0} reviews
             </span>
           </div>
 
@@ -302,7 +302,9 @@ export default function MealDetails() {
 
       {/* Student Ratings */}
       <div className="mt-16">
-        <StudentRatings mealRating={mealRating} ratingCount={ratingCount} />
+        {mealRating && (
+          <StudentRatings mealRating={mealRating} ratingCount={ratingCount} />
+        )}
       </div>
 
       {/* Student Review*/}

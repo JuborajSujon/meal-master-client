@@ -102,6 +102,7 @@ const AddMeal = () => {
             average: 0,
             count: 0,
           },
+          ratingCount: {},
         };
 
         const menuRes = await axiosSecure.post("/menu", menuItem);

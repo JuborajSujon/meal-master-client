@@ -100,6 +100,7 @@ function UpcomingModal() {
             average: 0,
             count: 0,
           },
+          ratingCount: {},
         };
 
         const menuRes = await axiosSecure.post("/upcoming-meal", menuItem);

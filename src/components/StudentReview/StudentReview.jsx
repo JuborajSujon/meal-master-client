@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import MakeReview from "../MakeReview/MakeReview";
 import ReviewCard from "./ReviewCard";
 import PropTypes from "prop-types";
 
 export default function StudentReview({ id, reviews, refetch }) {
+  const newReviws = [...reviews];
+
   if (reviews.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center w-full h-full">
@@ -23,7 +26,7 @@ export default function StudentReview({ id, reviews, refetch }) {
       <div className="space-y-2 bg-slate-300 dark:bg-slate-800 p-2 rounded">
         <MakeReview id={id} refetch={refetch} />
 
-        {reviews.map((review, index) => (
+        {newReviws.reverse().map((review, index) => (
           <ReviewCard key={index} review={review} />
         ))}
       </div>

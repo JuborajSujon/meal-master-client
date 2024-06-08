@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import PropTypes from "prop-types";
 
 import "@smastrom/react-rating/style.css";
 export default function StudentRatings({ mealRating, ratingCount }) {
   const { reviewCount } = mealRating;
-
-  const rating = [1, 2, 3, 4, 5];
 
   return (
     <div>
@@ -21,13 +18,13 @@ export default function StudentRatings({ mealRating, ratingCount }) {
           </h3>
           <Rating
             style={{ maxWidth: 180 }}
-            value={mealRating.averageRating}
+            value={mealRating.averageRating || 0}
             readOnly
           />
           <p className="text-slate-900 text-xl">
             Student Ratings
             <span className="text-orange-400 ml-2">
-              ({mealRating.reviewCount})
+              ({mealRating.reviewCount || 0})
             </span>
           </p>
         </div>
@@ -35,61 +32,72 @@ export default function StudentRatings({ mealRating, ratingCount }) {
         <div className="flex-1 space-y-4">
           {/* rating 5 */}
           <div className="flex flex-col md:flex-row md:items-center  gap-3">
-            <Rating style={{ maxWidth: 120 }} value={rating[4]} readOnly />
+            <Rating style={{ maxWidth: 120 }} value={5} readOnly />
             <progress
               className="progress progress-warning max-w-lg lg:max-w-sm xl:max-w-lg  w-full"
               value={((ratingCount[5] * 100) / reviewCount).toFixed(0)}
               max="100"></progress>
             <p className="text-slate-900 dark:text-slate-300 text-nowrap">
-              {((ratingCount[5] * 100) / reviewCount).toFixed(0)}% (
-              {ratingCount[5]})
+              {isNaN(((ratingCount[5] * 100) / reviewCount).toFixed(0))
+                ? 0
+                : ((ratingCount[5] * 100) / reviewCount).toFixed(0)}
+              % ({ratingCount[5] || 0})
             </p>
           </div>
           {/* rating 4 */}
           <div className="flex flex-col md:flex-row md:items-center  gap-3">
-            <Rating style={{ maxWidth: 120 }} value={rating[3]} readOnly />
+            <Rating style={{ maxWidth: 120 }} value={4} readOnly />
             <progress
               className="progress progress-warning max-w-lg lg:max-w-sm xl:max-w-lg  w-full"
-              value={((ratingCount[5] * 100) / reviewCount).toFixed(0)}
+              value={((ratingCount[4] * 100) / reviewCount).toFixed(0)}
               max="100"></progress>
             <p className="text-slate-900 dark:text-slate-300 text-nowrap">
-              {((ratingCount[5] * 100) / reviewCount).toFixed(0)}% (
-              {ratingCount[4]})
+              {isNaN(((ratingCount[4] * 100) / reviewCount).toFixed(0))
+                ? 0
+                : ((ratingCount[4] * 100) / reviewCount).toFixed(0)}
+              % ({ratingCount[4] || 0})
             </p>
           </div>
           {/* rating 3 */}
           <div className="flex flex-col md:flex-row md:items-center  gap-3">
-            <Rating style={{ maxWidth: 120 }} value={rating[2]} readOnly />
+            <Rating style={{ maxWidth: 120 }} value={3} readOnly />
             <progress
               className="progress progress-warning max-w-lg lg:max-w-sm xl:max-w-lg w-full"
-              value={((ratingCount[5] * 100) / reviewCount).toFixed(0)}
+              value={((ratingCount[3] * 100) / reviewCount).toFixed(0)}
               max="100"></progress>
             <p className="text-slate-900 dark:text-slate-300 text-nowrap">
-              {((ratingCount[5] * 100) / reviewCount).toFixed(0)}% (
-              {ratingCount[3]})
+              {isNaN(((ratingCount[3] * 100) / reviewCount).toFixed(0))
+                ? 0
+                : ((ratingCount[3] * 100) / reviewCount).toFixed(0)}
+              % ({ratingCount[3] || 0})
             </p>
           </div>
           {/* rating 2 */}
           <div className="flex flex-col md:flex-row md:items-center  gap-3">
-            <Rating style={{ maxWidth: 120 }} value={rating[1]} readOnly />
+            <Rating style={{ maxWidth: 120 }} value={2} readOnly />
             <progress
               className="progress progress-warning max-w-lg lg:max-w-sm xl:max-w-lg w-full"
-              value={((ratingCount[5] * 100) / reviewCount).toFixed(0)}
+              value={((ratingCount[2] * 100) / reviewCount).toFixed(0) || 0}
               max="100"></progress>
             <p className="text-slate-900 dark:text-slate-300 text-nowrap">
-              {((ratingCount[5] * 100) / reviewCount).toFixed(0)}% (
-              {ratingCount[2]})
+              {isNaN(((ratingCount[2] * 100) / reviewCount).toFixed(0))
+                ? 0
+                : ((ratingCount[2] * 100) / reviewCount).toFixed(0)}
+              % ({ratingCount[2] || 0})
             </p>
           </div>
           {/* rating 1 */}
           <div className="flex flex-col md:flex-row md:items-center  gap-3">
-            <Rating style={{ maxWidth: 120 }} value={rating[0]} readOnly />
+            <Rating style={{ maxWidth: 120 }} value={1} readOnly />
             <progress
               className="progress progress-warning max-w-lg lg:max-w-sm xl:max-w-lg w-full"
-              value={0}
+              value={((ratingCount[2] * 100) / reviewCount).toFixed(0)}
               max="100"></progress>
             <p className="text-slate-900 dark:text-slate-300 text-nowrap">
-              0% ({ratingCount[1]})
+              {isNaN(((ratingCount[1] * 100) / reviewCount).toFixed(0))
+                ? 0
+                : ((ratingCount[1] * 100) / reviewCount).toFixed(0)}
+              % ({ratingCount[1] || 0})
             </p>
           </div>
         </div>
