@@ -10,12 +10,36 @@ import StudentRatings from "../../components/StudentRatings/StudentRatings";
 import StudentReview from "../../components/StudentReview/StudentReview";
 import { BiSolidLike } from "react-icons/bi";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { MdRateReview } from "react-icons/md";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import moment from "moment";
 
 export default function MealDetails() {
-  const [rating, setRating] = useState(3);
+  const loadedData = useLoaderData();
+
+  const {
+    _id,
+    meal_title,
+    price,
+    serve_amount,
+    admin,
+    prep_time,
+    cooking_time,
+    total_time,
+    distributor_name,
+    image,
+    likes_count,
+    meal_category,
+    meal_subcategory,
+    meal_ingredients,
+    nutrition_facts,
+    post_createdAt,
+    post_updatedAt,
+    rating: mealRating,
+    short_description,
+  } = loadedData;
+  const [rating, setRating] = useState(mealRating.average || 0);
 
   //  ensure that the new page starts at the top when navigating
   useScrollToTop();
@@ -35,18 +59,20 @@ export default function MealDetails() {
           <div className="overflow-hidden w-full">
             <img
               className="w-full max-h-[70vh] object-cover"
-              src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-              alt=""
+              src={image}
+              alt={meal_title}
             />
           </div>
 
           {/* Post Details */}
           <div className="py-6">
             <div className="">
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-300">
-                Admin/distributor Name
+              <h3 className="text-xl font-bold text-slate-900 dark:text-slate-300">
+                Admin Name : {admin.name}
               </h3>
-              <h4>Post Date</h4>
+              <h4>Admin Email : {admin.email}</h4>
+              <h4>Post Date : {moment(post_createdAt).fromNow()}</h4>
+              <h4>Last Updated Date : {moment(post_createdAt).fromNow()}</h4>
             </div>
           </div>
         </div>
@@ -54,57 +80,59 @@ export default function MealDetails() {
         {/* right side */}
         <div className="lg:pr-16">
           <div className="flex justify-between items-start">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-300">
-              Product Name
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-300">
+              {meal_title}
             </h2>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-300 mr-3">
-              $10
-              <del className="text-base font-normal text-slate-400 ml-3">
-                12
-              </del>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-300 mr-3">
+              ${price}
             </h3>
           </div>
           <p className="text-base font-medium text-slate-900 dark:text-slate-300">
             <span className="text-slate-400 text-base mr-2">by</span>
-            Healthy Feast Corner
+            {distributor_name}
           </p>
 
           <div className="flex items-center gap-2 ">
             {/* Rating - read only */}
-            <Rating
-              style={{ maxWidth: 120 }}
-              value={rating}
-              onChange={setRating}
-            />
+            <Rating style={{ maxWidth: 120 }} value={rating} readOnly />
 
             <span> | </span>
 
             {/* review - read only */}
             <span className="text-slate-800 dark:text-slate-300 text-base leading-10">
-              3 reviews
+              {mealRating.count} reviews
             </span>
           </div>
 
-          <div className="dark:text-slate-300 space-y-3 mt-6">
-            <p>
-              Provident debitis diamlorem conubia ut, fugiat magnam wisi felis
-              laborum sint. Elit. Auctor justo, rhoncus veritatis, velit risus
-              amet! Orci.
+          <div className="flex gap-2 items-center justify-around">
+            <p className="text-sm text-slate-900 dark:text-slate-300 items-center justify-center flex flex-col">
+              <span className="font-medium">Prep.Time</span>{" "}
+              <span>{prep_time}</span>
             </p>
+            <p className="text-sm text-slate-900 dark:text-slate-300 items-center justify-center flex flex-col">
+              <span className="font-medium">cooking Time</span>{" "}
+              <span>{cooking_time}</span>
+            </p>
+            <p className="text-sm text-slate-900 dark:text-slate-300 items-center justify-center flex flex-col">
+              <span className="font-medium">Total Time</span>{" "}
+              <span>{total_time}</span>
+            </p>
+          </div>
+
+          <div className="dark:text-slate-300 space-y-3 mt-6">
+            <p>{short_description}</p>
             <ul className="*:mb-1">
               <h4 className="text-lg font-medium underline decoration-orange-300">
                 Food Ingredients
               </h4>
-              <li className="flex items-center gap-2">
-                {" "}
-                <FaArrowRight className="text-orange-600" size={18} />
-                Potato
-              </li>
-              <li className="flex items-center gap-2">
-                {" "}
-                <FaArrowRight className="text-orange-600" size={18} />
-                Carrot
-              </li>
+
+              {meal_ingredients.map((ingredient, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  {" "}
+                  <FaArrowRight className="text-orange-600" size={18} />
+                  {ingredient}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -117,9 +145,17 @@ export default function MealDetails() {
             <ul className="flex flex-wrap justify-start items-center gap-4">
               <li className="flex items-center gap-2">
                 <BiSolidLike size={24} className="text-orange-600" />
-                <span>10</span>
+                <span>{likes_count}</span>
               </li>
-              <li className="flex items-center gap-2">
+              <li
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.scrollTo({
+                    top: document.querySelector("#review").offsetTop,
+                    behavior: "smooth",
+                  });
+                }}
+                className="flex items-center gap-2">
                 <MdRateReview size={24} className="text-orange-600" />
                 <span>Review</span>
               </li>
@@ -147,25 +183,25 @@ export default function MealDetails() {
               <div className="flex justify-between items-center">
                 <div className="text-center">
                   <h4 className="text-xl font-medium text-slate-900 dark:text-slate-300">
-                    564
+                    {nutrition_facts.calories}
                   </h4>
                   <p className="text-slate-900 dark:text-slate-300">Calories</p>
                 </div>
                 <div className="text-center">
                   <h4 className="text-xl font-medium text-slate-900 dark:text-slate-300">
-                    306gm
+                    {nutrition_facts.fats}
                   </h4>
                   <p className="text-slate-900 dark:text-slate-300">Fat</p>
                 </div>
                 <div className="text-center">
                   <h4 className="text-xl font-medium text-slate-900 dark:text-slate-300">
-                    2gm
+                    {nutrition_facts.carbs}
                   </h4>
                   <p className="text-slate-900 dark:text-slate-300">Carbs</p>
                 </div>
                 <div className="text-center">
                   <h4 className="text-xl font-medium text-slate-900 dark:text-slate-300">
-                    6.5gm
+                    {nutrition_facts.protein}
                   </h4>
                   <p className="text-slate-900 dark:text-slate-300">Protein</p>
                 </div>
@@ -189,18 +225,16 @@ export default function MealDetails() {
           You may also like
         </h3>
         {/* meal slider */}
-        <div>
-          <MealCardSlider />
-        </div>
+        <div>{/* <MealCardSlider /> */}</div>
       </div>
 
       {/* Student Ratings */}
-      <div className="mt-10">
+      <div className="mt-16">
         <StudentRatings />
       </div>
 
       {/* Student Review*/}
-      <div className="mt-10">
+      <div id="reviews" className="mt-24">
         <StudentReview />
       </div>
     </div>
