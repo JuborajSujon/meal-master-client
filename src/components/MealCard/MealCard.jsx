@@ -1,13 +1,15 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export default function MealCard() {
+export default function MealCard({ item }) {
+  const { _id, name, price, image, rating } = item;
   return (
     <div className="group rounded-lg bg-white dark:bg-slate-900 shadow hover:shadow-md dark:hover:shadow-md dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden  m-3 flex flex-col max-w-sm">
       <div className="relative h-64">
         <img
           className="w-full h-full object-cover group-hover:scale-105 duration-300"
-          src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-          alt=""
+          src={image}
+          alt={name}
         />
       </div>
 
@@ -16,7 +18,7 @@ export default function MealCard() {
           <h3
             className="text-xl font-medium text-slate-900
                  dark:text-slate-200 dark:hover:text-orange-500">
-            Product Name
+            {name}
           </h3>
         </div>
         <ul className=" flex justify-between items-center list-none">
@@ -25,7 +27,7 @@ export default function MealCard() {
               <span className="text-slate-400 dark:text-slate-300 mr-2">
                 Price:
               </span>
-              $<span className="font-chakraPetch">10</span>
+              $<span className="font-chakraPetch">{price}</span>
             </p>
           </li>
 
@@ -35,7 +37,7 @@ export default function MealCard() {
                 className="inline text-slate-900 
               dark:text-slate-300 ">
                 <span className="text-slate-400 mr-2">Rating:</span>
-                <span className="font-chakraPetch">4.5</span>
+                <span className="font-chakraPetch">{rating?.average}</span>
               </li>
             </ul>
           </li>
@@ -43,7 +45,7 @@ export default function MealCard() {
 
         <div className=" mt-4">
           <Link
-            // to={`/meal/${_id}`}
+            to={`/meal-details/${_id}`}
             className="btn text-base bg-orange-400 hover:bg-orange-500 border-orange-400 hover:orange-yellow-500 text-slate-900 rounded-md ">
             View Details
           </Link>
@@ -52,3 +54,7 @@ export default function MealCard() {
     </div>
   );
 }
+
+MealCard.propTypes = {
+  item: PropTypes.object,
+};

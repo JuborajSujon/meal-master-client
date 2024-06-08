@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-export default function UpComingMealCard({ upcomingMeal, currentUser }) {
+export default function UpComingMealCard({ upcomingMeal, userData }) {
   const [liked, setLiked] = useState(false);
 
   const {
@@ -16,8 +16,6 @@ export default function UpComingMealCard({ upcomingMeal, currentUser }) {
     likes_count,
   } = upcomingMeal;
   const [likeCount, setLikeCount] = useState(likes_count);
-  const { _id: userId, badge, email, name, photo } = currentUser;
-  console.log(upcomingMeal);
 
   // handle like button
   const handleLike = () => {

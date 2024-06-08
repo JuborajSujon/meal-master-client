@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Carousel from "../../../components/Carousel/Carousel";
 import Membership from "../Membership/Membership";
-import MealsCategory from "../MealsCategory/MealsCategory";
 import HomeAboutUs from "../HomeAboutUs/HomeAboutUs";
 import GiftCard from "../GiftCard/GiftCard";
 import TabMealCategory from "../TabMealCategory/TabMealCategory";
@@ -19,7 +18,6 @@ export default function Home() {
       <Carousel />
       <TabMealCategory />
       <Membership />
-      <MealsCategory />
       <HomeAboutUs />
       <GiftCard />
     </div>

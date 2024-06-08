@@ -22,8 +22,9 @@ export default function Meals() {
       setHasMore(false);
       return;
     }
-    setTimeout(() => {
+    const time = setTimeout(() => {
       setItems((prevItems) => prevItems.concat(Array.from({ length: 6 })));
+      clearTimeout(time);
     }, 1000);
   };
 

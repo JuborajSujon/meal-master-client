@@ -5,7 +5,6 @@ import UpComingMealCard from "../../components/UpComingMealCard/UpComingMealCard
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useUpcomingMeal from "../../hooks/useUpcomingMeal";
 import Loading from "../../components/Loading/Loading";
-
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useCallback, useState } from "react";
 import useUser from "../../hooks/useUser";
@@ -28,7 +27,7 @@ export default function UpComingMeals() {
         <UpComingMealCard
           key={upcomingMeals._id}
           upcomingMeal={upcomingMeals}
-          currentUser={userData}
+          userData={userData}
         />
       );
     },
@@ -41,8 +40,9 @@ export default function UpComingMeals() {
       setHasMore(false);
       return;
     }
-    setTimeout(() => {
+    const time = setTimeout(() => {
       setItems((prevItems) => prevItems.concat(Array.from({ length: 6 })));
+      clearTimeout(time);
     }, 1000);
   };
 
