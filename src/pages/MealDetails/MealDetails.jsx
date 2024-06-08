@@ -10,7 +10,7 @@ import StudentRatings from "../../components/StudentRatings/StudentRatings";
 import StudentReview from "../../components/StudentReview/StudentReview";
 import { BiSolidLike } from "react-icons/bi";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { MdRateReview } from "react-icons/md";
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import moment from "moment";
@@ -18,6 +18,7 @@ import useSingleMeal from "../../hooks/useSingleMeal";
 import Loading from "../../components/Loading/Loading";
 import useUser from "../../hooks/useUser";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 export default function MealDetails() {
@@ -25,9 +26,12 @@ export default function MealDetails() {
   const { mealId } = useParams();
   const [like, setLike] = useState(false);
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [singleMeal, isLoading, refetch] = useSingleMeal(mealId);
   const [userData] = useUser();
-  const { _id: userId, name, email, photo } = userData;
+  const { _id: userId, name, email, photo, badge } = userData;
 
   const {
     _id,
@@ -78,6 +82,41 @@ export default function MealDetails() {
     }
   };
 
+  // handle Request Meal
+  const handleMealRequest = async (item) => {
+    if (userData && userData.email) {
+      // send cart item to server
+      const cartItem = {
+        menuId: _id,
+        email: email,
+        meal_title,
+        image,
+        price,
+      };
+
+      const result = await axiosSecure.post(`/carts`, cartItem);
+
+      if (result.status === 200) {
+        refetch();
+        toast.success("Request Meal Success!", { autoClose: 1500 });
+      }
+    } else {
+      Swal.fire({
+        title: "You are not logged in!",
+        text: "Please login first. Thank you!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -93,7 +132,7 @@ export default function MealDetails() {
       {/* main content */}
       <div className="flex flex-col md:flex-row justify-between gap-6 mt-4">
         {/* left side */}
-        <div>
+        <div className="min-w-96 w-full">
           {/* Meal Image */}
           <div className="overflow-hidden w-full">
             <img
@@ -140,6 +179,7 @@ export default function MealDetails() {
             {distributor_name}
           </p>
 
+          {/* Meal Name, Price, Review and Rating */}
           <div className="flex items-center gap-2 ">
             {/* Rating - read only */}
             <Rating
@@ -156,6 +196,7 @@ export default function MealDetails() {
             </span>
           </div>
 
+          {/* category and sub-category and serve amount */}
           <div className="py-5">
             <h4>
               <span className="font-semibold">Category : </span> {meal_category}
@@ -170,7 +211,8 @@ export default function MealDetails() {
             </h4>
           </div>
 
-          <div className="flex gap-2 items-center justify-around">
+          {/* cooking time and prep time and total time */}
+          <div className="flex gap-16 items-center justify-start">
             <p className="text-sm text-slate-900 dark:text-slate-300 items-center justify-center flex flex-col">
               <span className="font-medium">Prep.Time</span>{" "}
               <span>{prep_time}</span>
@@ -185,6 +227,7 @@ export default function MealDetails() {
             </p>
           </div>
 
+          {/* Food Ingredients and Description */}
           <div className="dark:text-slate-300 space-y-3 mt-6">
             <p>{short_description}</p>
             <ul className="*:mb-1">
@@ -202,12 +245,22 @@ export default function MealDetails() {
             </ul>
           </div>
 
+          {/* Page Action Buttons section  */}
           <div className="text-center flex justify-start mt-10 gap-6">
-            <Link to="/subscription">
-              <button className="btn bg-yellow-400   hover:text-slate-900 dark:text-slate-900 hover:bg-yellow-500 text-base">
+            {badge === "bronze" ? (
+              <Link to="/subscription">
+                <button className="btn bg-yellow-400   hover:text-slate-900 dark:text-slate-900 hover:bg-yellow-500 text-base">
+                  Meal Request
+                </button>
+              </Link>
+            ) : (
+              <button
+                onClick={() => handleMealRequest(singleMeal)}
+                className="btn bg-yellow-400   hover:text-slate-900 dark:text-slate-900 hover:bg-yellow-500 text-base">
                 Meal Request
               </button>
-            </Link>
+            )}
+
             <ul className="flex flex-wrap justify-start items-center gap-4">
               <li
                 onClick={handleLike}
@@ -238,6 +291,8 @@ export default function MealDetails() {
               </li>
             </ul>
           </div>
+
+          {/* Nutrition Facts */}
 
           <div className="mt-10 md:mt-16">
             <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-300">
@@ -277,6 +332,7 @@ export default function MealDetails() {
             </div>
           </div>
 
+          {/* People are viewing this right now */}
           <div className="mt-4">
             <p className="text-slate-900 dark:text-slate-300 flex items-center gap-2">
               <FaEye className="text-orange-400" />

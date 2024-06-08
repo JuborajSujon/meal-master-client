@@ -1,9 +1,11 @@
 import { AiOutlineBars } from "react-icons/ai";
+import { PiShoppingCartBold } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import logo from "../../../../assets/logo.png";
 import useAuth from "../../../../hooks/useAuth";
 import useUser from "../../../../hooks/useUser";
+import { MdNotificationsActive } from "react-icons/md";
 
 const DashboardNav = ({ handleToggle }) => {
   const { userSignOut, setUser } = useAuth();
@@ -24,6 +26,7 @@ const DashboardNav = ({ handleToggle }) => {
     <div className="sticky top-0 left-0 right-0 z-10 w-full bg-slate-50 dark:bg-slate-700 border-b border-gray-200">
       {/* Small Screen Navbar */}
       <div className=" dark:bg-slate-700 text-gray-800 flex justify-between">
+        {/* Humburger and Logo */}
         <div className="flex items-center md:hidden">
           <button
             onClick={handleToggle}
@@ -31,7 +34,7 @@ const DashboardNav = ({ handleToggle }) => {
             <AiOutlineBars className="h-5 w-5 dark:text-slate-300" />
           </button>
           <div className="block cursor-pointer font-bold">
-            <Link to="/">
+            <Link to="/dashboard">
               <img
                 // className='hidden md:block'
                 src={logo}
@@ -42,8 +45,11 @@ const DashboardNav = ({ handleToggle }) => {
             </Link>
           </div>
         </div>
+
+        {/* Navbar */}
         <div className="flex-1 dark:bg-slate-700">
           <div className="navbar ">
+            {/* Search Bar input field */}
             <div className="flex-1">
               <label className="input input-bordered md:flex items-center gap-2 hidden">
                 <input type="text" className="grow" placeholder="Search" />
@@ -60,66 +66,27 @@ const DashboardNav = ({ handleToggle }) => {
                 </svg>
               </label>
             </div>
-            <div className="flex-none">
-              <div className="dropdown dropdown-end">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle">
-                  <div className="indicator">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 dark:text-slate-300"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                    <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
-                      8
-                    </span>
-                  </div>
-                </div>
-                <div
-                  tabIndex={0}
-                  className="mt-3 z-[1] card card-compact dropdown-content w-64 dark:bg-slate-700 bg-base-100 shadow rounded-md">
-                  <div className="card-body">
-                    <span className="font-bold dark:text-slate-300 text-lg">
-                      8 Items
-                    </span>
-                    <span className="text-info">Subtotal: $999</span>
-                    <div className="card-actions">
-                      <button className="btn btn-primary btn-block">
-                        View cart
-                      </button>
-                    </div>
-                  </div>
-                </div>
+
+            {/* Right Side */}
+            <div className="flex-none space-x-3">
+              {/* Add to Cart Page */}
+              <div className="indicator">
+                <PiShoppingCartBold size={24} />
+
+                <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
+                  8
+                </span>
               </div>
+
+              {/* Notification Dropdown */}
               <div className="dropdown dropdown-end">
                 <div
                   tabIndex={0}
                   role="button"
                   className="btn btn-ghost btn-circle">
                   <div className="indicator">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 dark:text-slate-300"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                      />
-                    </svg>
+                    <MdNotificationsActive size={24} />
+
                     <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
                       8
                     </span>
@@ -136,6 +103,8 @@ const DashboardNav = ({ handleToggle }) => {
                   </div>
                 </div>
               </div>
+
+              {/* User Profile menu with Dropdown */}
               <div className="dropdown dropdown-end">
                 <div
                   tabIndex={0}

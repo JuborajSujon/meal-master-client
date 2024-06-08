@@ -24,11 +24,6 @@ export default function UpComingMealCard({ upcomingMeal, userData, refetch }) {
     setLiked(true);
   }
 
-  // handle like
-  // const handleIsLike = async () => {
-  //   setLike(!like);
-  // }
-
   // handle like button
   const handleLike = async () => {
     setLike(!like);
@@ -47,7 +42,6 @@ export default function UpComingMealCard({ upcomingMeal, userData, refetch }) {
       const result = await axiosSecure.post(`/upcoming-like`, likeObj);
 
       if (result.data.acknowledged) {
-        console.log(result.data.modifiedCount);
         refetch();
       }
     } catch (error) {
