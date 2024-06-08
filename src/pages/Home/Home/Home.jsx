@@ -5,6 +5,7 @@ import HomeAboutUs from "../HomeAboutUs/HomeAboutUs";
 import GiftCard from "../GiftCard/GiftCard";
 import TabMealCategory from "../TabMealCategory/TabMealCategory";
 import useScrollToTop from "./../../../hooks/useScrollToTop";
+import MealsCategory from "../MealsCategory/MealsCategory";
 
 export default function Home() {
   //  ensure that the new page starts at the top when navigating
@@ -18,6 +19,7 @@ export default function Home() {
       <Carousel />
       <TabMealCategory />
       <Membership />
+      <MealsCategory />
       <HomeAboutUs />
       <GiftCard />
     </div>

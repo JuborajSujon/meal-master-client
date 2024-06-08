@@ -70,9 +70,18 @@ export default function MealDetails() {
               <h3 className="text-xl font-bold text-slate-900 dark:text-slate-300">
                 Admin Name : {admin.name}
               </h3>
-              <h4>Admin Email : {admin.email}</h4>
-              <h4>Post Date : {moment(post_createdAt).fromNow()}</h4>
-              <h4>Last Updated Date : {moment(post_createdAt).fromNow()}</h4>
+              <h4>
+                <span className="font-semibold">Admin Email</span> :{" "}
+                {admin.email}
+              </h4>
+              <h4>
+                <span className="font-semibold">Post Date :</span>{" "}
+                {moment(post_createdAt).fromNow()}
+              </h4>
+              <h4>
+                <span className="font-semibold">Last Updated Date :</span>{" "}
+                {moment(post_updatedAt).fromNow()}
+              </h4>
             </div>
           </div>
         </div>
@@ -102,6 +111,20 @@ export default function MealDetails() {
             <span className="text-slate-800 dark:text-slate-300 text-base leading-10">
               {mealRating.count} reviews
             </span>
+          </div>
+
+          <div className="py-5">
+            <h4>
+              <span className="font-semibold">Category : </span> {meal_category}
+            </h4>
+            <h4>
+              <span className="font-semibold">Sub-Category : </span>{" "}
+              {meal_subcategory}
+            </h4>
+            <h4>
+              <span className="font-semibold">Serve Amount : </span>{" "}
+              {serve_amount}
+            </h4>
           </div>
 
           <div className="flex gap-2 items-center justify-around">
@@ -143,7 +166,7 @@ export default function MealDetails() {
               </button>
             </Link>
             <ul className="flex flex-wrap justify-start items-center gap-4">
-              <li className="flex items-center gap-2">
+              <li className="flex cursor-pointer items-center gap-2">
                 <BiSolidLike size={24} className="text-orange-600" />
                 <span>{likes_count}</span>
               </li>
@@ -155,16 +178,16 @@ export default function MealDetails() {
                     behavior: "smooth",
                   });
                 }}
-                className="flex items-center gap-2">
+                className="flex cursor-pointer items-center gap-2">
                 <MdRateReview size={24} className="text-orange-600" />
                 <span>Review</span>
               </li>
-              <li className="flex items-center gap-2">
+              <li className="flex items-center gap-2 cursor-pointer">
                 <FaHeart size={24} className="text-orange-600" />
                 <span>Save</span>
               </li>
 
-              <li className="flex items-center gap-2">
+              <li className="flex cursor-pointer items-center gap-2">
                 <FaShareAlt />
                 <span>Share</span>
               </li>
@@ -222,10 +245,12 @@ export default function MealDetails() {
       {/* You may also like section - similar meals*/}
       <div className="mt-10">
         <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-300">
-          You may also like
+          Similar Category Meals
         </h3>
         {/* meal slider */}
-        <div>{/* <MealCardSlider /> */}</div>
+        <div>
+          <MealCardSlider meal_category={meal_category} />
+        </div>
       </div>
 
       {/* Student Ratings */}

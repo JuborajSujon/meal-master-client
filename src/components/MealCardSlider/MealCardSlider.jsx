@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -5,7 +6,17 @@ import "swiper/css/pagination";
 
 import { FreeMode, Pagination, Autoplay } from "swiper/modules";
 import MealCard from "../MealCard/MealCard";
-const MealCardSlider = () => {
+import useMenu from "./../../hooks/useMenu";
+import Loading from "../Loading/Loading";
+const MealCardSlider = ({ meal_category }) => {
+  const [menu, loading] = useMenu();
+  const sliderMenu = menu?.filter(
+    (menu) => menu.meal_category === meal_category
+  );
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div>
       <Swiper
@@ -35,33 +46,18 @@ const MealCardSlider = () => {
           },
         }}
         className="mySwiper">
-        <SwiperSlide>
-          <MealCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MealCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MealCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MealCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MealCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MealCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MealCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MealCard />
-        </SwiperSlide>
+        {sliderMenu?.map((item) => (
+          <SwiperSlide key={item._id}>
+            <MealCard item={item} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
+};
+
+MealCardSlider.propTypes = {
+  meal_category: PropTypes.string,
 };
 
 export default MealCardSlider;

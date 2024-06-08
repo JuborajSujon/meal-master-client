@@ -5,9 +5,15 @@ import { Autoplay, Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import useMenu from "../../../hooks/useMenu";
+import Loading from "../../../components/Loading/Loading";
 
 export default function MealsCategory() {
-  const slides = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const [menu, loading] = useMenu();
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="py-16">
       <div className="flex justify-start items-end gap-6">
@@ -37,9 +43,9 @@ export default function MealsCategory() {
           }}
           modules={[Autoplay, Navigation]}
           className="mySwiper">
-          {slides.map((slide) => (
-            <SwiperSlide key={slide}>
-              <MealCard />
+          {menu?.map((item) => (
+            <SwiperSlide key={item._id}>
+              <MealCard item={item} />
             </SwiperSlide>
           ))}
         </Swiper>

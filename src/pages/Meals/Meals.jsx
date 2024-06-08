@@ -6,12 +6,16 @@ import MealCard from "../../components/MealCard/MealCard";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import useMenu from "../../hooks/useMenu";
+import Loading from "../../components/Loading/Loading";
 
 export default function Meals() {
   const [items, setItems] = useState(Array.from({ length: 6 }));
   const [hasMore, setHasMore] = useState(true);
   const [priceRange, setPriceRange] = useState([0, 100]);
   const [minPrice, maxPrice] = priceRange;
+
+  const [menu, loading] = useMenu();
 
   //  ensure that the new page starts at the top when navigating
   useScrollToTop();
@@ -121,9 +125,9 @@ export default function Meals() {
           </p>
         }>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
-          {items.map((_, index) => (
-            <p key={index}>Hello</p>
-            // <MealCard key={index} />
+          {loading && <Loading />}
+          {menu?.map((item) => (
+            <MealCard item={item} key={item._id} />
           ))}
         </div>
       </InfiniteScroll>

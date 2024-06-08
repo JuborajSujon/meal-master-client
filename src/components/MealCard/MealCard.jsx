@@ -2,14 +2,14 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export default function MealCard({ item }) {
-  const { _id, name, price, image, rating } = item;
+  const { _id, meal_title, meal_category, price, image, rating } = item;
   return (
     <div className="group rounded-lg bg-white dark:bg-slate-900 shadow hover:shadow-md dark:hover:shadow-md dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden  m-3 flex flex-col max-w-sm">
       <div className="relative h-64">
         <img
           className="w-full h-full object-cover group-hover:scale-105 duration-300"
           src={image}
-          alt={name}
+          alt={meal_title}
         />
       </div>
 
@@ -18,8 +18,12 @@ export default function MealCard({ item }) {
           <h3
             className="text-xl font-medium text-slate-900
                  dark:text-slate-200 dark:hover:text-orange-500">
-            {name}
+            {meal_title}
           </h3>
+          <p>
+            <span className="font-semibold">Category : </span>
+            {meal_category}
+          </p>
         </div>
         <ul className=" flex justify-between items-center list-none">
           <li>
