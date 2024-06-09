@@ -4,19 +4,8 @@ import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { FaEdit } from "react-icons/fa";
 import { BiSolidDetail } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { useState } from "react";
 
 const AllMeals = () => {
-  const [sortLikes, setSortLikes] = useState(false);
-  const [sortReviews, setSortReviews] = useState(false);
-
-  const handleSortLikes = () => {
-    setSortLikes(!sortLikes);
-  };
-  const handleSortReviews = () => {
-    setSortReviews(!sortReviews);
-  };
   return (
     <div>
       <Helmet>
@@ -43,25 +32,11 @@ const AllMeals = () => {
               <thead className="bg-gray-300">
                 <tr className="text-left">
                   <th className="p-3">Meal Name</th>
-                  <th onClick={handleSortLikes} className="p-3 ">
-                    <p className="flex items-center gap-2">
-                      Likes
-                      {sortLikes ? (
-                        <IoIosArrowUp size={16} />
-                      ) : (
-                        <IoIosArrowDown size={16} />
-                      )}
-                    </p>
+                  <th className="p-3 ">
+                    <p className="flex items-center gap-2">Likes</p>
                   </th>
-                  <th onClick={handleSortReviews} className="p-3">
-                    <p className="flex items-center gap-2">
-                      Reviews
-                      {sortReviews ? (
-                        <IoIosArrowUp size={16} />
-                      ) : (
-                        <IoIosArrowDown size={16} />
-                      )}
-                    </p>
+                  <th className="p-3">
+                    <p className="flex items-center gap-2">Reviews</p>
                   </th>
                   <th className="p-3">Distributor</th>
                   <th className="p-3 ">Action</th>

@@ -20,6 +20,7 @@ import ManageUpcomingMeal from "./../pages/Dashboard/AdminPage/ManageUpcomingMea
 import RequestedMeals from "../pages/Dashboard/UserPage/RequestedMeals/RequestedMeals";
 import UserReviews from "../pages/Dashboard/UserPage/UserReviews/UserReviews";
 import PaymentHistory from "../pages/Dashboard/UserPage/PaymentHistory/PaymentHistory";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -72,7 +73,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <div>Dashboard</div>,
+        element: <DashboardHome />,
       },
       {
         path: "/dashboard/admin-profile",

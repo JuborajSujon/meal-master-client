@@ -4,7 +4,6 @@ import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 export default function ManageUsers() {
@@ -14,6 +13,7 @@ export default function ManageUsers() {
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
   const [allUsers, setAllUsers] = useState([]);
+  const [isUserAdmin, setIsUserAdmin] = useState(false);
 
   const axiosSecure = useAxiosSecure();
 
@@ -28,7 +28,7 @@ export default function ManageUsers() {
     };
 
     getData();
-  }, [axiosSecure, currentPage, itemsPerPage, search, searchText]);
+  }, [axiosSecure, currentPage, itemsPerPage, search, searchText, isUserAdmin]);
 
   const numberOfPages = Math.ceil(allUsers.count / itemsPerPage);
 
@@ -50,15 +50,18 @@ export default function ManageUsers() {
     setCurrentPage(1);
   };
 
+  // handle make admin
   const handleMakeAdmin = async (email) => {
     if (!email) return;
-    console.log(email);
+
+    // make admin
     try {
       const res = await axiosSecure.patch(`/users/admin/${email}`, {
         role: "admin",
       });
       if (res.data.modifiedCount) {
         toast.success("Make admin successful");
+        setIsUserAdmin(!isUserAdmin);
       }
     } catch (err) {
       console.log(err);
