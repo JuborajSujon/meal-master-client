@@ -4,13 +4,13 @@ import useUser from "../../hooks/useUser";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Loading from "../Loading/Loading";
+import useAxiosSecure from "./../../hooks/useAxiosSecure";
 const MakeReview = ({ id, refetch }) => {
   const [rating, setRating] = useState(1);
   const [userData, isLoading] = useUser();
   const { _id, name, email, photo } = userData;
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const myStyles = {
     itemShapes: RoundedStar,
@@ -35,7 +35,7 @@ const MakeReview = ({ id, refetch }) => {
         review: data.review,
         created_time: new Date().toISOString(),
       };
-      const { data: reviewData } = await axiosPublic.post(
+      const { data: reviewData } = await axiosSecure.post(
         `/review/${id}`,
         review
       );
