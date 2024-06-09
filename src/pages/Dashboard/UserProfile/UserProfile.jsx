@@ -34,7 +34,7 @@ export default function UserProfile() {
             <p className="px-5 text-xs sm:text-base text-gray-600">
               User Email: {userData?.email}
             </p>
-            {menu.length ? (
+            {userData.role === "admin" ? (
               <p>Number of Menu Added : {menu.length}</p>
             ) : (
               <p>Badge : {userData?.badge}</p>

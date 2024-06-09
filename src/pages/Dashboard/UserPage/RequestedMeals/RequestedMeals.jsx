@@ -56,7 +56,7 @@ function RequestedMeals() {
       <div className="bg-orange-50 dark:bg-slate-800 p-4 rounded-md">
         <div className="container p-2 mx-auto sm:p-4 text-gray-800">
           <div className="overflow-x-auto">
-            <table className="min-w-full text-xs">
+            <table className="min-w-full text-sm">
               <colgroup>
                 <col />
                 <col />

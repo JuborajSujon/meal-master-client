@@ -99,6 +99,7 @@ const AuthProvider = ({ children }) => {
       photo: user?.photoURL || "https://i.ibb.co/Jn1jJHN/avater.png",
       role: "verified",
       badge: "bronze",
+      status: "active",
       createdAt: user?.metadata.createdAt,
       lastLogin: user?.metadata.lastLoginAt,
     };

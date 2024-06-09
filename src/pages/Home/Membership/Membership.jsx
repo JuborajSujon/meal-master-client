@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { LuBadgeCheck } from "react-icons/lu";
 import useMemberShip from "../../../hooks/useMemberShip";
@@ -6,24 +5,7 @@ import Loading from "../../../components/Loading/Loading";
 import { Link } from "react-router-dom";
 
 export default function Membership() {
-  const [selectedPlan, setSelectedPlan] = useState([]);
   const [membership, loading] = useMemberShip();
-
-  useEffect(() => {
-    if (!loading) {
-      setSelectedPlan(
-        membership
-          .reverse()
-          .slice((0, 3))
-          .reverse()
-      );
-    }
-  }, [membership, loading]);
-
-  const handleFilter = (plan) => {
-    const result = membership.filter((item) => item.duration === plan);
-    setSelectedPlan(result.reverse());
-  };
 
   if (loading) {
     return <Loading />;
@@ -36,28 +18,11 @@ export default function Membership() {
 
       <section className=" bg-gray-100 dark:bg-slate-800 rounded text-gray-800">
         <div className="container p-4 mx-auto sm:p-10">
-          <div className="mb-12 space-y-4 text-center">
-            <h1 className="text-2xl dark:text-slate-300 font-bold">
-              Choose Your Plan
-            </h1>
-            <div>
-              <button
-                onClick={() => handleFilter("monthly")}
-                className="px-4 py-1 font-semibold border rounded-l-lg bg-amber-600 border-amber-600 text-gray-50">
-                Monthly
-              </button>
-              <button
-                onClick={() => handleFilter("yearly")}
-                className="px-4 py-1 border rounded-r-lg border-amber-600 dark:text-slate-300">
-                Annually
-              </button>
-            </div>
-          </div>
           <div className="grid max-w-md grid-cols-1 gap-6 mx-auto auto-rows-fr lg:grid-cols-3 lg:max-w-full">
-            {selectedPlan?.map((plan) => {
+            {membership?.map((plan) => {
               return (
                 <div
-                  key={plan.service_name}
+                  key={plan._id}
                   className="flex flex-col overflow-hidden border-2 rounded-md border-gray-300 hover:border-amber-600 bg-slate-50">
                   <div
                     className={`${plan.bg_color} flex flex-col items-center justify-center px-2 py-8 space-y-4`}>
