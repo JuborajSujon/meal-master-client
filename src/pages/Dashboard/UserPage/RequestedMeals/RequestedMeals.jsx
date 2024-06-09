@@ -26,7 +26,9 @@ function RequestedMeals() {
           const res = await axiosSecure.delete(`/carts/${id}`);
 
           if (res.data.deletedCount > 0) {
-            toast.success("Meal deleted successfully from cart");
+            toast.success("Meal deleted successfully from cart", {
+              autoClose: 1500,
+            });
             refetch();
           }
         }
@@ -47,6 +49,8 @@ function RequestedMeals() {
       <div>
         <SectionTitle title="Requested Meals" />
       </div>
+
+      {isLoading && <Loading />}
 
       {/* table */}
       <div className="bg-orange-50 dark:bg-slate-800 p-4 rounded-md">
@@ -75,37 +79,33 @@ function RequestedMeals() {
                 </tr>
               </thead>
               <tbody>
-                {isLoading ? (
-                  <Loading />
-                ) : (
-                  carts?.map((cart) => (
-                    <tr
-                      key={cart._id}
-                      className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                      <td className="p-3">
-                        <p>{cart?.menu?.meal_title}</p>
-                      </td>
-                      <td className="p-3">
-                        <p>{cart?.menu?.likes_count || 0}</p>
-                      </td>
-                      <td className="p-3">
-                        <p>{cart?.menu?.reviews_count || 0}</p>
-                      </td>
-                      <td className="p-3">
-                        <p>{cart?.req_status}</p>
-                      </td>
+                {carts?.map((cart) => (
+                  <tr
+                    key={cart._id}
+                    className="border-b border-opacity-20 border-gray-300 bg-gray-50">
+                    <td className="p-3">
+                      <p>{cart?.menu?.meal_title}</p>
+                    </td>
+                    <td className="p-3">
+                      <p>{cart?.menu?.likes_count || 0}</p>
+                    </td>
+                    <td className="p-3">
+                      <p>{cart?.menu?.reviews_count || 0}</p>
+                    </td>
+                    <td className="p-3">
+                      <p>{cart?.req_status}</p>
+                    </td>
 
-                      <td className="p-3 flex items-center gap-2">
-                        <button
-                          onClick={() => handleDeleteCart(cart._id, refetch)}
-                          data-tip="Cen"
-                          className="px-3 py-1 tooltip rounded-md bg-red-600 text-gray-50">
-                          Cancel Order
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
+                    <td className="p-3 flex items-center gap-2">
+                      <button
+                        onClick={() => handleDeleteCart(cart._id, refetch)}
+                        data-tip="Cancel Order"
+                        className="px-3 py-1 tooltip rounded-md bg-red-600 text-gray-50">
+                        Cancel Order
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

@@ -4,8 +4,22 @@ import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { FaEdit } from "react-icons/fa";
 import { BiSolidDetail } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
+import useReviews from "../../../../hooks/useReviews";
+import { Link } from "react-router-dom";
 
 function UserReviews() {
+  const [reviews, isLoading, refetch] = useReviews();
+
+  // handle edit
+  const handleUpdateReview = (createdAt, refetch) => {
+    console.log(createdAt);
+  };
+
+  // handle delete
+  const handleDeleteReview = (createdAt, refetch) => {
+    console.log(createdAt);
+  };
+
   return (
     <div>
       <Helmet>
@@ -42,39 +56,52 @@ function UserReviews() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                  <td className="p-3">
-                    <p>Meal Name</p>
-                  </td>
-                  <td className="p-3">
-                    <p>200</p>
-                  </td>
-                  <td className="p-3">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Minima qui unde deserunt quo nulla eveniet deleniti modi
-                      quibusdam. Quo, inventore. Voluptatem incidunt impedit,
-                      pariatur illum at vitae nulla saepe laudantium.
-                    </p>
-                  </td>
-                  <td className="p-3 flex items-center gap-2">
-                    <button
-                      data-tip="Meal View"
-                      className="px-3 py-1 tooltip rounded-md bg-amber-600 text-gray-50">
-                      <BiSolidDetail size={16} />
-                    </button>
-                    <button
-                      data-tip="Update Review"
-                      className="px-3 py-1 tooltip rounded-md bg-green-600 text-gray-50">
-                      <FaEdit size={16} />
-                    </button>
-                    <button
-                      data-tip="Delete"
-                      className="px-3 py-1 tooltip rounded-md bg-red-600 text-gray-50">
-                      <MdDeleteForever size={16} />
-                    </button>
-                  </td>
-                </tr>
+                {reviews?.map((review, index) => (
+                  <tr
+                    key={index}
+                    className="border-b border-opacity-20 border-gray-300 bg-gray-50">
+                    <td className="p-3">
+                      <p>{review?.meal_title}</p>
+                    </td>
+                    <td className="p-3">
+                      <p>{review?.likes_count}</p>
+                    </td>
+                    <td className="p-3">
+                      <p>{review?.reviews?.review}</p>
+                    </td>
+                    <td className="p-3 flex items-center gap-2">
+                      <Link to={`/meal-details/${review?._id}`}>
+                        <button
+                          data-tip="Meal View"
+                          className="px-3 py-1 tooltip rounded-md bg-amber-600 text-gray-50">
+                          <BiSolidDetail size={16} />
+                        </button>
+                      </Link>
+                      <button
+                        onClick={() =>
+                          handleUpdateReview(
+                            review?.reviews?.created_time,
+                            refetch
+                          )
+                        }
+                        data-tip="Update Review"
+                        className="px-3 py-1 tooltip rounded-md bg-green-600 text-gray-50">
+                        <FaEdit size={16} />
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleDeleteReview(
+                            review?.reviews?.created_time,
+                            refetch
+                          )
+                        }
+                        data-tip="Delete"
+                        className="px-3 py-1 tooltip rounded-md bg-red-600 text-gray-50">
+                        <MdDeleteForever size={16} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
