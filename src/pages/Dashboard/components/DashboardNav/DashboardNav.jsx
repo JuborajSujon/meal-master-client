@@ -6,11 +6,13 @@ import logo from "../../../../assets/logo.png";
 import useAuth from "../../../../hooks/useAuth";
 import useUser from "../../../../hooks/useUser";
 import { MdNotificationsActive } from "react-icons/md";
+import useCart from "../../../../hooks/useCart";
 
 const DashboardNav = ({ handleToggle }) => {
   const { userSignOut, setUser } = useAuth();
   const navigate = useNavigate();
   const [userData] = useUser();
+  const [carts, isLoading] = useCart();
 
   // Logout Handler
   const handleLogout = async () => {
@@ -74,7 +76,7 @@ const DashboardNav = ({ handleToggle }) => {
                 <PiShoppingCartBold size={24} />
 
                 <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
-                  8
+                  {isLoading ? "0" : carts?.length}
                 </span>
               </div>
 

@@ -92,6 +92,7 @@ export default function MealDetails() {
         meal_title,
         image,
         price,
+        req_status: "pending",
       };
 
       const result = await axiosSecure.post(`/carts`, cartItem);
