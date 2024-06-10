@@ -12,22 +12,36 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useUser from "../../../../hooks/useUser";
 import useReviews from "./../../../../hooks/useReviews";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 function UserReviews() {
-  const [reviews, isLoading, refetch] = useReviews();
+  const [reviews, , refetch] = useReviews();
   const axiosSecure = useAxiosSecure();
   const [userData] = useUser();
-  const { name, photo } = userData;
+  const { name, photo, email } = userData;
 
   const [selectedReview, setSelectedReview] = useState(null); // State to hold selected review
   const [rating, setRating] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const myStyles = {
     itemShapes: RoundedStar,
     activeFillColor: "#ffb700",
     inactiveFillColor: "#fbf1a9",
   };
+
+  const { data: sortReviews = [], isLoading } = useQuery({
+    queryKey: ["sortReviews", currentPage, itemsPerPage, email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/reviews-sort?page=${currentPage}&size=${itemsPerPage}&email=${email}`
+      );
+      return res.data;
+    },
+  });
 
   const handleSubmit = (reviewId) => async (e) => {
     e.preventDefault();
