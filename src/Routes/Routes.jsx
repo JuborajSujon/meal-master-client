@@ -23,6 +23,7 @@ import PaymentHistory from "../pages/Dashboard/UserPage/PaymentHistory/PaymentHi
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 import UpcomingMealsDetails from "../pages/Dashboard/AdminPage/ManageUpcomingMeal/UpcomingMealsDetails";
 import Checkout from "../pages/Checkout/Checkout";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/payment",
+        element: <div>Card</div>,
+      },
     ],
   },
   {
@@ -87,35 +92,67 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin-profile",
-        element: <UserProfile />,
+        element: (
+          <AdminRoute>
+            <UserProfile />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/manage-users",
-        element: <ManageUsers />,
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/add-meal",
-        element: <AddMeal />,
+        element: (
+          <AdminRoute>
+            <AddMeal />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/all-meals",
-        element: <AllMeals />,
+        element: (
+          <AdminRoute>
+            <AllMeals />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/all-reviews",
-        element: <AllReviews />,
+        element: (
+          <AdminRoute>
+            <AllReviews />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/serve-meals",
-        element: <ServeMeals />,
+        element: (
+          <AdminRoute>
+            <ServeMeals />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/upcoming-meals",
-        element: <ManageUpcomingMeal />,
+        element: (
+          <AdminRoute>
+            <ManageUpcomingMeal />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/upcoming-meal-details/:mealId",
-        element: <UpcomingMealsDetails />,
+        element: (
+          <AdminRoute>
+            <UpcomingMealsDetails />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/user-profile",

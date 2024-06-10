@@ -147,6 +147,15 @@ function UserReviews() {
                   </tr>
                 </thead>
                 <tbody>
+                  {sortReviews?.result?.length === 0 && (
+                    <tr>
+                      <td colSpan={4} className="text-center p-3">
+                        No reviews found
+                      </td>
+                    </tr>
+                  )}
+
+                  {/* table body */}
                   {sortReviews?.result?.map((review, index) => (
                     <tr
                       key={index}

@@ -1,9 +1,8 @@
 import { Helmet } from "react-helmet-async";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useScrollToTop from "../../hooks/useScrollToTop";
 
 const Checkout = () => {
@@ -22,7 +21,7 @@ const Checkout = () => {
   return (
     <div className="py-20">
       <Helmet>
-        <title> Checkout</title>
+        <title>Checkout</title>
       </Helmet>
 
       <div>
@@ -67,9 +66,11 @@ const Checkout = () => {
             </table>
           </div>
           <div>
-            <button className="px-6 py-2 mt-6 text-lg font-semibold rounded sm:mt-12 bg-amber-600 hover:bg-orange-400 text-gray-50">
-              Pay
-            </button>
+            <Link to={`/payment/${checkout._id}`}>
+              <button className="px-6 py-2 mt-6 text-lg font-semibold rounded sm:mt-12 bg-amber-600 hover:bg-orange-400 text-gray-50">
+                Pay
+              </button>
+            </Link>
           </div>
         </div>
       </div>

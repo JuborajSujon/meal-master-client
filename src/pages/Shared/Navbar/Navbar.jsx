@@ -6,11 +6,13 @@ import useAuth from "./../../../hooks/useAuth";
 import useScrollPosition from "./../../../hooks/useScrollPosition";
 import { PiShoppingCartBold } from "react-icons/pi";
 import { FaHeart } from "react-icons/fa";
+import useUser from "../../../hooks/useUser";
 
 export default function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
   const { user, userSignOut, setUser, reload } = useAuth();
   const scrollPosition = useScrollPosition();
+  const [userData] = useUser();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -163,7 +165,7 @@ export default function Navbar() {
                 <p className="text-base flex justify-between items-center">
                   Name : {user?.displayName || "user name not found"}
                   <span className="text-sm py-1 px-2 rounded-full bg-orange-400">
-                    Bronze
+                    {userData?.badge}
                   </span>
                 </p>
                 <li>

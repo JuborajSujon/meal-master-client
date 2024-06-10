@@ -111,7 +111,13 @@ function RequestedMeals() {
               </thead>
               <tbody>
                 {/* if data not found */}
-                {sortCarts?.result?.length === 0 && "No data found"}
+                {sortCarts?.result?.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="p-3">
+                      <p className="text-center">No data found</p>
+                    </td>
+                  </tr>
+                )}
                 {sortCarts?.result?.map((cart) => (
                   <tr
                     key={cart._id}
