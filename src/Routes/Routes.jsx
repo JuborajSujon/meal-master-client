@@ -22,6 +22,7 @@ import UserReviews from "../pages/Dashboard/UserPage/UserReviews/UserReviews";
 import PaymentHistory from "../pages/Dashboard/UserPage/PaymentHistory/PaymentHistory";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 import UpcomingMealsDetails from "../pages/Dashboard/AdminPage/ManageUpcomingMeal/UpcomingMealsDetails";
+import Checkout from "../pages/Checkout/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +48,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/subscription",
-        element: <Subscription />,
+        element: (
+          <PrivateRoute>
+            <Subscription />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -57,11 +62,23 @@ export const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
+      {
+        path: "/checkout/:id",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {

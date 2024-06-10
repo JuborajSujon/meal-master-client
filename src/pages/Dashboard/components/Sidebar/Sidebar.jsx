@@ -12,10 +12,12 @@ import useAuth from "../../../../hooks/useAuth";
 import logo from "../../../../assets/logo.png";
 import PropTypes from "prop-types";
 import { FaIdCard, FaList } from "react-icons/fa6";
+import useUser from "../../../../hooks/useUser";
 
 const Sidebar = ({ handleToggle, isActive }) => {
   const { userSignOut, setUser, user } = useAuth();
   const navigate = useNavigate();
+  const [userData] = useUser();
 
   // Logout Handler
   const handleLogout = async () => {
@@ -30,10 +32,6 @@ const Sidebar = ({ handleToggle, isActive }) => {
   return (
     <>
       {/* Sidebar */}
-      {/* <div
-        className={`z-20 min-h-screen flex flex-col justify-between overflow-x-hidden border-r border-gray-200 bg-slate-200 dark:bg-slate-800 w-64 space-y-6 px-2 py-3 absolute md:fixed md:top-0 md:left-0 inset-y-0 left-0 transform ${
-          isActive && "-translate-x-full"
-        }  md:translate-x-0 transition duration-200 ease-in-out`}> */}
 
       <div
         className={`md:flex flex-col justify-between overflow-x-hidden border-r border-gray-200 bg-slate-200 dark:bg-slate-800  space-y-6 px-2 py-3 z-20 min-h-screen w-64 ${
@@ -74,179 +72,182 @@ const Sidebar = ({ handleToggle, isActive }) => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1">
             {/*  Menu Items */}
-            {user && (
-              <nav>
-                <NavLink
-                  to="/dashboard"
-                  end
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <FaHome className="w-5 h-5" />
+            {userData?.role === "admin" ? (
+              <>
+                <nav>
+                  <NavLink
+                    to="/dashboard"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <FaHome className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Dashboard Home</span>
-                </NavLink>
-                <NavLink
-                  to="admin-profile"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <FaUser className="w-5 h-5" />
+                    <span className="mx-4 font-medium">Dashboard Home</span>
+                  </NavLink>
+                  <NavLink
+                    to="admin-profile"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <FaUser className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Admin Profile</span>
-                </NavLink>
+                    <span className="mx-4 font-medium">Admin Profile</span>
+                  </NavLink>
 
-                <NavLink
-                  to="manage-users"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <MdManageAccounts className="w-6 h-7" />
+                  <NavLink
+                    to="manage-users"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <MdManageAccounts className="w-6 h-7" />
 
-                  <span className="mx-4 font-medium">Manage Users</span>
-                </NavLink>
+                    <span className="mx-4 font-medium">Manage Users</span>
+                  </NavLink>
 
-                <NavLink
-                  to="add-meal"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <MdFormatListBulletedAdd className="w-5 h-5" />
+                  <NavLink
+                    to="add-meal"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <MdFormatListBulletedAdd className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Add Meal</span>
-                </NavLink>
+                    <span className="mx-4 font-medium">Add Meal</span>
+                  </NavLink>
 
-                <NavLink
-                  to="all-meals"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <FaList className="w-5 h-5" />
+                  <NavLink
+                    to="all-meals"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <FaList className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">All Meals</span>
-                </NavLink>
+                    <span className="mx-4 font-medium">All Meals</span>
+                  </NavLink>
 
-                <NavLink
-                  to="all-reviews"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <GoCodeReview className="w-5 h-5" />
+                  <NavLink
+                    to="all-reviews"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <GoCodeReview className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">All Reviews</span>
-                </NavLink>
+                    <span className="mx-4 font-medium">All Reviews</span>
+                  </NavLink>
 
-                <NavLink
-                  to="serve-meals"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <GiCook className="w-5 h-5" />
+                  <NavLink
+                    to="serve-meals"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <GiCook className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Serve Meals</span>
-                </NavLink>
+                    <span className="mx-4 font-medium">Serve Meals</span>
+                  </NavLink>
 
-                <NavLink
-                  to="upcoming-meals"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <GiCampCookingPot className="w-5 h-5" />
+                  <NavLink
+                    to="upcoming-meals"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <GiCampCookingPot className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Upcoming Meals</span>
-                </NavLink>
-              </nav>
-            )}
-            {user && (
-              <nav>
-                <NavLink
-                  to="user-profile"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <FaUser className="w-5 h-5" />
+                    <span className="mx-4 font-medium">Upcoming Meals</span>
+                  </NavLink>
+                </nav>
+              </>
+            ) : (
+              <>
+                <nav>
+                  <NavLink
+                    to="user-profile"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <FaUser className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">My Profile</span>
-                </NavLink>
+                    <span className="mx-4 font-medium">My Profile</span>
+                  </NavLink>
 
-                <NavLink
-                  to="requested-meals"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <IoGitPullRequestSharp className="w-6 h-7" />
+                  <NavLink
+                    to="requested-meals"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <IoGitPullRequestSharp className="w-6 h-7" />
 
-                  <span className="mx-4 font-medium">Requested Meals</span>
-                </NavLink>
+                    <span className="mx-4 font-medium">Requested Meals</span>
+                  </NavLink>
 
-                <NavLink
-                  to="user-reviews"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <GoCodeReview className="w-5 h-5" />
+                  <NavLink
+                    to="user-reviews"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <GoCodeReview className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">My Reviews</span>
-                </NavLink>
+                    <span className="mx-4 font-medium">My Reviews</span>
+                  </NavLink>
 
-                <NavLink
-                  to="payment-history"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
-                      isActive
-                        ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
-                        : "text-gray-700"
-                    }`
-                  }>
-                  <FaIdCard className="w-5 h-5" />
+                  <NavLink
+                    to="payment-history"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                        isActive
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          : "text-gray-700"
+                      }`
+                    }>
+                    <FaIdCard className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Payment History</span>
-                </NavLink>
-              </nav>
+                    <span className="mx-4 font-medium">Payment History</span>
+                  </NavLink>
+                </nav>
+              </>
             )}
           </div>
         </div>

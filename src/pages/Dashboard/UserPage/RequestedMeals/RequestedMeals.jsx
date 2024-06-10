@@ -110,6 +110,8 @@ function RequestedMeals() {
                 </tr>
               </thead>
               <tbody>
+                {/* if data not found */}
+                {sortCarts?.result?.length === 0 && "No data found"}
                 {sortCarts?.result?.map((cart) => (
                   <tr
                     key={cart._id}
@@ -144,7 +146,7 @@ function RequestedMeals() {
       </div>
       {/* pagination */}
 
-      <div className="flex absolute bottom-0 left-0 right-0 items-center justify-center mt-10">
+      <div className="flex fixed bottom-5 left-0 right-0 items-center justify-center mt-10">
         <button
           disabled={currentPage === 1}
           onClick={() => handlePaginationButton(currentPage - 1)}
