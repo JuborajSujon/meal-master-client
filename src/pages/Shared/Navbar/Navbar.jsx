@@ -12,7 +12,8 @@ export default function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
   const { user, userSignOut, setUser, reload } = useAuth();
   const scrollPosition = useScrollPosition();
-  const [userData] = useUser();
+  const [userData, refetch] = useUser();
+  // console.log(userData);
 
   const handleMouseEnter = () => {
     setIsHovered(true);

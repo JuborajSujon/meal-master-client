@@ -4,8 +4,22 @@ import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { BiSolidDetail } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 export default function PaymentHistory() {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  const { data: paymentHistory = [], isLoading } = useQuery({
+    queryKey: ["paymentHistory", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/payments?email=${user?.email}`);
+      return res.data;
+    },
+  });
+
   return (
     <div>
       <Helmet>
@@ -29,50 +43,40 @@ export default function PaymentHistory() {
               </colgroup>
               <thead className="bg-gray-300">
                 <tr className="text-left">
-                  <th className="p-3">Meal Name</th>
-                  <th className="p-3 ">
-                    <p>Likes</p>
-                  </th>
-                  <th className="p-3">
-                    <p>Reviews</p>
-                  </th>
-                  <th className="p-3 ">Action</th>
+                  <th className="p-3">Service Name</th>
+                  <th className="p-3 ">Price</th>
+                  <th className="p-3">Duration</th>
+                  <th className="p-3 ">Email</th>
+                  <th className="p-3 ">Transiction Id</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                  <td className="p-3">
-                    <p>Meal Name</p>
-                  </td>
-                  <td className="p-3">
-                    <p>200</p>
-                  </td>
-                  <td className="p-3">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Minima qui unde deserunt quo nulla eveniet deleniti modi
-                      quibusdam. Quo, inventore. Voluptatem incidunt impedit,
-                      pariatur illum at vitae nulla saepe laudantium.
-                    </p>
-                  </td>
-                  <td className="p-3 flex items-center gap-2">
-                    <button
-                      data-tip="Meal View"
-                      className="px-3 py-1 tooltip rounded-md bg-amber-600 text-gray-50">
-                      <BiSolidDetail size={16} />
-                    </button>
-                    <button
-                      data-tip="Update Review"
-                      className="px-3 py-1 tooltip rounded-md bg-green-600 text-gray-50">
-                      <FaEdit size={16} />
-                    </button>
-                    <button
-                      data-tip="Delete"
-                      className="px-3 py-1 tooltip rounded-md bg-red-600 text-gray-50">
-                      <MdDeleteForever size={16} />
-                    </button>
-                  </td>
-                </tr>
+                {paymentHistory.length === 0 && <p>No Payment History</p>}
+
+                {paymentHistory.map((payment) => (
+                  <tr
+                    key={payment._id}
+                    className="border-b border-opacity-20 border-gray-300 bg-gray-50">
+                    <td className="p-3">
+                      <p>{payment.service_name}</p>
+                    </td>
+                    <td className="p-3">
+                      {payment.price.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })}
+                    </td>
+                    <td className="p-3">
+                      <p>{payment.duration}</p>
+                    </td>
+                    <td className="p-3">
+                      <p>{payment.email}</p>
+                    </td>
+                    <td className="p-3">
+                      <p>{payment.transactionId}</p>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

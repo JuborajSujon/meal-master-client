@@ -24,6 +24,7 @@ import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 import UpcomingMealsDetails from "../pages/Dashboard/AdminPage/ManageUpcomingMeal/UpcomingMealsDetails";
 import Checkout from "../pages/Checkout/Checkout";
 import AdminRoute from "./AdminRoute";
+import Payment from "../pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -72,8 +73,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/payment",
-        element: <div>Card</div>,
+        path: "/payment/:id",
+        element: <Payment />,
       },
     ],
   },
