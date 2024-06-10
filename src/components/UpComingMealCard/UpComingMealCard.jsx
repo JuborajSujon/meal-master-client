@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 
@@ -7,7 +7,7 @@ export default function UpComingMealCard({ upcomingMeal, userData, refetch }) {
   const [liked, setLiked] = useState(false);
   const [like, setLike] = useState(false);
   const axiosSecure = useAxiosSecure();
-  const { _id: userId, name, email, photo } = userData;
+  const { _id: userId, name, email, photo, badge } = userData;
 
   const {
     _id,
@@ -20,13 +20,13 @@ export default function UpComingMealCard({ upcomingMeal, userData, refetch }) {
     likes_count,
   } = upcomingMeal || {};
 
-  if (!userData?.badge === "bronze") {
-    setLiked(true);
-  }
+  useEffect(() => {
+    if (!userData?.badge === "bronze") setLike(true);
+  }, [liked, userData?.badge]);
 
   // handle like button
   const handleLike = async () => {
-    setLike(!like);
+    setLiked(!liked);
 
     try {
       const likeObj = {
@@ -35,7 +35,7 @@ export default function UpComingMealCard({ upcomingMeal, userData, refetch }) {
         name: name,
         email: email,
         photo: photo,
-        liked: like,
+        liked: liked,
         created_time: new Date().toISOString(),
       };
 

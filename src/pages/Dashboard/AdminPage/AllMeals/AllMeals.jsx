@@ -11,6 +11,7 @@ import useMenu from "../../../../hooks/useMenu";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { imageUpload } from "../../../../api";
 import Loading from "../../../../components/Loading/Loading";
+import Swal from "sweetalert2";
 
 const AllMeals = () => {
   const [menu, loading, refetch] = useMenu();
@@ -123,11 +124,23 @@ const AllMeals = () => {
 
   const handleDeleteMeal = async (mealId) => {
     try {
-      await axiosSecure.delete(`/menu/${mealId}`);
-      refetch();
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await axiosSecure.delete(`/menu/${mealId}`);
+          refetch();
 
-      toast.success("Meal deleted successfully", {
-        autoClose: 1500,
+          toast.success("Meal deleted successfully", {
+            autoClose: 1500,
+          });
+        }
       });
     } catch (error) {
       console.log(error);
@@ -188,6 +201,9 @@ const AllMeals = () => {
                     </td>
                     <td className="p-3">
                       <p>{meal?.rating?.reviewCount}</p>
+                    </td>
+                    <td className="p-3">
+                      <p>{meal?.distributor_name}</p>
                     </td>
                     <td className="p-3 flex items-center gap-2">
                       <Link to={`/meal-details/${meal?._id}`}>

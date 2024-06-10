@@ -41,7 +41,9 @@ export default function MealCard({ item }) {
                 className="inline text-slate-900 
               dark:text-slate-300 ">
                 <span className="text-slate-400 mr-2">Rating:</span>
-                <span className="font-chakraPetch">{rating?.average}</span>
+                <span className="font-chakraPetch">
+                  {rating?.averageRating}
+                </span>
               </li>
             </ul>
           </li>

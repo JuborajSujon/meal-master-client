@@ -125,6 +125,15 @@ const ServeMeals = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  {/* if cart is empty */}
+                  {allCarts?.count === 0 && (
+                    <tr>
+                      <td className="p-3" colSpan={6}>
+                        <p className="text-center">No data found</p>
+                      </td>
+                    </tr>
+                  )}
+
                   {/* table data */}
                   {allCarts?.result?.map((cart) => (
                     <tr
@@ -140,7 +149,7 @@ const ServeMeals = () => {
                         <p>{cart.email}</p>
                       </td>
                       <td className="p-3">
-                        <p>{cart.name}</p>
+                        <p>{cart.user_name}</p>
                       </td>
                       <td className="p-3">
                         <p

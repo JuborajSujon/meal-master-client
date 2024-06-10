@@ -56,14 +56,6 @@ export const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
-      {
-        path: "secret",
-        element: (
-          <PrivateRoute>
-            <div>secret</div>
-          </PrivateRoute>
-        ),
-      },
     ],
   },
   {
@@ -102,6 +94,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/upcoming-meals",
         element: <ManageUpcomingMeal />,
+      },
+      {
+        path: "/dashboard/upcoming-meal-details/:mealId",
+        element: <div>Upcoming meal details</div>,
       },
       {
         path: "/dashboard/user-profile",

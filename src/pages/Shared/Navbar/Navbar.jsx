@@ -5,13 +5,12 @@ import Logo from "../../../assets/logo.png";
 import useAuth from "./../../../hooks/useAuth";
 import useScrollPosition from "./../../../hooks/useScrollPosition";
 import { PiShoppingCartBold } from "react-icons/pi";
-import useCart from "../../../hooks/useCart";
+import { FaHeart } from "react-icons/fa";
 
 export default function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
   const { user, userSignOut, setUser, reload } = useAuth();
   const scrollPosition = useScrollPosition();
-  const [carts, isLoading] = useCart();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -125,10 +124,10 @@ export default function Navbar() {
       <div className="navbar-end  space-x-2 mr-4">
         <div className="indicator">
           <Link to="/dashboard/requested-meals">
-            <PiShoppingCartBold size={24} />
+            <FaHeart color="orange" size={24} />
 
             <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
-              {isLoading ? "0" : carts?.length}
+              {/* {isLoading ? "0" : carts?.length} */}
             </span>
           </Link>
         </div>

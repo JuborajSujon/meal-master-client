@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useUser from "../../../../hooks/useUser";
 import useReviews from "./../../../../hooks/useReviews";
+import Swal from "sweetalert2";
 
 function UserReviews() {
   const [reviews, isLoading, refetch] = useReviews();
@@ -57,11 +58,23 @@ function UserReviews() {
 
   const handleDeleteReview = async (createdAt) => {
     try {
-      await axiosSecure.delete(`/review/${createdAt}`);
-      refetch();
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await axiosSecure.delete(`/review/${createdAt}`);
+          refetch();
 
-      toast.success("Review deleted successfully", {
-        autoClose: 1500,
+          toast.success("Review deleted successfully", {
+            autoClose: 1500,
+          });
+        }
       });
     } catch (error) {
       console.log(error);

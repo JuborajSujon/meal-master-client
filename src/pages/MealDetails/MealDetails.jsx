@@ -9,7 +9,6 @@ import MealCardSlider from "../../components/MealCardSlider/MealCardSlider";
 import StudentRatings from "../../components/StudentRatings/StudentRatings";
 import StudentReview from "../../components/StudentReview/StudentReview";
 import { BiSolidLike } from "react-icons/bi";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { MdRateReview } from "react-icons/md";
 import useScrollToTop from "./../../hooks/useScrollToTop";
@@ -61,6 +60,10 @@ export default function MealDetails() {
   const handleLike = async () => {
     setLike(!like);
 
+    if (!userId) {
+      return navigate("/login");
+    }
+
     try {
       const likeObj = {
         meal_id: _id,
@@ -90,6 +93,8 @@ export default function MealDetails() {
         menuId: _id,
         email: email,
         meal_title,
+        user_name: name,
+        user_photo: photo,
         image,
         price,
         req_status: "pending",
@@ -127,8 +132,6 @@ export default function MealDetails() {
       <Helmet>
         <title>Meal Details</title>
       </Helmet>
-      {/* breadcrumbs */}
-      <Breadcrumbs />
 
       {/* main content */}
       <div className="flex flex-col md:flex-row justify-between gap-6 mt-4">
