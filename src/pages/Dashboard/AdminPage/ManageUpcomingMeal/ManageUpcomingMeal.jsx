@@ -8,7 +8,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading/Loading";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const ManageUpcomingMeal = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -125,7 +124,7 @@ const ManageUpcomingMeal = () => {
                 {/* isloading*/}
                 {isLoading && <p>No Upcoming Meal</p>}
 
-                {sortUpcomingMeals?.map((upcomingMeal) => (
+                {sortUpcomingMeals?.result?.map((upcomingMeal) => (
                   <tr
                     key={upcomingMeal._id}
                     className="border-b border-opacity-20 border-gray-300 bg-gray-50">

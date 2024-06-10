@@ -7,14 +7,13 @@ import { MdDeleteForever } from "react-icons/md";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import useMenu from "../../../../hooks/useMenu";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { imageUpload } from "../../../../api";
 import Loading from "../../../../components/Loading/Loading";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 const AllMeals = () => {
-  const [menu, loading, refetch] = useMenu();
   const [spinning, setSpinning] = useState(false);
 
   const axiosSecure = useAxiosSecure();
@@ -22,6 +21,38 @@ const AllMeals = () => {
   const [selectedMeal, setSelectedMeal] = useState(null); // State to hold selected review
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
 
+  // Paginatin state variables
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const {
+    data: allMeals = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["allMeals", currentPage, itemsPerPage],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/all-meals?page=${currentPage}&size=${itemsPerPage}`
+      );
+      return res.data;
+    },
+  });
+
+  const numberOfPages = Math.ceil(allMeals.count / itemsPerPage);
+
+  let pages = [];
+  if (!isLoading) {
+    pages = Array.from({ length: numberOfPages }, (_, index) => index + 1);
+  } else {
+    pages = Array.from({ length: 1 }, (_, index) => index + 1);
+  }
+
+  const handlePaginationButton = (value) => {
+    setCurrentPage(value);
+  };
+
+  // Handle form submission
   const handleSubmit = (mealId) => async (e) => {
     e.preventDefault();
     if (!mealId) return;
@@ -122,6 +153,7 @@ const AllMeals = () => {
     }
   };
 
+  // handle delete meal
   const handleDeleteMeal = async (mealId) => {
     try {
       Swal.fire({
@@ -148,480 +180,545 @@ const AllMeals = () => {
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
   return (
-    <div>
-      <Helmet>
-        <title>User Reviews | Dashboard</title>
-      </Helmet>
-      <div className="py-2">
-        <Breadcrumbs />
-      </div>
+    <div className="h-full relative">
       <div>
-        <SectionTitle title="Reviews all Meals" />
-      </div>
-      <div className="bg-orange-50 dark:bg-slate-800 p-4 rounded-md">
-        <div className="container p-2 mx-auto sm:p-4 text-gray-800">
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-              </colgroup>
-              <thead className="bg-gray-300">
-                <tr className="text-left">
-                  <th className="p-3">Meal Name</th>
-                  <th className="p-3">
-                    <p>Likes</p>
-                  </th>
-                  <th className="p-3">
-                    <p>Reviews</p>
-                  </th>
-                  <th className="p-3">
-                    <p>Distibutor Name</p>
-                  </th>
-                  <th className="p-3">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {menu?.map((meal, index) => (
-                  <tr
-                    key={index}
-                    className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                    <td className="p-3">
-                      <p>{meal?.meal_title}</p>
-                    </td>
-                    <td className="p-3">
-                      <p>{meal?.likes_count}</p>
-                    </td>
-                    <td className="p-3">
-                      <p>{meal?.rating?.reviewCount}</p>
-                    </td>
-                    <td className="p-3">
-                      <p>{meal?.distributor_name}</p>
-                    </td>
-                    <td className="p-3 flex items-center gap-2">
-                      <Link to={`/meal-details/${meal?._id}`}>
-                        <button className="px-3 py-1 rounded-md bg-amber-600 text-gray-50">
-                          <BiSolidDetail size={16} />
-                        </button>
-                      </Link>
-                      <button
-                        onClick={() => {
-                          setSelectedMeal(meal);
-                          setIsModalOpen(true);
-                        }}
-                        className="px-3 py-1 rounded-md bg-green-600 text-gray-50">
-                        <FaEdit size={16} />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteMeal(meal._id)}
-                        className="px-3 py-1  rounded-md bg-red-600 text-gray-50">
-                        <MdDeleteForever size={16} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <Helmet>
+          <title>User Reviews | Dashboard</title>
+        </Helmet>
+        <div className="py-2">
+          <Breadcrumbs />
         </div>
-      </div>
-      {isModalOpen && selectedMeal && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
-          <div className="modal-box rounded-md w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
-            <div className="p-4 rounded-md shadow-sm bg-gray-50 dark:bg-slate-800 dark:border w-full">
-              <div className="z-30 sticky top-0 flex justify-end">
-                <button
-                  onClick={() => {
-                    setIsModalOpen(false);
-                    setSelectedMeal(null);
-                  }}
-                  className=" px-3 py-1.5 rounded-full border bg-black border-gray-800 text-white dark:border-slate-300 dark:text-orange-400">
-                  X
-                </button>
-              </div>
-              <h1 className="text-2xl font-bold mb-4">Update Meal</h1>
-
-              <form onSubmit={handleSubmit(selectedMeal._id)}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 grid-y-3">
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-slate-600 text-sm dark:text-slate-300 font-bold mb-2"
-                      htmlFor="grid-password">
-                      Meal Title
-                    </label>
-                    <input
-                      defaultValue={selectedMeal?.meal_title}
-                      name="meal_title"
-                      type="text"
-                      required
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500  text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Meal Name"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Price
-                    </label>
-                    <input
-                      type="number"
-                      step="any"
-                      defaultValue={selectedMeal?.price}
-                      name="price"
-                      required
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Price"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Serve Amount
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.serve_amount}
-                      name="serve_amount"
-                      required
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="6 pcs"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Distributor Name
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.distributor_name}
-                      name="distributor_name"
-                      required
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Meal Master"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Preparation Time
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.prep_time}
-                      name="prep_time"
-                      required
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="10 min"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Cooking Time
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.cooking_time}
-                      name="cooking_time"
-                      required
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="10 min"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Total Time
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.total_time}
-                      name="total_time"
-                      required
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="20 min"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Sub-category
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_subcategory}
-                      name="meal_subcategory"
-                      required
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Dessert"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Photo
-                    </label>
-                    <input
-                      type="file"
-                      defaultValue={selectedMeal?.photo}
-                      name="photo"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Cooking Time"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Category
-                    </label>
-
-                    <select
-                      defaultValue={selectedMeal?.meal_category}
-                      name="meal_category"
-                      required
-                      className="select h-9 min-h-2 select-bordered border-0  placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                      <option value="Breakfast">Breakfast</option>
-                      <option value="Lunch">Lunch</option>
-                      <option value="Dinner">Dinner</option>
-                    </select>
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                      htmlFor="grid-password">
-                      Meal Status
-                    </label>
-
-                    <select
-                      defaultValue={selectedMeal?.post_status}
-                      name="post_status"
-                      required
-                      className="select h-9 min-h-2 select-bordered border-0 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                      <option value="Published">Published</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                    htmlFor="grid-password">
-                    Meal Ingredients
-                  </label>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2">
-                  <div className="relative w-full mb-3">
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_ingredients[0]}
-                      name="meal_ing_item1"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Item 1"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_ingredients[1]}
-                      name="meal_ing_item2"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Item 2"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_ingredients[2]}
-                      name="meal_ing_item3"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Item 3"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_ingredients[3]}
-                      name="meal_ing_item4"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Item 4"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_ingredients[4]}
-                      name="meal_ing_item5"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Item 5"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_ingredients[5]}
-                      name="meal_ing_item6"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Item 6"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_ingredients[6]}
-                      name="meal_ing_item7"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Item 7"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_ingredients[7]}
-                      name="meal_ing_item8"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Item 8"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.meal_ingredients[8]}
-                      name="meal_ing_item9"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Item 9"
-                    />
-                  </div>
-                </div>
-                {/* Nutrition Facts */}
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                    htmlFor="grid-password">
-                    Nutrition Facts
-                  </label>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
-                  <div className="relative w-full mb-2">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
-                      htmlFor="grid-password">
-                      Calories
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.nutrition_facts.calories}
-                      required
-                      name="nutrition_calories"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="100"
-                    />
-                  </div>
-                  <div className="relative w-full mb-2">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
-                      htmlFor="grid-password">
-                      Fats
-                    </label>
-                    <input
-                      name="nutrition_fats"
-                      defaultValue={selectedMeal?.nutrition_facts.fats}
-                      required
-                      type="text"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="10gm"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
-                      htmlFor="grid-password">
-                      Carbs
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.nutrition_facts.carbs}
-                      required
-                      name="nutrition_carbs"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="10gm"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
-                      htmlFor="grid-password">
-                      Proteins
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={selectedMeal?.nutrition_facts.protein}
-                      required
-                      name="nutrition_proteins"
-                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="10gm"
-                    />
-                  </div>
-                </div>
-
-                {/* short description */}
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
-                    htmlFor="grid-password">
-                    Short Description
-                  </label>
-                  <textarea
-                    defaultValue={selectedMeal?.short_description}
-                    name="short_description"
-                    required
-                    type="text"
-                    rows="3"
-                    className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Short Description"></textarea>
-                </div>
-
-                {/* submit button */}
-                <div className="text-center mt-6">
-                  {spinning ? (
-                    <button
-                      disabled
-                      className="bg-slate-800 text-white  hover:bg-slate-700 text-sm font-bold uppercase px-6 rounded shadow hover:shadow-lg outline-none border-2 border-transparent dark:bg-slate-500 hover:border-2 hover:border-yellow-400 focus:outline-none mr-1 py-1 mb-1 w-full ease-linear transition-all duration-150">
-                      <span className="loading loading-dots loading-md"></span>
-                    </button>
-                  ) : (
-                    <input
-                      value={"Update Meal"}
-                      type="submit"
-                      className="bg-slate-800 text-white  hover:bg-slate-700 text-sm font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none border-2 border-transparent dark:bg-slate-500 hover:border-2 hover:border-yellow-400 focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                    />
-                  )}
-                </div>
-              </form>
+        <div>
+          <SectionTitle title="Reviews all Meals" />
+        </div>
+        <div className="bg-orange-50 dark:bg-slate-800 p-4 rounded-md">
+          <div className="container p-2 mx-auto sm:p-4 text-gray-800">
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-sm">
+                <colgroup>
+                  <col />
+                  <col />
+                  <col />
+                  <col />
+                </colgroup>
+                <thead className="bg-gray-300">
+                  <tr className="text-left">
+                    <th className="p-3">Meal Name</th>
+                    <th className="p-3">
+                      <p>Likes</p>
+                    </th>
+                    <th className="p-3">
+                      <p>Reviews</p>
+                    </th>
+                    <th className="p-3">
+                      <p>Distibutor Name</p>
+                    </th>
+                    <th className="p-3">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allMeals?.result?.map((meal, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-opacity-20 border-gray-300 bg-gray-50">
+                      <td className="p-3">
+                        <p>{meal?.meal_title}</p>
+                      </td>
+                      <td className="p-3">
+                        <p>{meal?.likes_count}</p>
+                      </td>
+                      <td className="p-3">
+                        <p>{meal?.rating?.reviewCount}</p>
+                      </td>
+                      <td className="p-3">
+                        <p>{meal?.distributor_name}</p>
+                      </td>
+                      <td className="p-3 flex items-center gap-2">
+                        <Link to={`/meal-details/${meal?._id}`}>
+                          <button className="px-3 py-1 rounded-md bg-amber-600 text-gray-50">
+                            <BiSolidDetail size={16} />
+                          </button>
+                        </Link>
+                        <button
+                          onClick={() => {
+                            setSelectedMeal(meal);
+                            setIsModalOpen(true);
+                          }}
+                          className="px-3 py-1 rounded-md bg-green-600 text-gray-50">
+                          <FaEdit size={16} />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteMeal(meal._id)}
+                          className="px-3 py-1  rounded-md bg-red-600 text-gray-50">
+                          <MdDeleteForever size={16} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      )}
+        {isModalOpen && selectedMeal && (
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+            <div className="modal-box rounded-md w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
+              <div className="p-4 rounded-md shadow-sm bg-gray-50 dark:bg-slate-800 dark:border w-full">
+                <div className="z-30 sticky top-0 flex justify-end">
+                  <button
+                    onClick={() => {
+                      setIsModalOpen(false);
+                      setSelectedMeal(null);
+                    }}
+                    className=" px-3 py-1.5 rounded-full border bg-black border-gray-800 text-white dark:border-slate-300 dark:text-orange-400">
+                    X
+                  </button>
+                </div>
+                <h1 className="text-2xl font-bold mb-4">Update Meal</h1>
+
+                <form onSubmit={handleSubmit(selectedMeal._id)}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 grid-y-3">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-slate-600 text-sm dark:text-slate-300 font-bold mb-2"
+                        htmlFor="grid-password">
+                        Meal Title
+                      </label>
+                      <input
+                        defaultValue={selectedMeal?.meal_title}
+                        name="meal_title"
+                        type="text"
+                        required
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500  text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Meal Name"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Price
+                      </label>
+                      <input
+                        type="number"
+                        step="any"
+                        defaultValue={selectedMeal?.price}
+                        name="price"
+                        required
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Price"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Serve Amount
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.serve_amount}
+                        name="serve_amount"
+                        required
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="6 pcs"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Distributor Name
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.distributor_name}
+                        name="distributor_name"
+                        required
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Meal Master"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Preparation Time
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.prep_time}
+                        name="prep_time"
+                        required
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="10 min"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Cooking Time
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.cooking_time}
+                        name="cooking_time"
+                        required
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="10 min"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Total Time
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.total_time}
+                        name="total_time"
+                        required
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="20 min"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Sub-category
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_subcategory}
+                        name="meal_subcategory"
+                        required
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Dessert"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Photo
+                      </label>
+                      <input
+                        type="file"
+                        defaultValue={selectedMeal?.photo}
+                        name="photo"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Cooking Time"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Category
+                      </label>
+
+                      <select
+                        defaultValue={selectedMeal?.meal_category}
+                        name="meal_category"
+                        required
+                        className="select h-9 min-h-2 select-bordered border-0  placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                      </select>
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                        htmlFor="grid-password">
+                        Meal Status
+                      </label>
+
+                      <select
+                        defaultValue={selectedMeal?.post_status}
+                        name="post_status"
+                        required
+                        className="select h-9 min-h-2 select-bordered border-0 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                        <option value="Published">Published</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                      htmlFor="grid-password">
+                      Meal Ingredients
+                    </label>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2">
+                    <div className="relative w-full mb-3">
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_ingredients[0]}
+                        name="meal_ing_item1"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Item 1"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_ingredients[1]}
+                        name="meal_ing_item2"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Item 2"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_ingredients[2]}
+                        name="meal_ing_item3"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Item 3"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_ingredients[3]}
+                        name="meal_ing_item4"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Item 4"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_ingredients[4]}
+                        name="meal_ing_item5"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Item 5"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_ingredients[5]}
+                        name="meal_ing_item6"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Item 6"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_ingredients[6]}
+                        name="meal_ing_item7"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Item 7"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_ingredients[7]}
+                        name="meal_ing_item8"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Item 8"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.meal_ingredients[8]}
+                        name="meal_ing_item9"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Item 9"
+                      />
+                    </div>
+                  </div>
+                  {/* Nutrition Facts */}
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                      htmlFor="grid-password">
+                      Nutrition Facts
+                    </label>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+                    <div className="relative w-full mb-2">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
+                        htmlFor="grid-password">
+                        Calories
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.nutrition_facts.calories}
+                        required
+                        name="nutrition_calories"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="100"
+                      />
+                    </div>
+                    <div className="relative w-full mb-2">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
+                        htmlFor="grid-password">
+                        Fats
+                      </label>
+                      <input
+                        name="nutrition_fats"
+                        defaultValue={selectedMeal?.nutrition_facts.fats}
+                        required
+                        type="text"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="10gm"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
+                        htmlFor="grid-password">
+                        Carbs
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.nutrition_facts.carbs}
+                        required
+                        name="nutrition_carbs"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="10gm"
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-semibold mb-2"
+                        htmlFor="grid-password">
+                        Proteins
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={selectedMeal?.nutrition_facts.protein}
+                        required
+                        name="nutrition_proteins"
+                        className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="10gm"
+                      />
+                    </div>
+                  </div>
+
+                  {/* short description */}
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase dark:text-slate-300 text-slate-600 text-sm font-bold mb-2"
+                      htmlFor="grid-password">
+                      Short Description
+                    </label>
+                    <textarea
+                      defaultValue={selectedMeal?.short_description}
+                      name="short_description"
+                      required
+                      type="text"
+                      rows="3"
+                      className="border-0 px-3 py-1.5 placeholder-slate-300 dark:placeholder:text-slate-500 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Short Description"></textarea>
+                  </div>
+
+                  {/* submit button */}
+                  <div className="text-center mt-6">
+                    {spinning ? (
+                      <button
+                        disabled
+                        className="bg-slate-800 text-white  hover:bg-slate-700 text-sm font-bold uppercase px-6 rounded shadow hover:shadow-lg outline-none border-2 border-transparent dark:bg-slate-500 hover:border-2 hover:border-yellow-400 focus:outline-none mr-1 py-1 mb-1 w-full ease-linear transition-all duration-150">
+                        <span className="loading loading-dots loading-md"></span>
+                      </button>
+                    ) : (
+                      <input
+                        value={"Update Meal"}
+                        type="submit"
+                        className="bg-slate-800 text-white  hover:bg-slate-700 text-sm font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none border-2 border-transparent dark:bg-slate-500 hover:border-2 hover:border-yellow-400 focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      />
+                    )}
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      {/* pagination */}
+
+      <div className="flex absolute bottom-0 left-0 right-0 items-center justify-center mt-10">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => handlePaginationButton(currentPage - 1)}
+          className="px-4 py-2 mx-1 capitalize bg-orange-400 text-slate-900 font-semibold rounded-md cursor-not-allowed hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
+          <div className="flex items-center -mx-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 mx-1 rtl:-scale-x-100"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M7 16l-4-4m0 0l4-4m-4 4h18"
+              />
+            </svg>
+
+            <span className="mx-1">previous</span>
+          </div>
+        </button>
+
+        {/* Numbers */}
+        {pages.map((btnNum) => (
+          <button
+            onClick={() => handlePaginationButton(btnNum)}
+            key={btnNum}
+            className={`hidden ${
+              currentPage === btnNum
+                ? "bg-blue-500 text-white"
+                : "bg-orange-400"
+            } px-4 py-2 mx-1 transition-colors duration-300 transform  rounded-md sm:inline hover:bg-blue-500  hover:text-white`}>
+            {btnNum}
+          </button>
+        ))}
+
+        <button
+          disabled={currentPage === numberOfPages}
+          onClick={() => handlePaginationButton(currentPage + 1)}
+          className="px-4 py-2 mx-1 text-slate-900 font-semibold transition-colors duration-300 transform bg-orange-400 rounded-md  hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200 pr-7">
+          <div className="flex items-center -mx-1">
+            <span className="mx-1">Next</span>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 mx-1 rtl:-scale-x-100"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </div>
+        </button>
+      </div>
     </div>
   );
 };
