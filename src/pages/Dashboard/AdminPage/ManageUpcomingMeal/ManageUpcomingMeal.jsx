@@ -145,7 +145,8 @@ const ManageUpcomingMeal = () => {
                       <button className="px-3 py-1 rounded-md bg-amber-600 text-gray-50">
                         Publish
                       </button>
-                      <Link to={`/upcoming-meal-details/${upcomingMeal._id}`}>
+                      <Link
+                        to={`/dashboard/upcoming-meal-details/${upcomingMeal._id}`}>
                         <button className="px-3 py-1 rounded-md text-nowrap bg-green-600 text-gray-50">
                           View Details
                         </button>

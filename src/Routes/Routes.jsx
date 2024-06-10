@@ -21,6 +21,7 @@ import RequestedMeals from "../pages/Dashboard/UserPage/RequestedMeals/Requested
 import UserReviews from "../pages/Dashboard/UserPage/UserReviews/UserReviews";
 import PaymentHistory from "../pages/Dashboard/UserPage/PaymentHistory/PaymentHistory";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
+import UpcomingMealsDetails from "../pages/Dashboard/AdminPage/ManageUpcomingMeal/UpcomingMealsDetails";
 
 export const router = createBrowserRouter([
   {
@@ -97,7 +98,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/upcoming-meal-details/:mealId",
-        element: <div>Upcoming meal details</div>,
+        element: <UpcomingMealsDetails />,
       },
       {
         path: "/dashboard/user-profile",

@@ -12,6 +12,7 @@ import { imageUpload } from "../../../../api";
 import Loading from "../../../../components/Loading/Loading";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const AllMeals = () => {
   const [spinning, setSpinning] = useState(false);
@@ -25,6 +26,12 @@ const AllMeals = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [sortLike, setSortLike] = useState("desc");
+  const [sortLikesBtn, setSortLikesBtn] = useState(false);
+
+  const [sortReviews, setSortReviews] = useState("desc");
+  const [sortReviewsBtn, setSortReviewsBtn] = useState(false);
+
   const {
     data: allMeals = [],
     isLoading,
@@ -33,7 +40,7 @@ const AllMeals = () => {
     queryKey: ["allMeals", currentPage, itemsPerPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/all-meals?page=${currentPage}&size=${itemsPerPage}`
+        `/all-meals?page=${currentPage}&size=${itemsPerPage}&sortLike=${sortLike}&sortReviews=${sortReviews}`
       );
       return res.data;
     },
@@ -50,6 +57,17 @@ const AllMeals = () => {
 
   const handlePaginationButton = (value) => {
     setCurrentPage(value);
+  };
+  const handleSortLikes = () => {
+    setSortLike((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    setSortLikesBtn(!sortLikesBtn);
+    refetch();
+  };
+
+  const handleSortReviews = () => {
+    setSortReviews((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    setSortReviewsBtn(!sortReviewsBtn);
+    refetch();
   };
 
   // Handle form submission
@@ -209,12 +227,31 @@ const AllMeals = () => {
                 <thead className="bg-gray-300">
                   <tr className="text-left">
                     <th className="p-3">Meal Name</th>
-                    <th className="p-3">
-                      <p>Likes</p>
+                    <th
+                      onClick={handleSortLikes}
+                      className="p-3 cursor-pointer">
+                      <p className="flex items-center gap-2">
+                        Likes
+                        {sortLikesBtn ? (
+                          <IoIosArrowUp size={16} />
+                        ) : (
+                          <IoIosArrowDown size={16} />
+                        )}
+                      </p>
                     </th>
-                    <th className="p-3">
-                      <p>Reviews</p>
+                    <th
+                      onClick={handleSortReviews}
+                      className="p-3 cursor-pointer">
+                      <p className="flex items-center gap-2">
+                        Reviews
+                        {sortReviewsBtn ? (
+                          <IoIosArrowUp size={16} />
+                        ) : (
+                          <IoIosArrowDown size={16} />
+                        )}
+                      </p>
                     </th>
+
                     <th className="p-3">
                       <p>Distibutor Name</p>
                     </th>
