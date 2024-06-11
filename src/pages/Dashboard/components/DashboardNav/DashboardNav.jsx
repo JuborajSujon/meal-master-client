@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import logo from "../../../../assets/logo.png";
 import useAuth from "../../../../hooks/useAuth";
 import useUser from "../../../../hooks/useUser";
-import { MdNotificationsActive } from "react-icons/md";
 import useCart from "../../../../hooks/useCart";
 
 const DashboardNav = ({ handleToggle }) => {
@@ -52,42 +51,23 @@ const DashboardNav = ({ handleToggle }) => {
         <div className="flex-1 dark:bg-slate-700">
           <div className="navbar ">
             {/* Search Bar input field */}
-            <div className="flex-1">
-              <label className="input input-bordered md:flex items-center gap-2 hidden">
-                <input type="text" className="grow" placeholder="Search" />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  className="w-4 h-4 opacity-70">
-                  <path
-                    fillRule="evenodd"
-                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </label>
-            </div>
+            <div className="flex-1"></div>
 
             {/* Right Side */}
-            <div className="flex-none space-x-3">
+            <div className="flex-none space-x-4">
               {/* Add to Cart Page */}
-              <div className="indicator">
-                <PiShoppingCartBold size={24} />
+              <Link to="/dashboard/requested-meals">
+                <div className="indicator">
+                  <PiShoppingCartBold
+                    className="h-6 w-6 dark:text-slate-300"
+                    size={24}
+                  />
 
-                <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
-                  {isLoading ? "0" : carts?.length}
-                </span>
-              </div>
-
-              {/* Notification Dropdown */}
-              <div className="indicator">
-                <MdNotificationsActive size={24} />
-
-                <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
-                  8
-                </span>
-              </div>
+                  <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
+                    {isLoading ? "0" : carts?.length}
+                  </span>
+                </div>
+              </Link>
 
               {/* User Profile menu with Dropdown */}
               <div className="dropdown dropdown-end">
@@ -100,9 +80,13 @@ const DashboardNav = ({ handleToggle }) => {
                       <img alt="profile image" src={userData?.photo} />
                     </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold">{userData?.name}</p>
-                    <small>{userData?.badge}</small>
+                  <div className="ml-2">
+                    <p className="text-sm font-semibold dark:text-slate-300">
+                      {userData?.name}
+                    </p>
+                    <small className="text-xs dark:text-slate-300">
+                      {userData?.badge}
+                    </small>
                   </div>
                 </div>
                 <ul

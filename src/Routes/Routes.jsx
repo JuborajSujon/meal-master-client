@@ -89,87 +89,123 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <DashboardHome />,
+        element: (
+          <PrivateRoute>
+            <DashboardHome />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/admin-profile",
         element: (
-          <AdminRoute>
-            <UserProfile />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <UserProfile />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/manage-users",
         element: (
-          <AdminRoute>
-            <ManageUsers />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageUsers />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/add-meal",
         element: (
-          <AdminRoute>
-            <AddMeal />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <AddMeal />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/all-meals",
         element: (
-          <AdminRoute>
-            <AllMeals />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <AllMeals />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/all-reviews",
         element: (
-          <AdminRoute>
-            <AllReviews />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <AllReviews />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/serve-meals",
         element: (
-          <AdminRoute>
-            <ServeMeals />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <ServeMeals />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/upcoming-meals",
         element: (
-          <AdminRoute>
-            <ManageUpcomingMeal />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageUpcomingMeal />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/upcoming-meal-details/:mealId",
         element: (
-          <AdminRoute>
-            <UpcomingMealsDetails />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <UpcomingMealsDetails />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/user-profile",
-        element: <UserProfile />,
+        element: (
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/requested-meals",
-        element: <RequestedMeals />,
+        element: (
+          <PrivateRoute>
+            <RequestedMeals />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/user-reviews",
-        element: <UserReviews />,
+        element: (
+          <PrivateRoute>
+            <UserReviews />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/payment-history",
-        element: <PaymentHistory />,
+        element: (
+          <PrivateRoute>
+            <PaymentHistory />
+          </PrivateRoute>
+        ),
       },
     ],
   },

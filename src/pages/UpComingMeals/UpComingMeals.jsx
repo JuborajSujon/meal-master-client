@@ -5,14 +5,9 @@ import UpComingMealCard from "../../components/UpComingMealCard/UpComingMealCard
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useUpcomingMeal from "../../hooks/useUpcomingMeal";
 import Loading from "../../components/Loading/Loading";
-import useUser from "../../hooks/useUser";
 
 export default function UpComingMeals() {
-  //  ensure that the new page starts at the top when navigating
   useScrollToTop();
-
-  // current user data get from db
-  const [userData] = useUser();
 
   // data fetching from db
   const [upcomingMeals, loading, refetch] = useUpcomingMeal();
@@ -45,7 +40,6 @@ export default function UpComingMeals() {
           <UpComingMealCard
             key={upcomingMeal._id}
             upcomingMeal={upcomingMeal}
-            userData={userData}
             refetch={refetch}
           />
         ))}

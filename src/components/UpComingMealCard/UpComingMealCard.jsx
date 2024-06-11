@@ -2,12 +2,14 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import useUser from "./../../hooks/useUser";
 
-export default function UpComingMealCard({ upcomingMeal, userData, refetch }) {
+export default function UpComingMealCard({ upcomingMeal, refetch }) {
   const [liked, setLiked] = useState(false);
-  const [like, setLike] = useState(false);
+  const [button, setbutton] = useState(true);
   const axiosSecure = useAxiosSecure();
-  const { _id: userId, name, email, photo, badge } = userData;
+  const [userData] = useUser();
+  const { name, email, photo, _id: userId, badge } = userData || {};
 
   const {
     _id,
@@ -21,13 +23,13 @@ export default function UpComingMealCard({ upcomingMeal, userData, refetch }) {
   } = upcomingMeal || {};
 
   useEffect(() => {
-    if (!userData?.badge === "bronze") setLike(true);
-  }, [liked, userData?.badge]);
+    if (badge === "silver" || badge === "Gold" || badge === "Platinum")
+      setbutton(false);
+  }, [liked, badge]);
 
   // handle like button
   const handleLike = async () => {
     setLiked(!liked);
-
     try {
       const likeObj = {
         meal_id: _id,
@@ -98,8 +100,9 @@ export default function UpComingMealCard({ upcomingMeal, userData, refetch }) {
                 <span className="text-blue-600 text-xl mr-2">
                   {likes_count}
                 </span>
-                <button disabled={liked} onClick={handleLike}>
-                  {like ? "Unlike" : "Like"}
+                <button disabled={button} onClick={handleLike}>
+                  {/* {like ? "Like" : "Unlike"} */}
+                  button
                 </button>
               </li>
             </ul>

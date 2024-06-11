@@ -68,6 +68,25 @@ export default function ManageUsers() {
       toast.error(err.message);
     }
   };
+
+  // handle remove admin
+  const handleRemoveAdmin = async (email) => {
+    if (!email) return;
+
+    // remove admin
+    try {
+      const res = await axiosSecure.patch(`/users/admin/${email}`, {
+        role: "verified",
+      });
+      if (res.data.modifiedCount) {
+        toast.success("Remove admin successful");
+        setIsUserAdmin(!isUserAdmin);
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
   return (
     <div className="relative h-full">
       <Helmet>
@@ -126,24 +145,29 @@ export default function ManageUsers() {
                     <tr
                       key={user._id}
                       className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                      <td className="p-3">
+                      <td className="p-3 text-nowrap">
                         <p>{user.name}</p>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 text-nowrap">
                         <p>{user.email}</p>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 text-nowrap">
                         <p>{user.role}</p>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 text-nowrap">
                         <p>{user.badge}</p>
                       </td>
 
-                      <td className="p-3">
+                      <td className="p-3 flex gap-2">
                         <button
                           onClick={() => handleMakeAdmin(user.email)}
-                          className="px-3 py-1 font-semibold rounded-md bg-amber-600 text-gray-50">
+                          className="px-3 py-1 font-semibold text-nowrap rounded-md bg-amber-600 text-gray-50">
                           Make Admin
+                        </button>
+                        <button
+                          onClick={() => handleRemoveAdmin(user.email)}
+                          className="px-3 py-1 font-semibold text-nowrap rounded-md bg-red-600 text-gray-50">
+                          Remove Admin
                         </button>
                       </td>
                     </tr>

@@ -1,24 +1,62 @@
 import { Helmet } from "react-helmet-async";
 import Breadcrumbs from "../../../../components/Breadcrumbs/Breadcrumbs";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
-import { BiSolidDetail } from "react-icons/bi";
-import { FaEdit } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
+import { BiTrash } from "react-icons/bi";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export default function PaymentHistory() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: paymentHistory = [], isLoading } = useQuery({
+  const { data: paymentHistory = [], refetch } = useQuery({
     queryKey: ["paymentHistory", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/payments?email=${user?.email}`);
       return res.data;
     },
   });
+
+  const handleDelete = async (id) => {
+    if (!id) return;
+
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await axiosSecure.delete(`/payments/${id}`);
+          if (res.data.deletedCount > 0) {
+            const userbadge = {
+              badge: "bronze",
+            };
+
+            const res = await axiosSecure.patch(
+              `/user/${user?.email}`,
+              userbadge
+            );
+            if (res.data.modifiedCount > 0) {
+              toast.success("Payment deleted successfully", {
+                autoClose: 1500,
+              });
+              refetch();
+            }
+          }
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -48,6 +86,7 @@ export default function PaymentHistory() {
                   <th className="p-3">Duration</th>
                   <th className="p-3 ">Email</th>
                   <th className="p-3 ">Transiction Id</th>
+                  <th className="p-3">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -80,6 +119,13 @@ export default function PaymentHistory() {
                     </td>
                     <td className="p-3">
                       <p>{payment.transactionId}</p>
+                    </td>
+                    <td className="p-3">
+                      <button
+                        onClick={() => handleDelete(payment._id)}
+                        className="text-blue-500 bg-red-500 p-1 rounded">
+                        <BiTrash className="w-5 h-5 text-white" size={20} />
+                      </button>
                     </td>
                   </tr>
                 ))}

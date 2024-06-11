@@ -17,11 +17,13 @@ const CheckoutForm = ({ payment }) => {
   const { total_price, service_name, _id, benefits, duration } = payment;
 
   useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent", { price: total_price })
-      .then((res) => {
-        setClientSecret(res.data.clientSecret);
-      });
+    if (total_price > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: total_price })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        });
+    }
   }, [axiosSecure, payment, total_price]);
 
   const handleSubmit = async (e) => {
