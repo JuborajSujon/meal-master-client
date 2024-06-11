@@ -105,6 +105,13 @@ function AllReviews() {
                 </tr>
               </thead>
               <tbody>
+                {AllReviews?.result?.length === 0 && (
+                  <tr>
+                    <td colSpan={4} className="text-center p-3">
+                      No reviews found
+                    </td>
+                  </tr>
+                )}
                 {AllReviews?.result?.map((review, index) => (
                   <tr
                     key={index}

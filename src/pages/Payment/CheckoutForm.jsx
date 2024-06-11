@@ -62,11 +62,15 @@ const CheckoutForm = ({ payment }) => {
       });
 
     if (confirmError) {
-      toast.error(confirmError.message);
+      toast.error(confirmError.message, {
+        autoClose: 1500,
+      });
     } else {
       if (paymentIntent.status === "succeeded") {
         setTransactionId(paymentIntent.id);
-        toast.success("Payment Successful");
+        toast.success("Payment Successful", {
+          autoClose: 1500,
+        });
 
         // update payment status
         const payment = {
@@ -85,7 +89,9 @@ const CheckoutForm = ({ payment }) => {
           .post("/payments", payment)
           .then((res) => {
             if (res.data.insertedId) {
-              toast.success("Send Payment info to server Successfull");
+              toast.success("Send Payment info to server Successfull", {
+                autoClose: 1500,
+              });
             }
           })
           .catch((err) => {

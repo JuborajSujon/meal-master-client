@@ -122,7 +122,13 @@ const ManageUpcomingMeal = () => {
               </thead>
               <tbody>
                 {/* isloading*/}
-                {isLoading && <p>No Upcoming Meal</p>}
+                {sortUpcomingMeals?.result === 0 && (
+                  <tr>
+                    <td colSpan={4} className="text-center p-3">
+                      No reviews found
+                    </td>
+                  </tr>
+                )}
 
                 {sortUpcomingMeals?.result?.map((upcomingMeal) => (
                   <tr

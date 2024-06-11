@@ -51,7 +51,13 @@ export default function PaymentHistory() {
                 </tr>
               </thead>
               <tbody>
-                {paymentHistory.length === 0 && <p>No Payment History</p>}
+                {paymentHistory.length === 0 && (
+                  <tr>
+                    <td colSpan={4} className="text-center p-3">
+                      No data found
+                    </td>
+                  </tr>
+                )}
 
                 {paymentHistory.map((payment) => (
                   <tr

@@ -1,28 +1,52 @@
 import { Helmet } from "react-helmet-async";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import SectionTitle from "./../../components/SectionTitle/SectionTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MealCard from "../../components/MealCard/MealCard";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import useScrollToTop from "./../../hooks/useScrollToTop";
-import useMenu from "../../hooks/useMenu";
-import Loading from "../../components/Loading/Loading";
+import useAxiosPublic from "./../../hooks/useAxiosPublic";
 
 export default function Meals() {
+  useScrollToTop();
   const [items, setItems] = useState(Array.from({ length: 6 }));
   const [hasMore, setHasMore] = useState(true);
-  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [priceRange, setPriceRange] = useState([0, 10]);
+
+  const [meals, setMeals] = useState([]);
+  const [search, setSearch] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [category, setCategory] = useState("");
   const [minPrice, maxPrice] = priceRange;
+  const [totalMeals, setTotalMeals] = useState(0);
 
-  const [menu, loading] = useMenu();
+  const axiosPublic = useAxiosPublic();
 
-  //  ensure that the new page starts at the top when navigating
-  useScrollToTop();
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axiosPublic("/all-menu", {
+          params: {
+            search,
+            category,
+            minPrice,
+            maxPrice,
+          },
+        });
+        setMeals(res.data.meals);
+        setTotalMeals(res.data.count);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getData();
+  }, [search, category, minPrice, maxPrice]);
 
   // handle infinite scroll
   const fetchMoreData = () => {
-    if (items.length >= 60) {
+    if (items.length >= totalMeals) {
       setHasMore(false);
       return;
     }
@@ -37,6 +61,11 @@ export default function Meals() {
     setPriceRange([0, parseInt(value)]);
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchText(searchText);
+  };
+
   return (
     <div className="px-4 py-20">
       <Helmet>
@@ -47,39 +76,56 @@ export default function Meals() {
       {/* Meals Filter Section */}
       <div className="py-6">
         <div className="lg:flex justify-between">
-          <SectionTitle
-            title="Meals"
-            subTitle="Ultimate dining experience with unlimited options"
-          />
+          <div>
+            <SectionTitle
+              title="Meals"
+              subTitle="Ultimate dining experience with unlimited options"
+            />
+            <p className="text-xl font-medium text-blue-400 ml-4">
+              Total {totalMeals} meals found
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-3 sm:items-center px-4">
             <div>
               <div className="space-y-2">
                 <p className="font-medium">Name</p>
-                <label className="input input-bordered flex border-warning items-center gap-2">
-                  <input type="text" className="grow" placeholder="Search" />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                    className="w-6 h-6 opacity-70">
-                    <path
-                      fillRule="evenodd"
-                      d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                      clipRule="evenodd"
+                <form onSubmit={handleSearch}>
+                  <label className="input input-bordered flex border-warning items-center gap-2">
+                    <input
+                      type="text"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      name="search"
+                      className="grow"
+                      placeholder="Search"
                     />
-                  </svg>
-                </label>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      className="w-6 h-6 opacity-70">
+                      <path
+                        fillRule="evenodd"
+                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </label>
+                </form>
               </div>
             </div>
             <div className="flex items-center justify-between gap-4">
               <div>
                 <div className="space-y-2">
                   <p className=" font-medium">Category</p>
-                  <select className="select text-lg select-warning w-full">
-                    <option value="all">All Meals</option>
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
+                  <select
+                    onChange={(e) => setCategory(e.target.value)}
+                    defaultValue={category}
+                    className="select text-sm select-warning min-w-32 max-w-xs w-full">
+                    <option value="">All Meals</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
                   </select>
                 </div>
               </div>
@@ -90,10 +136,10 @@ export default function Meals() {
                   <input
                     type="range"
                     min={minPrice}
-                    max="100"
+                    max="10"
                     value={maxPrice}
                     onChange={handleRangeChange}
-                    className="w-full "
+                    className="w-full max-w-xs"
                   />
                 </div>
               </div>
@@ -124,9 +170,8 @@ export default function Meals() {
             <b>Yay! You have seen it all</b>
           </p>
         }>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
-          {loading && <Loading />}
-          {menu?.map((item) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 justify-between">
+          {meals?.map((item) => (
             <MealCard item={item} key={item._id} />
           ))}
         </div>

@@ -81,29 +81,12 @@ const DashboardNav = ({ handleToggle }) => {
               </div>
 
               {/* Notification Dropdown */}
-              <div className="dropdown dropdown-end">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle">
-                  <div className="indicator">
-                    <MdNotificationsActive size={24} />
+              <div className="indicator">
+                <MdNotificationsActive size={24} />
 
-                    <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
-                      8
-                    </span>
-                  </div>
-                </div>
-                <div
-                  tabIndex={0}
-                  className="mt-3 z-[1] card card-compact dropdown-content w-64 bg-base-100 dark:bg-slate-700 shadow rounded-md">
-                  <div className="card-body">
-                    <span className="font-bold dark:text-slate-300 text-lg">
-                      8 info
-                    </span>
-                    <span className="text-info"></span>
-                  </div>
-                </div>
+                <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
+                  8
+                </span>
               </div>
 
               {/* User Profile menu with Dropdown */}
@@ -114,10 +97,7 @@ const DashboardNav = ({ handleToggle }) => {
                   className="flex items-center justify-start ">
                   <div className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
-                      <img
-                        alt="Tailwind CSS Navbar component"
-                        src={userData?.photo}
-                      />
+                      <img alt="profile image" src={userData?.photo} />
                     </div>
                   </div>
                   <div>

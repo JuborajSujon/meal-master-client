@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoIosNotifications } from "react-icons/io";
 import Logo from "../../../assets/logo.png";
 import useAuth from "./../../../hooks/useAuth";
@@ -13,7 +13,7 @@ export default function Navbar() {
   const { user, userSignOut, setUser, reload } = useAuth();
   const scrollPosition = useScrollPosition();
   const [userData, refetch] = useUser();
-  // console.log(userData);
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -27,6 +27,7 @@ export default function Navbar() {
     userSignOut()
       .then(() => {
         setUser(null);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.message);
@@ -125,16 +126,6 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end  space-x-2 mr-4">
-        <div className="indicator">
-          <Link to="/dashboard/requested-meals">
-            <FaHeart color="orange" size={24} />
-
-            <span className="badge badge-sm indicator-item dark:text-blue-500 dark:bg-white text-base">
-              {/* {isLoading ? "0" : carts?.length} */}
-            </span>
-          </Link>
-        </div>
-
         <div>
           <IoIosNotifications
             size={30}
