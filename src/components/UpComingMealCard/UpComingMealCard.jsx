@@ -4,7 +4,12 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import useUser from "./../../hooks/useUser";
 
-export default function UpComingMealCard({ upcomingMeal, refetch }) {
+export default function UpComingMealCard({
+  upcomingMeal,
+  refetch,
+  setReload,
+  reload,
+}) {
   const [liked, setLiked] = useState(false);
   const [button, setbutton] = useState(true);
   const axiosSecure = useAxiosSecure();
@@ -45,6 +50,7 @@ export default function UpComingMealCard({ upcomingMeal, refetch }) {
 
       if (result.data.acknowledged) {
         refetch();
+        setReload(!reload);
       }
     } catch (error) {
       console.log(error.message);
@@ -101,8 +107,7 @@ export default function UpComingMealCard({ upcomingMeal, refetch }) {
                   {likes_count}
                 </span>
                 <button disabled={button} onClick={handleLike}>
-                  {/* {like ? "Like" : "Unlike"} */}
-                  button
+                  {button ? "Like" : "Unlike"}
                 </button>
               </li>
             </ul>
@@ -116,4 +121,6 @@ export default function UpComingMealCard({ upcomingMeal, refetch }) {
 UpComingMealCard.propTypes = {
   upcomingMeal: PropTypes.object,
   refetch: PropTypes.func,
+  setReload: PropTypes.func,
+  reload: PropTypes.bool,
 };

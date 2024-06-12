@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading/Loading";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ManageUpcomingMeal = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -48,6 +49,22 @@ const ManageUpcomingMeal = () => {
     setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
     setSortLikes(!sortLikes);
     refetch();
+  };
+
+  const handlePublish = async (id) => {
+    try {
+      const res = await axiosSecure.patch(`/upcoming-meal/${id}`, {
+        post_status: "Published",
+      });
+      if (res.data.acknowledged === true) {
+        refetch();
+        toast.success("Upcoming meal published successfully", {
+          autoClose: 1500,
+        });
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   if (isLoading) {
@@ -117,6 +134,7 @@ const ManageUpcomingMeal = () => {
                     <p>Price</p>
                   </th>
                   <th className="p-3">Distributor</th>
+                  <th className="p-3">Status</th>
                   <th className="p-3 ">Action</th>
                 </tr>
               </thead>
@@ -146,9 +164,14 @@ const ManageUpcomingMeal = () => {
                     <td className="p-3">
                       <p>{upcomingMeal.distributor_name}</p>
                     </td>
+                    <td className="p-3">
+                      <p>{upcomingMeal.post_status}</p>
+                    </td>
 
                     <td className="p-3 flex items-center gap-3">
-                      <button className="px-3 py-1 rounded-md bg-amber-600 text-gray-50">
+                      <button
+                        onClick={() => handlePublish(upcomingMeal._id)}
+                        className="px-3 py-1 rounded-md bg-amber-600 text-gray-50">
                         Publish
                       </button>
                       <Link

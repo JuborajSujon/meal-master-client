@@ -5,9 +5,11 @@ import UpComingMealCard from "../../components/UpComingMealCard/UpComingMealCard
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useUpcomingMeal from "../../hooks/useUpcomingMeal";
 import Loading from "../../components/Loading/Loading";
+import { useState } from "react";
 
 export default function UpComingMeals() {
   useScrollToTop();
+  const [reload, setReload] = useState(false);
 
   // data fetching from db
   const [upcomingMeals, loading, refetch] = useUpcomingMeal();
@@ -41,6 +43,8 @@ export default function UpComingMeals() {
             key={upcomingMeal._id}
             upcomingMeal={upcomingMeal}
             refetch={refetch}
+            setReload={setReload}
+            reload={reload}
           />
         ))}
       </div>

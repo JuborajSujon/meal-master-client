@@ -170,6 +170,7 @@ export default function Meals() {
             <b>Yay! You have seen it all</b>
           </p>
         }>
+        {meals.length === 0 && <p className="text-center">No meal found</p>}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 justify-between">
           {meals?.map((item) => (
             <MealCard item={item} key={item._id} />
