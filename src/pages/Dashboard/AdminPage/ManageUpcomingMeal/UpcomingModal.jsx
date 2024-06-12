@@ -115,11 +115,13 @@ function UpcomingModal() {
           toast.error("Failed to add meal");
         }
       } else {
+        setSpinning(false);
         toast.error("Image upload failed, please try again", {
           autoClose: 2000,
         });
       }
     } catch (err) {
+      setSpinning(false);
       console.log(err);
       toast.error(err.message);
     }
