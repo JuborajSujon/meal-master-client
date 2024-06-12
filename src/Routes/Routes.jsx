@@ -97,13 +97,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin-profile",
-        element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <UserProfile />
-            </AdminRoute>
-          </PrivateRoute>
-        ),
+        element: <UserProfile />,
       },
       {
         path: "/dashboard/manage-users",

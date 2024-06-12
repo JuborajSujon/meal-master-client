@@ -2,11 +2,12 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
 import { Helmet } from "react-helmet-async";
 import useUser from "../../../hooks/useUser";
-import useAdminMenu from "../../../hooks/useAdminMenu";
+import useMenu from "../../../hooks/useMenu";
 
 export default function UserProfile() {
-  const [adminMenu] = useAdminMenu();
+  const [menu] = useMenu();
   const [userData] = useUser();
+
   return (
     <div>
       <Helmet>
@@ -34,7 +35,7 @@ export default function UserProfile() {
               User Email: {userData?.email}
             </p>
             {userData.role === "admin" ? (
-              <p>Number of Menu Added : {adminMenu.length}</p>
+              <p>Number of Menu Added : {menu?.length}</p>
             ) : (
               <p>Badge : {userData?.badge}</p>
             )}
