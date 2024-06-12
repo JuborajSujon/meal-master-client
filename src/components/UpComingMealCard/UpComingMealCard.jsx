@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import useUser from "./../../hooks/useUser";
+import { SlLike } from "react-icons/sl";
 
 export default function UpComingMealCard({
   upcomingMeal,
@@ -30,11 +31,10 @@ export default function UpComingMealCard({
   useEffect(() => {
     if (badge === "silver" || badge === "Gold" || badge === "Platinum")
       setbutton(false);
-  }, [liked, badge]);
+  }, [badge]);
 
   // handle like button
   const handleLike = async () => {
-    setLiked(!liked);
     try {
       const likeObj = {
         meal_id: _id,
@@ -42,7 +42,7 @@ export default function UpComingMealCard({
         name: name,
         email: email,
         photo: photo,
-        liked: liked,
+        liked: !liked,
         created_time: new Date().toISOString(),
       };
 
@@ -51,6 +51,7 @@ export default function UpComingMealCard({
       if (result.data.acknowledged) {
         refetch();
         setReload(!reload);
+        setLiked((prevLiked) => !prevLiked);
       }
     } catch (error) {
       console.log(error.message);
@@ -107,7 +108,7 @@ export default function UpComingMealCard({
                   {likes_count}
                 </span>
                 <button disabled={button} onClick={handleLike}>
-                  {button ? "Like" : "Unlike"}
+                  <SlLike className={button ? "text-red-500" : ""} size={18} />
                 </button>
               </li>
             </ul>

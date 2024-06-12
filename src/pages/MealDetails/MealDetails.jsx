@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 export default function MealDetails() {
   useScrollToTop();
   const { mealId } = useParams();
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(true);
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
