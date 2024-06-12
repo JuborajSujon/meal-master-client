@@ -2,13 +2,13 @@
 
 ### Live Site URL:
 
-Firebase Hosting : []()
+Firebase Hosting : [https://meal-master-chef.web.app/](https://meal-master-chef.web.app/)
 
-Netlify Hosting : []()
+Netlify Hosting : [https://mealmasterchef.netlify.app/](https://mealmasterchef.netlify.app/)
 
-Admin User Name : one@one.com
+**Admin User Name** : one@one.com
 
-Admin Password : 111111Aa
+**Admin Password** : 111111Aa
 
 ## Features and Characteristics:
 
