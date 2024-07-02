@@ -6,17 +6,22 @@ Firebase Hosting : [https://meal-master-chef.web.app/](https://meal-master-chef.
 
 Netlify Hosting : [https://mealmasterchef.netlify.app/](https://mealmasterchef.netlify.app/)
 
+Meal Master server side repository : [https://github.com/JuborajSujon/meal-master-server.git](https://github.com/JuborajSujon/meal-master-server.git)
+
 **Admin User Name** : one@one.com
 
 **Admin Password** : 111111Aa
 
+## Project Overview
+This project user can request meals, review, purches order, payments status and delete order and admin can added meal, manage user, manage meals, manage review, manage upcomeing meals and meals status. This project payment method intregrate with strap and user authentication handle firebase.
+
 ## Features and Characteristics:
 
-## Comprehensive Navigation:
+### Comprehensive Navigation:
 
 Easily navigate through our website with dedicated sections for Home, Meals, Upcoming Meals, Subscriptions, Error Page, Login, Register, and Purchase Confirm. Users can also access Google.
 
-## User Dashboard :
+### User Dashboard :
 
 - Users can Request Meals
 - Users can add reviews and Edit or Delete their reviews
@@ -24,7 +29,7 @@ Easily navigate through our website with dedicated sections for Home, Meals, Upc
 - Check Payment Status and delete their Orders
 - Users can view their profile.
 
-## Admin Dashboard:
+### Admin Dashboard:
 
 - Admin can view their profile with number of menu added
 - Admin can manage Users update or remove users role
@@ -33,36 +38,40 @@ Easily navigate through our website with dedicated sections for Home, Meals, Upc
 - Serve meals with status update to delivery or pending.
 - Added Upcoming Meals views and published main menu for users to order.
 
-### User Authentication:
+#### Other features:
+- **User Authentication** : Utilizing Firebase Authentication, users can securely register, sign in, and login. Additionally, they have the option to sign in with Google or GitHub for added convenience.
 
-Utilizing Firebase Authentication, users can securely register, sign in, and login. Additionally, they have the option to sign in with Google or GitHub for added convenience.
+- **Intregated MongoDB Database** : Our website is integrated with MongoDB database for seamless data storage and retrieval.
 
-### Intregated MongoDB Database:
+- **Responsive Design** : Our website is designed to be responsive across various devices, ensuring a consistent and user-friendly experience for all users.
 
-Our website is integrated with MongoDB database for seamless data storage and retrieval.
+- **Theme Selection** : Choose from a variety of themes, including light and dark mode, for a seamless and visually appealing user experience.
 
-### Responsive Design:
+- **Engaging Visuals** : Enhance user interaction with captivating animations powered by the tsparticles, animate.css, and aos npm packages.
 
-Our website is designed to be responsive across various devices, ensuring a consistent and user-friendly experience for all users.
+- **User-friendly Interface** : Our website is designed with a modern and intuitive user interface, ensuring a smooth and intuitive experience for all users.
 
-### Theme Selection:
+## Used Technology
+- **Frontend Development** : React, React DOM, React Router DOM, React Hook Form, React Icons, React Helmet Async, React Toastify, Lottie React, React Datepicker, React Loader Spinner, React Infinite Scroll Component
 
-Choose from a variety of themes, including light and dark mode, for a seamless and visually appealing user experience.
+- **User Authentication & Security** : Firebase
 
-### Engaging Visuals:
+- **Payment Processing** : @stripe/react-stripe-js, @stripe/stripe-js
 
-Enhance user interaction with captivating animations powered by the tsparticles, animate.css, and aos npm packages.
+- **UI Components & Styling** : Tailwind CSS, DaisyUI
 
-### User-friendly Interface:
+- **Development Tools** : Vite, ESLint, ESLint Plugins, PostCSS, Autoprefixer
 
-Our website is designed with a modern and intuitive user interface, ensuring a smooth and intuitive experience for all users.
+- **Charts & Data Visualization** : Recharts
+
+- **Additional Libraries** : Axios, SweetAlert2, Swiper, @tanstack/react-query
 
 ## Installation: :computer:
 
 1. Clone the repository from GitHub:
 
 ```
-git clone https://github.com/programming-hero-web-course1/b9a12-client-side-JuborajSujon
+git clone https://github.com/JuborajSujon/meal-master-client.git
 
 
 ```
@@ -70,7 +79,7 @@ git clone https://github.com/programming-hero-web-course1/b9a12-client-side-Jubo
 2. Navigate to the project directory:
 
 ```
-cd fixnexus-client
+cd meal-master-client
 ```
 
 3. Install dependencies using npm or yarn:
