@@ -6,6 +6,7 @@ import GiftCard from "../GiftCard/GiftCard";
 import TabMealCategory from "../TabMealCategory/TabMealCategory";
 import useScrollToTop from "./../../../hooks/useScrollToTop";
 import MealsCategory from "../MealsCategory/MealsCategory";
+import Contact from "../../../components/Contact/Contact";
 
 export default function Home() {
   //  ensure that the new page starts at the top when navigating
@@ -22,6 +23,7 @@ export default function Home() {
       <MealsCategory />
       <HomeAboutUs />
       <GiftCard />
+      <Contact />
     </div>
   );
 }

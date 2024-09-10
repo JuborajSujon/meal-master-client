@@ -4,7 +4,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 const GiftCard = () => {
   const [activeTab, setActiveTab] = useState("buy");
   return (
-    <div>
+    <div className="mb-12">
       <SectionTitle
         title="Gift Card"
         subTitle="Meal Master Gift Card and Redeem Gift Card"

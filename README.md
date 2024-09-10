@@ -14,7 +14,7 @@ Netlify Hosting : [https://mealmasterchef.netlify.app/](https://mealmasterchef.n
 
 ## Comprehensive Navigation:
 
-Easily navigate through our website with dedicated sections for Home, Meals, Upcoming Meals, Subscriptions, Error Page, Login, Register, and Purchase Confirm. Users can also access Google.
+Easily navigate through our website with dedicated sections for Home, Meals, Upcoming Meals, Subscriptions, Contact Us, Error Page, Login, Register, and Purchase Confirm. Users can also access Google.
 
 ## User Dashboard :
 
@@ -40,6 +40,10 @@ Utilizing Firebase Authentication, users can securely register, sign in, and log
 ### Intregated MongoDB Database:
 
 Our website is integrated with MongoDB database for seamless data storage and retrieval.
+
+### Seamless Contact Form:
+
+Integrate EmailJS with React to create a seamless contact form. With EmailJS, you can send emails directly from the client-side, streamlining our email workflow and making it easier for our users to get in touch.
 
 ### Responsive Design:
 
