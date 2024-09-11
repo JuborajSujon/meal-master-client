@@ -49,13 +49,13 @@ Easily navigate through our website with dedicated sections for Home, Meals, Upc
 
 - **Theme Selection** : Choose from a variety of themes, including light and dark mode, for a seamless and visually appealing user experience.
 
-### Seamless Contact Form:
+- **Seamless Contact Form** :
 
 Integrate EmailJS with React to create a seamless contact form. With EmailJS, you can send emails directly from the client-side, streamlining our email workflow and making it easier for our users to get in touch.
 
-### Responsive Design:
+- **Push Notification** : Send push notifications to your users with the help of Firebase Cloud Messaging.
 
-=======
+### Responsive Design:
 
 - **Engaging Visuals** : Enhance user interaction with captivating animations powered by the tsparticles, animate.css, and aos npm packages.
 

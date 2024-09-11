@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getMessaging } from "firebase/messaging";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,4 +16,5 @@ const firebaseConfig = {
 // Initialize Firebase Authentication and get a reference to the service
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+export const messaging = getMessaging(app);
 export default auth;
