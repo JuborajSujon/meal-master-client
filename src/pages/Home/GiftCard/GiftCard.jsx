@@ -12,7 +12,7 @@ const GiftCard = () => {
       <div>
         <h2 className="text-3xl lg:text-5xl font-bold leading-loose"></h2>
 
-        <div>
+        <div className="text-slate-800 ">
           <div className="max-w-3xl mx-auto py-12">
             <div className="flex justify-center mb-6">
               <button
@@ -57,7 +57,7 @@ const GiftCard = () => {
                         min="25"
                         max="250"
                         id="amount"
-                        className="w-full px-4 py-2 border rounded-lg"
+                        className="w-full px-4 py-2 border rounded-lg bg-white"
                         placeholder="Enter amount"
                       />
                     </div>
@@ -70,7 +70,7 @@ const GiftCard = () => {
                       <input
                         type="email"
                         id="recipient"
-                        className="w-full px-4 py-2 border rounded-lg"
+                        className="w-full px-4 py-2 border rounded-lg bg-white"
                         placeholder="Enter recipient's email"
                       />
                     </div>
@@ -82,7 +82,7 @@ const GiftCard = () => {
                       </label>
                       <textarea
                         id="message"
-                        className="w-full px-4 py-2 border rounded-lg"
+                        className="w-full px-4 py-2 border rounded-lg bg-white"
                         placeholder="Enter a message"
                         rows="4"></textarea>
                     </div>
@@ -131,7 +131,7 @@ const GiftCard = () => {
         </div>
 
         <div className="divider"></div>
-        <div className="flex gap-3 text-xl">
+        <div className="flex gap-3 text-xl text-slate-800 dark:text-slate-300">
           <p>
             SKU: <span className="text-orange-400">N/A</span>
           </p>
