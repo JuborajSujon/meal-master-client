@@ -12,13 +12,13 @@ function TabMealCategory() {
   let borderColor = "";
 
   if (tabIndex === 0) {
-    borderColor = "border-red-500";
+    borderColor = "border-red-500 !bg-slate-800";
   } else if (tabIndex === 1) {
-    borderColor = "border-red-500";
+    borderColor = "border-red-500 !bg-slate-800";
   } else if (tabIndex === 2) {
-    borderColor = "border-red-500";
+    borderColor = "border-red-500 !bg-slate-800";
   } else if (tabIndex === 3) {
-    borderColor = "border-red-500";
+    borderColor = "border-red-500 !bg-slate-800";
   }
 
   const [menu, loading] = useMenu();
@@ -54,19 +54,19 @@ function TabMealCategory() {
             onSelect={(index) => setTabIndex(index)}>
             <TabList className="text-lg font-semibold flex justify-center items-center gap-4 pt-6 pb-16">
               <Tab
-                className={`border-b-[6px] text-slate-800 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
+                className={`border-b-[6px] text-slate-800 dark:text-slate-300 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
                 Breakfast
               </Tab>
               <Tab
-                className={`border-b-[6px] text-slate-800 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
+                className={`border-b-[6px] text-slate-800 dark:text-slate-300 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
                 Lunch
               </Tab>
               <Tab
-                className={`border-b-[6px] text-slate-800 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
+                className={`border-b-[6px] text-slate-800 dark:text-slate-300 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
                 Dinner
               </Tab>
               <Tab
-                className={`border-b-[6px] text-slate-800 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
+                className={`border-b-[6px] text-slate-800 dark:text-slate-300 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
                 All Meals
               </Tab>
             </TabList>
