@@ -79,112 +79,128 @@ const Sidebar = ({ handleToggle, isActive }) => {
                     to="/dashboard"
                     end
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <FaHome className="w-5 h-5" />
+                    <FaHome className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">Dashboard Home</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      Dashboard Home
+                    </span>
                   </NavLink>
                   <NavLink
                     to="admin-profile"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <FaUser className="w-5 h-5" />
+                    <FaUser className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">Admin Profile</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      Admin Profile
+                    </span>
                   </NavLink>
 
                   <NavLink
                     to="manage-users"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <MdManageAccounts className="w-6 h-7" />
+                    <MdManageAccounts className="w-6 h-7 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">Manage Users</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      Manage Users
+                    </span>
                   </NavLink>
 
                   <NavLink
                     to="add-meal"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <MdFormatListBulletedAdd className="w-5 h-5" />
+                    <MdFormatListBulletedAdd className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">Add Meal</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      Add Meal
+                    </span>
                   </NavLink>
 
                   <NavLink
                     to="all-meals"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <FaList className="w-5 h-5" />
+                    <FaList className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">All Meals</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      All Meals
+                    </span>
                   </NavLink>
 
                   <NavLink
                     to="all-reviews"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <GoCodeReview className="w-5 h-5" />
+                    <GoCodeReview className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">All Reviews</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      All Reviews
+                    </span>
                   </NavLink>
 
                   <NavLink
                     to="serve-meals"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <GiCook className="w-5 h-5" />
+                    <GiCook className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">Serve Meals</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      Serve Meals
+                    </span>
                   </NavLink>
 
                   <NavLink
                     to="upcoming-meals"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <GiCampCookingPot className="w-5 h-5" />
+                    <GiCampCookingPot className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">Upcoming Meals</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      Upcoming Meals
+                    </span>
                   </NavLink>
                 </nav>
               </>
@@ -194,57 +210,65 @@ const Sidebar = ({ handleToggle, isActive }) => {
                   <NavLink
                     to="user-profile"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <FaUser className="w-5 h-5" />
+                    <FaUser className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">My Profile</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      My Profile
+                    </span>
                   </NavLink>
 
                   <NavLink
                     to="requested-meals"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <IoGitPullRequestSharp className="w-6 h-7" />
+                    <IoGitPullRequestSharp className="w-6 h-7 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">Requested Meals</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      Requested Meals
+                    </span>
                   </NavLink>
 
                   <NavLink
                     to="user-reviews"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <GoCodeReview className="w-5 h-5" />
+                    <GoCodeReview className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">My Reviews</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      My Reviews
+                    </span>
                   </NavLink>
 
                   <NavLink
                     to="payment-history"
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700  dark:text-slate-300 ${
+                      `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-black dark:text-slate-300 group ${
                         isActive
                           ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
-                    <FaIdCard className="w-5 h-5" />
+                    <FaIdCard className="w-5 h-5 group-hover:text-slate-800" />
 
-                    <span className="mx-4 font-medium">Payment History</span>
+                    <span className="mx-4 font-medium group-hover:text-slate-800">
+                      Payment History
+                    </span>
                   </NavLink>
                 </nav>
               </>
