@@ -20,18 +20,21 @@ export default function MealCard({ item }) {
                  dark:text-slate-200 dark:hover:text-orange-500">
             {meal_title}
           </h3>
-          <p>
-            <span className="font-semibold">Category : </span>
+          <p className="text-slate-800 dark:text-slate-300">
+            <span className="font-semibold ">Category : </span>
             {meal_category}
           </p>
         </div>
         <ul className=" flex justify-between items-center list-none">
           <li>
             <p className="text-lg dark:text-slate-300 font-medium">
-              <span className="text-slate-400 dark:text-slate-300 mr-2">
+              <span className="text-slate-600 dark:text-slate-300 mr-2">
                 Price:
               </span>
-              $<span className="font-chakraPetch">{price}</span>
+              $
+              <span className="font-chakraPetch text-slate-800 dark:text-slate-300">
+                {price}
+              </span>
             </p>
           </li>
 
@@ -40,7 +43,9 @@ export default function MealCard({ item }) {
               <li
                 className="inline text-slate-900 
               dark:text-slate-300 ">
-                <span className="text-slate-400 mr-2">Rating:</span>
+                <span className="text-slate-600 mr-2 dark:text-slate-300">
+                  Rating:
+                </span>
                 <span className="font-chakraPetch">
                   {rating?.averageRating || 0.0}
                 </span>
