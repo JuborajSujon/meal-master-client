@@ -2,10 +2,10 @@ import { Helmet } from "react-helmet-async";
 import useUser from "../../../hooks/useUser";
 import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import SimpleLineChart from "./SimpleLineChart";
 
 const DashboardHome = () => {
   const [userData] = useUser();
+  console.log(userData);
   return (
     <div>
       <Helmet>
@@ -67,7 +67,7 @@ const DashboardHome = () => {
             <div className="stat-figure text-secondary">
               <div className="avatar online">
                 <div className="w-16 rounded-full">
-                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                  <img src={userData?.photo} />
                 </div>
               </div>
             </div>
@@ -122,7 +122,7 @@ const DashboardHome = () => {
               <div className="stat-figure text-secondary">
                 <div className="avatar online">
                   <div className="w-16 rounded-full">
-                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    <img src={userData?.photo} />
                   </div>
                 </div>
               </div>
