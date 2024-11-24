@@ -85,12 +85,12 @@ export default function Meals() {
               Total {totalMeals} meals found
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 sm:items-center px-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:items-center px-4 text-slate-800 dark:text-slate-300">
             <div>
               <div className="space-y-2">
                 <p className="font-medium">Name</p>
                 <form onSubmit={handleSearch}>
-                  <label className="input input-bordered flex border-warning items-center gap-2">
+                  <label className="input input-bordered flex border-warning items-center gap-2 bg-white">
                     <input
                       type="text"
                       value={search}
@@ -121,7 +121,7 @@ export default function Meals() {
                   <select
                     onChange={(e) => setCategory(e.target.value)}
                     defaultValue={category}
-                    className="select text-sm select-warning min-w-32 max-w-xs w-full">
+                    className="select text-sm select-warning min-w-32 max-w-xs w-full bg-white">
                     <option value="">All Meals</option>
                     <option value="Breakfast">Breakfast</option>
                     <option value="Lunch">Lunch</option>
