@@ -11,7 +11,7 @@ const Dashboard = () => {
     setActive(!isActive);
   };
   return (
-    <div className="h-screen flex max-w-[1540px] mx-auto font-poppins">
+    <div className="h-screen flex max-w-[1540px] mx-auto font-poppins bg-white dark:bg-slate-900">
       {/* sider bar */}
       <div className="relative">
         <Sidebar handleToggle={handleToggle} isActive={isActive} />
