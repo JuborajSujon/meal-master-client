@@ -11,7 +11,7 @@ export default function Subscribe() {
             <input
               type="text"
               placeholder="example@email.com"
-              className="w-3/5 p-3 rounded-l-lg sm:w-2/3 border border-gray-300"
+              className="w-3/5 p-3 rounded-l-lg sm:w-2/3 border border-gray-300 bg-white"
             />
             <button
               type="button"
