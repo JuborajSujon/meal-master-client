@@ -5,7 +5,7 @@ import ThemeController from "../components/ThemeController/ThemeController";
 
 export default function Main() {
   return (
-    <div className="font-poppins">
+    <div className="font-poppins bg-white">
       <Navbar />
       <div className="dark:bg-slate-800 min-h-[calc(100vh-110px)] overflow-x-hidden text-white">
         <Outlet />
