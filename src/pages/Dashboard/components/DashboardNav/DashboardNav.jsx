@@ -91,16 +91,18 @@ const DashboardNav = ({ handleToggle }) => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-md dark:bg-slate-700 dark:text-slate-300 w-64">
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-md dark:bg-slate-700 dark:text-slate-300 w-64">
                   <li>
-                    <Link to="/" className="hover:bg-orange-100 rounded-md">
+                    <Link
+                      to="/"
+                      className="hover:bg-orange-100 hover:text-slate-800 rounded-md">
                       Home
                     </Link>
                   </li>
                   <li>
                     <Link
                       to="/dashboard/user-profile"
-                      className="hover:bg-orange-100 rounded-md">
+                      className="hover:bg-orange-100 hover:text-slate-800 rounded-md">
                       Profile
                     </Link>
                   </li>
@@ -108,7 +110,7 @@ const DashboardNav = ({ handleToggle }) => {
                   <li>
                     <button
                       onClick={handleLogout}
-                      className="hover:bg-orange-100 rounded-md">
+                      className="hover:bg-orange-100 hover:text-slate-800 rounded-md">
                       Logout
                     </button>
                   </li>
