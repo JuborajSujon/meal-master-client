@@ -5,7 +5,7 @@ import Subscribe from "../../../components/Subscribe/Subscribe";
 export default function Footer() {
   return (
     <div>
-      <footer className="p-6 dark:bg-slate-800 dark:text-slate-300 text-base">
+      <footer className="p-6 dark:bg-slate-800 dark:text-slate-300 text-slate-800 text-base">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-6">
           <div className="lg:col-span-4">
             <FooterLink />
