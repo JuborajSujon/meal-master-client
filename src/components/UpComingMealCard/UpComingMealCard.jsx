@@ -60,7 +60,7 @@ export default function UpComingMealCard({
   };
 
   return (
-    <div className="group rounded-lg bg-white dark:bg-slate-900 shadow hover:shadow-md dark:hover:shadow-md dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden  m-3 flex flex-col max-w-sm">
+    <div className="group rounded-lg bg-white dark:bg-slate-900 shadow hover:shadow-md dark:hover:shadow-md text-slate-800 dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden  m-3 flex flex-col max-w-sm">
       <div className="relative h-64">
         <img
           className="w-full h-full object-cover group-hover:scale-105 duration-300"
@@ -94,7 +94,7 @@ export default function UpComingMealCard({
         <ul className=" flex justify-between items-center list-none">
           <li>
             <p className="text-lg mt-4 dark:text-slate-300 font-medium">
-              <span className="text-slate-400 dark:text-slate-300 mr-2">
+              <span className="text-slate-600 dark:text-slate-300 mr-2">
                 Price:
               </span>
               $<span className="">{price}</span>
