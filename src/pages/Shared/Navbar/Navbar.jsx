@@ -96,7 +96,7 @@ export default function Navbar() {
             className="btn btn-ghost min-h-9 h-9 px-2  md:hidden hover:bg-orange-400 hover:text-slate-900">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-6 w-6 text-white"
               fill="none"
               viewBox="2 2 20 20"
               stroke="currentColor">
@@ -110,7 +110,7 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-md w-52 space-y-2">
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-md w-52 space-y-2">
             {navList}
           </ul>
         </div>
@@ -163,14 +163,14 @@ export default function Navbar() {
                 <li>
                   <Link
                     to="/dashboard"
-                    className="btn btn-ghost border border-orange-400 hover:bg-orange-500 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
+                    className="btn btn-ghost border border-orange-400 hover:bg-orange-500 hover:text-slate-900 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
                     Dashboard
                   </Link>
                 </li>
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="btn btn-ghost border border-orange-400 hover:bg-orange-500 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
+                    className="btn btn-ghost border border-orange-400 hover:bg-orange-500 hover:text-slate-900 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
                     Logout
                   </button>
                 </li>
