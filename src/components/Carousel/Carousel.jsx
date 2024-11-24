@@ -21,7 +21,7 @@ export default function Carousel() {
             <input
               type="text"
               placeholder=""
-              className="w-3/5 p-3 rounded-l-lg sm:w-2/3 border border-gray-300 "
+              className="w-3/5 p-3 rounded-l-lg sm:w-2/3 border border-gray-300 bg-white"
             />
 
             <button
