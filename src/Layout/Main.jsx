@@ -7,7 +7,7 @@ export default function Main() {
   return (
     <div className="font-poppins">
       <Navbar />
-      <div className="dark:bg-slate-800 min-h-[calc(100vh-110px)] overflow-x-hidden">
+      <div className="dark:bg-slate-800 min-h-[calc(100vh-110px)] overflow-x-hidden text-white">
         <Outlet />
         <ThemeController />
       </div>
