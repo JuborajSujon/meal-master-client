@@ -16,18 +16,18 @@ export default function MealCard({ item }) {
       <div className="p-6 flex-grow  flex flex-col justify-between">
         <div className="pb-4">
           <h3
-            className="text-xl font-medium text-slate-900
+            className="text-lg sm:text-xl font-medium text-slate-900
                  dark:text-slate-200 dark:hover:text-orange-500">
             {meal_title}
           </h3>
-          <p className="text-slate-800 dark:text-slate-300">
+          <p className="text-slate-800 dark:text-slate-300 text-sm sm:text-base">
             <span className="font-semibold ">Category : </span>
             {meal_category}
           </p>
         </div>
         <ul className=" flex justify-between items-center list-none">
           <li>
-            <p className="text-lg dark:text-slate-300 font-medium">
+            <p className="text-base sm:text-lg dark:text-slate-300 font-medium">
               <span className="text-slate-600 dark:text-slate-300 mr-2">
                 Price:
               </span>
@@ -39,7 +39,7 @@ export default function MealCard({ item }) {
           </li>
 
           <li>
-            <ul className="text-lg font-medium  list-none">
+            <ul className="text-base sm:text-lg font-medium  list-none">
               <li
                 className="inline text-slate-900 
               dark:text-slate-300 ">
@@ -57,7 +57,7 @@ export default function MealCard({ item }) {
         <div className=" mt-4">
           <Link
             to={`/meal-details/${_id}`}
-            className="btn text-base bg-orange-400 hover:bg-orange-500 border-orange-400 hover:orange-yellow-500 text-slate-900 rounded-md ">
+            className="btn text-sm sm:text-base h-8 min-h-8 sm:h-10 sm:min-h-10 bg-orange-400 hover:bg-orange-500 border-orange-400 hover:orange-yellow-500 text-slate-900 rounded-md ">
             View Details
           </Link>
         </div>
