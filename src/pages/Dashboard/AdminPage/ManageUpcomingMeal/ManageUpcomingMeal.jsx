@@ -224,7 +224,7 @@ const ManageUpcomingMeal = () => {
               currentPage === btnNum
                 ? "bg-blue-500 text-white"
                 : "bg-orange-400"
-            } px-4 py-2 mx-1 transition-colors duration-300 transform  rounded-md sm:inline hover:bg-blue-500  hover:text-white`}>
+            } px-4 py-2 mx-1 transition-colors duration-300 transform text-black rounded-md sm:inline hover:bg-blue-500  hover:text-white`}>
             {btnNum}
           </button>
         ))}
