@@ -52,21 +52,21 @@ function TabMealCategory() {
             className={`max-w-full mx-auto`}
             defaultIndex={tabIndex}
             onSelect={(index) => setTabIndex(index)}>
-            <TabList className="text-lg font-semibold flex justify-center items-center gap-4 pt-6 pb-16">
+            <TabList className="text-xs sm:text-lg font-semibold flex justify-center items-center gap-1 sm:gap-4 pt-6 pb-16">
               <Tab
-                className={`border-b-[6px] text-slate-800 dark:text-slate-400 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
+                className={`border-b-[6px] text-slate-800 dark:text-slate-400 rounded-b-lg px-1 sm:px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
                 Breakfast
               </Tab>
               <Tab
-                className={`border-b-[6px] text-slate-800 dark:text-slate-400 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
+                className={`border-b-[6px] text-slate-800 dark:text-slate-400 rounded-b-lg px-1 sm:px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
                 Lunch
               </Tab>
               <Tab
-                className={`border-b-[6px] text-slate-800 dark:text-slate-400 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
+                className={`border-b-[6px] text-slate-800 dark:text-slate-400 rounded-b-lg px-1 sm:px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
                 Dinner
               </Tab>
               <Tab
-                className={`border-b-[6px] text-slate-800 dark:text-slate-400 rounded-b-lg px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
+                className={`border-b-[6px] text-slate-800 dark:text-slate-400 rounded-b-lg px-1 sm:px-2 py-1.5 focus-visible:outline-none ${borderColor}`}>
                 All Meals
               </Tab>
             </TabList>
