@@ -9,15 +9,15 @@ export default function Carousel() {
     <div className="relative">
       <div className="h-[80vh] bg-slate-800/70 absolute inset-0 z-10">
         <div className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-4xl mt-16">
-          <h1 className="text-4xl font-bold leading-none sm:text-5xl text-white">
+          <h1 className="text-2xl md:text-4xl font-bold leading-none text-white">
             Streamline Your
             <span className="text-amber-600"> Hostel Dining</span> Experience
           </h1>
-          <p className="px-8 mt-8 mb-12 text-lg text-white">
+          <p className="px-8 mt-8 mb-12 text-sm sm:text-lg text-white">
             Efficient meal management and insightful reviews at your fingertips
             with MealMaster.
           </p>
-          <div className="flex flex-row max-w-sm relative ">
+          <div className="flex h-8 md:h-12 flex-row max-w-sm relative ">
             <input
               type="text"
               placeholder=""
