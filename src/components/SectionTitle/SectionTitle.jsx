@@ -8,7 +8,7 @@ export default function SectionTitle({ title, subTitle }) {
           {title}
         </h3>
       </div>
-      <h3 className="text-2xl font-medium text-slate-900 dark:text-slate-300 ">
+      <h3 className="text-lg sm:text-2xl font-medium text-slate-900 dark:text-slate-300 ">
         {subTitle}
       </h3>
     </div>
