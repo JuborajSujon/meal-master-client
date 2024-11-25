@@ -93,10 +93,10 @@ export default function Navbar() {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost min-h-9 h-9 px-2  md:hidden hover:bg-orange-400 hover:text-slate-900">
+            className="btn btn-ghost min-h-9 h-9 px-2  md:hidden  hover:bg-orange-400 hover:text-slate-900">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
+              className="h-6 w-6 text-slate-800 dark:text-white"
               fill="none"
               viewBox="2 2 20 20"
               stroke="currentColor">
@@ -110,14 +110,14 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-md w-52 space-y-2">
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-600 rounded-md w-52 space-y-2">
             {navList}
           </ul>
         </div>
         <Link
           to={"/"}
-          className="btn btn-ghost hover:bg-slate-800 bg-stone-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl italic font-bold  min-h-10 h-12 md:ml-4">
-          <img className="w-28" src={Logo} alt="logo" />
+          className="btn btn-ghost hover:bg-slate-800 bg-stone-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl italic font-bold  min-h-10 h-10 md:ml-4">
+          <img className="w-20 sm:w-28" src={Logo} alt="logo" />
         </Link>
       </div>
       <div className="navbar-center hidden md:flex">
@@ -126,7 +126,7 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end  space-x-2 mr-4">
-        <div>
+        <div className="hidden sm:flex">
           <IoIosNotifications
             size={30}
             className="cursor-pointer text-orange-400 dark:text-orange-500  hover:text-orange-700 dark:hover:text-orange-700"
