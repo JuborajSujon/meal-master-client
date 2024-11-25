@@ -33,7 +33,7 @@ function Contact() {
         <SectionTitle title="Contact" subTitle="Get in touch" />
 
         {/* =========== DESCCRIPTION =========== */}
-        <p className="mt-2 ml-4 leading-7 text-base text-zinc-600 dark:text-zinc-300 font-light mb-6">
+        <p className="mt-2 ml-4 leading-7 text-sm sm:text-base text-zinc-600 dark:text-zinc-300 font-light mb-6">
           Reach out to us and we will get back to you as soon as possible.
         </p>
       </div>
@@ -45,7 +45,7 @@ function Contact() {
               ref={form}
               onSubmit={sendEmail}
               noValidate=""
-              className="flex flex-col py-6 space-y-6 md:py-0 md:px-6">
+              className="flex flex-col text-slate-800 dark:text-slate-300 py-6 space-y-6 md:py-0 md:px-6">
               <label className="block">
                 <span className="mb-1">Full name</span>
                 <input
@@ -74,7 +74,7 @@ function Contact() {
               <input
                 type="submit"
                 value="Send"
-                className="self-center px-8 py-2 text-lg rounded focus:ring hover:ring focus:ring-opacity-75 bg-orange-500 text-gray-50 focus:ring-orange-500 hover:ring-orange-500"
+                className="self-center px-4 sm:px-8 py-1 sm:py-2 text-lg rounded focus:ring hover:ring focus:ring-opacity-75 bg-orange-500 text-gray-50 focus:ring-orange-500 hover:ring-orange-500"
               />
             </form>
           </div>
