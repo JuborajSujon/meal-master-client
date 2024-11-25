@@ -156,21 +156,21 @@ export default function Navbar() {
                 className="menu menu-sm dropdown-content mt-0 -ml-48 z-[1] py-3 px-4 shadow bg-base-100 rounded-md w-64 absolute space-y-2">
                 <p className="text-base flex justify-between items-center">
                   Name : {user?.displayName || "user name not found"}
-                  <span className="text-sm py-1 px-2 rounded-full bg-orange-400">
+                  <span className="text-sm py-1 px-2 rounded-full text-black bg-orange-200">
                     {userData?.badge}
                   </span>
                 </p>
                 <li>
                   <Link
                     to="/dashboard"
-                    className="btn btn-ghost border border-orange-400 hover:bg-orange-500 hover:text-slate-900 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
+                    className="btn btn-ghost border border-orange-400 hover:bg-orange-400 hover:text-slate-900 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
                     Dashboard
                   </Link>
                 </li>
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="btn btn-ghost border border-orange-400 hover:bg-orange-500 hover:text-slate-900 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
+                    className="btn btn-ghost border border-orange-400 hover:bg-orange-400 hover:text-slate-900 text-sm  font-semibold min-h-8 h-8 px-2 sm:px-4 sm:min-h-10 sm:h-10">
                     Logout
                   </button>
                 </li>
