@@ -25,13 +25,13 @@ export default function Membership() {
                   key={plan._id}
                   className="flex flex-col overflow-hidden border-2 rounded-md border-gray-300 hover:border-amber-600 bg-slate-50">
                   <div
-                    className={`${plan.bg_color} flex flex-col items-center justify-center px-2 py-8 space-y-4`}>
-                    <p className="text-2xl font-medium">
+                    className={`${plan.bg_color} flex flex-col items-center justify-center px-2 py-8 space-y-0 sm:space-y-4`}>
+                    <p className="text-lg sm:text-2xl font-medium">
                       {plan.service_name} Plan
                     </p>
-                    <p className="text-5xl font-bold">
+                    <p className="text-2xl sm:text-5xl font-bold">
                       {plan.total_price}$
-                      <span className="text-xl text-gray-600 ">
+                      <span className="text-base sm:text-xl text-gray-600 ">
                         /
                         {plan.duration.toLowerCase() === "monthly"
                           ? "mo"
@@ -45,13 +45,15 @@ export default function Membership() {
                         <li
                           key={index}
                           className="flex justify-center space-x-2">
-                          <LuBadgeCheck size={22} className="text-amber-900" />
-                          <span>{benefit}</span>
+                          <LuBadgeCheck size={22} className="text-amber-900 " />
+                          <span className="text-sm sm:text-base">
+                            {benefit}
+                          </span>
                         </li>
                       ))}
                     </ul>
                     <Link to={`/checkout/${plan._id}`}>
-                      <button className="px-8 py-3 mt-6 text-lg font-semibold rounded sm:mt-12 bg-amber-600 hover:bg-orange-400 text-gray-50">
+                      <button className="px-6 mt-6 backdrop:mt-6 text-lg h-8 min-h-8 sm:h-10 sm:min-h-10 font-semibold rounded sm:mt-12 bg-amber-600 hover:bg-orange-400 text-gray-50">
                         Subscribe
                       </button>
                     </Link>
