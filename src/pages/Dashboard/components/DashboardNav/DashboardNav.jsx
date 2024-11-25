@@ -80,7 +80,7 @@ const DashboardNav = ({ handleToggle }) => {
                       <img alt="profile image" src={userData?.photo} />
                     </div>
                   </div>
-                  <div className="ml-2">
+                  <div className="ml-2 hidden sm:block">
                     <p className="text-sm font-semibold dark:text-slate-300">
                       {userData?.name}
                     </p>
