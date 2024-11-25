@@ -39,13 +39,13 @@ export default function HomeAboutUs() {
             subTitle="Where quality food meet satisfaction"
           />
 
-          <p className="text-lg font-semibold px-4 mt-6">
+          <p className="text-lg text-slate-800 font-semibold px-4 mt-6">
             It’s the perfect dining experience where every dish is crafted with
             fresh, high-quality ingredients and served by friendly staff who go.
           </p>
 
           <div className="flex flex-wrap justify-around gap-4 py-16">
-            <div className="card w-56 bg-base-100 shadow-xl">
+            <div className="card w-56 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-300 shadow-xl dark:shadow-gray-700">
               <div className="card-body ">
                 <Lottie
                   animationData={FastFood}
@@ -61,7 +61,7 @@ export default function HomeAboutUs() {
                 </p>
               </div>
             </div>
-            <div className="card w-56 bg-base-100 shadow-xl">
+            <div className="card w-56 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-300 shadow-xl dark:shadow-gray-700">
               <div className="card-body">
                 <Lottie
                   animationData={HealthyFood}
@@ -75,7 +75,7 @@ export default function HomeAboutUs() {
                 <p>Lightning-fast delivery to your doorstep.</p>
               </div>
             </div>
-            <div className="card w-56 bg-base-100 shadow-xl">
+            <div className="card w-56 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-300 shadow-xl dark:shadow-gray-700">
               <div className="card-body">
                 <Lottie
                   animationData={FastDelivery}
