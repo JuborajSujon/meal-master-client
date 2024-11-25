@@ -57,7 +57,7 @@ const GiftCard = () => {
                         min="25"
                         max="250"
                         id="amount"
-                        className="w-full px-4 py-2 border rounded-lg bg-white"
+                        className="w-full px-4 py-2 border rounded-lg bg-white text-slate-950"
                         placeholder="Enter amount"
                       />
                     </div>
@@ -114,7 +114,7 @@ const GiftCard = () => {
                       <input
                         type="text"
                         id="code"
-                        className="w-full px-4 py-2 border rounded-lg"
+                        className="w-full px-4 py-2 border rounded-lg bg-white"
                         placeholder="Enter gift card code"
                       />
                     </div>
