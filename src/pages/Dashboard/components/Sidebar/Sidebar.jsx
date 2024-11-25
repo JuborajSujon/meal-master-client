@@ -212,7 +212,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                     className={({ isActive }) =>
                       `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
-                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
@@ -228,7 +228,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                     className={({ isActive }) =>
                       `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
-                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
@@ -244,7 +244,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                     className={({ isActive }) =>
                       `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-gray-700 group dark:text-slate-300 ${
                         isActive
-                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
@@ -260,7 +260,7 @@ const Sidebar = ({ handleToggle, isActive }) => {
                     className={({ isActive }) =>
                       `flex items-center px-4 py-2 my-2 transition-colors duration-300 transform hover:bg-orange-100 rounded-md hover:text-black dark:text-slate-300 group ${
                         isActive
-                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 rounded-md"
+                          ? "border-l-8 bg-orange-100 border-l-orange-400 dark:text-slate-700 text-slate-700 rounded-md"
                           : "text-gray-700"
                       }`
                     }>
