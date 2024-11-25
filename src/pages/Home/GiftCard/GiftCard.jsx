@@ -17,7 +17,7 @@ const GiftCard = () => {
             <div className="flex justify-center mb-6">
               <button
                 onClick={() => setActiveTab("buy")}
-                className={`px-4 py-2 mx-2 rounded-t-lg font-semibold ${
+                className={`px-2 sm:px-4 py-1 sm:py-2 mx-2 text-sm sm:text-base rounded-t-lg font-semibold ${
                   activeTab === "buy"
                     ? "bg-orange-500 text-white"
                     : "bg-gray-200 text-black"
@@ -26,7 +26,7 @@ const GiftCard = () => {
               </button>
               <button
                 onClick={() => setActiveTab("redeem")}
-                className={`px-4 py-2 mx-2 rounded-t-lg font-semibold ${
+                className={`px-2 sm:px-4 py-1 sm:py-2 mx-2 text-sm sm:text-base rounded-t-lg font-semibold ${
                   activeTab === "redeem"
                     ? "bg-orange-500 text-white"
                     : "bg-gray-200 text-black"
@@ -37,11 +37,13 @@ const GiftCard = () => {
             <div className="bg-white p-6 rounded-b-lg shadow-lg">
               {activeTab === "buy" && (
                 <div>
-                  <h3 className="text-2xl font-semibold mb-4">
+                  <h3 className="text-lg sm:text-2xl font-semibold mb-4">
                     Buy Gift Cards
                   </h3>
-                  <h4 className="mt-5">Gift card amount $25.00 - $250.00</h4>
-                  <p className="mb-4">
+                  <h4 className="mt-5 text-sm sm:text-base font-semibold">
+                    Gift card amount $25.00 - $250.00
+                  </h4>
+                  <p className="mb-4 text-sm sm:text-base">
                     Purchase a gift card for your loved ones. Choose from
                     various designs and amounts to suit any occasion.
                   </p>
@@ -57,7 +59,7 @@ const GiftCard = () => {
                         min="25"
                         max="250"
                         id="amount"
-                        className="w-full px-4 py-2 border rounded-lg bg-white text-slate-950"
+                        className="w-full px-4 py-2 h-8 sm:h-10 border rounded-lg bg-white text-slate-950"
                         placeholder="Enter amount"
                       />
                     </div>
@@ -96,11 +98,11 @@ const GiftCard = () => {
               )}
               {activeTab === "redeem" && (
                 <div>
-                  <h3 className="text-2xl font-semibold mb-4">
+                  <h3 className="text-lg sm:text-2xl font-semibold mb-4">
                     Redeem Gift Cards
                   </h3>
 
-                  <p className="mb-4">
+                  <p className="mb-4 text-sm sm:text-base">
                     Redeem your gift card by entering the code below. Enjoy your
                     gift!
                   </p>
@@ -131,7 +133,7 @@ const GiftCard = () => {
         </div>
 
         <div className="divider"></div>
-        <div className="flex gap-3 text-xl text-slate-800 dark:text-slate-300">
+        <div className="flex gap-3 text-xs sm:text-xl text-slate-800 dark:text-slate-300">
           <p>
             SKU: <span className="text-orange-400">N/A</span>
           </p>
