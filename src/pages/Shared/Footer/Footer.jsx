@@ -17,7 +17,7 @@ export default function Footer() {
 
         <hr className="border-gray-200 sm:mx-auto dark:border-gray-700 my-6" />
         <div className="flex items-center justify-center px-6">
-          <span className="dark:text-slate-300">
+          <span className="dark:text-slate-300 text-sm sm:text-base">
             {new Date().getFullYear()}@ Meal Master. Design with
             <i className="mdi mdi-heart text-red-600"></i> by{" "}
             <Link
